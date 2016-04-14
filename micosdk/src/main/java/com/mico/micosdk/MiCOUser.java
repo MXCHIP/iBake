@@ -28,15 +28,13 @@ public class MiCOUser {
      * @param appid
      * @param usercb
      */
-    public void getVerifyCode(String loginname, String appid,
-                              UserCallBack usercb) {
+    public void getVerifyCode(String loginname, String appid, UserCallBack usercb) {
         if (comfunc.checkPara(loginname, appid)) {
             JSONObject postParam = new JSONObject();
             try {
                 postParam.put("loginname", loginname);
                 postParam.put("appid", appid);
-                hsp.doHttpPost(Configuration.GETVERCODE, postParam,
-                        usercb);
+                hsp.doHttpPost(Configuration.GETVERCODE, postParam, usercb);
             } catch (JSONException e1) {
                 e1.printStackTrace();
             }
@@ -53,16 +51,14 @@ public class MiCOUser {
      * @param appid
      * @param usercb
      */
-    public void checkVerifyCode(String loginname, String vercode, String appid,
-                                UserCallBack usercb) {
+    public void checkVerifyCode(String loginname, String vercode, String appid, UserCallBack usercb) {
         if (comfunc.checkPara(loginname, vercode, appid)) {
             JSONObject postParam = new JSONObject();
             try {
                 postParam.put("loginname", loginname);
                 postParam.put("vercode", vercode);
                 postParam.put("appid", appid);
-                hsp.doHttpPost(Configuration.CHECKVERCODE, postParam,
-                        usercb);
+                hsp.doHttpPost(Configuration.CHECKVERCODE, postParam, usercb);
             } catch (JSONException e1) {
                 e1.printStackTrace();
             }
@@ -86,8 +82,7 @@ public class MiCOUser {
             try {
                 postParam.put("password1", password1);
                 postParam.put("password2", password2);
-                hsp.doHttpPost(Configuration.RESETPASSWORD, postParam,
-                        usercb, token);
+                hsp.doHttpPost(Configuration.RESETPASSWORD, postParam, usercb, token);
             } catch (JSONException e1) {
                 e1.printStackTrace();
             }

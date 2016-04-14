@@ -1,22 +1,5 @@
 package com.mxchip.helper;
 
-/**
- * public static String SENDVERCODE = _URLHEAD + "sendvercode/";
- * public static String CHECKVERCODE = _URLHEAD + "checkvercode/";
- * public static String REGISTER = _URLHEAD + "phonesignup/";
- * public static String LOGININ = _URLHEAD + "token-auth/";
- * public static String REFRESHJWT = _URLHEAD + "token-refresh/";
- * public static String VERIFYJWT = _URLHEAD + "token-verify/";
- * public static String GETSHAREVERCODE = _URLHEAD + "generatebindingvercode/";
- * public static String ADDDEVBYVERCODE = _URLHEAD + "devicegrant/";
- * public static String BINDINGDEV = _URLHEAD + "devicebinding/";
- * public static String UNBINDDEV = _URLHEAD + "bindingselfstop/";
- * public static String SENDCOMMAND = _URLHEAD + "sendcommand/";
- * public static String RESETPASSWORD = _URLHEAD + "accountpwchange/";
- * public static String UPDATEUSERROLE = _URLHEAD + "bindingrole/";
- * public static String REMOVEUSER = _URLHEAD + "bindingremove/";
- * public static String TRANSFERADMINUSER = _URLHEAD + "bindingshift/";
- */
 public class Configuration {
     private static String _URLHEAD = "https://iot.mxchip.com/enduser/";
     private static String _COOKBOOK = "https://iot.mxchip.com/cookbook/";
