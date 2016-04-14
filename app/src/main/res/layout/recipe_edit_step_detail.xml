@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/title_bar_height"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/recipe_ed_stepimgly"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/recipe_dd_img_height"
+                    android:background="@drawable/picture_2"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/cloud_cb_detail_top"
+                        android:layout_marginTop="@dimen/icon_size"
+                        android:src="@drawable/recipe_icon_add_picture" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/common_text_size"
+                        android:text="@string/recipe_ed_addpic"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/common_text_min2"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/recipe_ed_stepimgly"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/fab_margin">
+
+                    <EditText
+                        android:id="@+id/recipe_ed_step_desptxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/recipe_edit_multi_height"
+                        android:background="@color/sin_bg_color"
+                        android:enabled="true"
+                        android:gravity="top"
+                        android:hint="@string/recipe_ed_recip_destxt_hint"
+                        android:inputType="textMultiLine|textCapWords"
+                        android:maxLines="10"
+                        android:minLines="8"
+                        android:padding="@dimen/common_margin_top"
+                        android:scrollbars="vertical"
+                        android:textColor="@color/good_text_color"
+                        android:textColorHint="@color/txt_color_hint"
+                        android:textSize="@dimen/common_text_size" />
+
+                    <TextView
+                        android:id="@+id/recipe_dd_utensilsname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/fab_margin"
+                        android:paddingLeft="@dimen/common_margin_top"
+                        android:text="@string/uptemp"
+                        android:textColor="@color/good_text_color"
+                        android:textSize="@dimen/common_text_size"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/fab_margin"
+                        android:background="@color/sin_bg_color"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:paddingLeft="@dimen/common_margin_top"
+                                android:text="Temp"
+                                android:textColor="@color/good_text_color"
+                                android:textSize="@dimen/common_text_size" />
+
+                            <EditText
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/right_line"
+                                android:hint="3"
+                                android:padding="@dimen/common_margin_top"
+                                android:textColor="@color/good_text_color"
+                                android:textColorHint="@color/txt_color_hint"
+                                android:textSize="@dimen/common_text_size" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:paddingLeft="@dimen/common_margin_top"
+                                android:text="Time"
+                                android:textColor="@color/good_text_color"
+                                android:textSize="@dimen/common_text_size" />
+
+                            <EditText
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@color/sin_bg_color"
+                                android:hint="3"
+                                android:padding="@dimen/common_margin_top"
+                                android:textColor="@color/good_text_color"
+                                android:textColorHint="@color/txt_color_hint"
+                                android:textSize="@dimen/common_text_size" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/fab_margin"
+                        android:paddingLeft="@dimen/common_margin_top"
+                        android:text="@string/downtemp"
+                        android:textColor="@color/good_text_color"
+                        android:textSize="@dimen/common_text_size"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/fab_margin"
+                        android:background="@color/sin_bg_color"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:paddingLeft="@dimen/common_margin_top"
+                                android:text="Temp"
+                                android:textColor="@color/good_text_color"
+                                android:textSize="@dimen/common_text_size" />
+
+                            <EditText
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/right_line"
+                                android:hint="3"
+                                android:padding="@dimen/common_margin_top"
+                                android:textColor="@color/good_text_color"
+                                android:textColorHint="@color/txt_color_hint"
+                                android:textSize="@dimen/common_text_size" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:paddingLeft="@dimen/common_margin_top"
+                                android:text="Time"
+                                android:textColor="@color/good_text_color"
+                                android:textSize="@dimen/common_text_size" />
+
+                            <EditText
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@color/sin_bg_color"
+                                android:hint="3"
+                                android:padding="@dimen/common_margin_top"
+                                android:textColor="@color/good_text_color"
+                                android:textColorHint="@color/txt_color_hint"
+                                android:textSize="@dimen/common_text_size" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!--食材-->
+                    <TextView
+                        android:id="@+id/recipe_dd_ingre_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/fab_margin"
+                        android:paddingLeft="@dimen/common_margin_top"
+                        android:text="@string/ingredient"
+                        android:textColor="@color/good_text_color"
+                        android:textSize="@dimen/common_text_size"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/fab_margin"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/right_line"
+                            android:hint="@string/ingredient"
+                            android:padding="@dimen/common_margin_top"
+                            android:textColor="@color/good_text_color"
+                            android:textColorHint="@color/txt_color_hint"
+                            android:textSize="@dimen/common_text_size" />
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/right_line"
+                            android:hint="@string/recipe_dd_utensilsname"
+                            android:padding="@dimen/common_margin_top"
+                            android:textColor="@color/good_text_color"
+                            android:textColorHint="@color/txt_color_hint"
+                            android:textSize="@dimen/common_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/fab_margin"
+                        android:gravity="right"
+                        android:orientation="horizontal"
+                        android:paddingRight="@dimen/icon_margin_right">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/dash_button"
+                            android:paddingBottom="@dimen/swi_txt_bottom"
+                            android:paddingLeft="@dimen/common_margin_top"
+                            android:paddingRight="@dimen/common_margin_top"
+                            android:paddingTop="@dimen/swi_txt_bottom"
+                            android:text="@string/add_ingredient"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/common_text_size" />
+                    </LinearLayout>
+
+
+                    <!--untensils-->
+                    <TextView
+                        android:id="@+id/recipe_dd_utensils_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/fab_margin"
+                        android:paddingLeft="@dimen/common_margin_top"
+                        android:text="@string/recipe_dd_utensilsname"
+                        android:textColor="@color/good_text_color"
+                        android:textSize="@dimen/common_text_size"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/fab_margin"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/right_line"
+                            android:hint="@string/flour"
+                            android:padding="@dimen/common_margin_top"
+                            android:textColor="@color/good_text_color"
+                            android:textColorHint="@color/txt_color_hint"
+                            android:textSize="@dimen/common_text_size" />
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/right_line"
+                            android:hint="@string/bowl"
+                            android:padding="@dimen/common_margin_top"
+                            android:textColor="@color/good_text_color"
+                            android:textColorHint="@color/txt_color_hint"
+                            android:textSize="@dimen/common_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/fab_margin"
+                        android:gravity="right"
+                        android:orientation="horizontal"
+                        android:paddingRight="@dimen/icon_margin_right">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/dash_button"
+                            android:paddingBottom="@dimen/swi_txt_bottom"
+                            android:paddingLeft="@dimen/common_margin_top"
+                            android:paddingRight="@dimen/common_margin_top"
+                            android:paddingTop="@dimen/swi_txt_bottom"
+                            android:text="@string/add_ingredient"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/common_text_size" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/recipe_dd_line_top"
+                        android:layout_marginLeft="@dimen/common_margin_top"
+                        android:layout_marginRight="@dimen/common_margin_top"
+                        android:layout_marginTop="@dimen/fab_margin"
+                        android:background="@drawable/dash_line" />
+
+                    <Button
+                        android:id="@+id/rsp_checkvercode_btnid"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/input_btn_height"
+                        android:layout_marginTop="@dimen/fab_margin"
+                        android:background="@color/colorAccent"
+                        android:text="@string/addsteps"
+                        android:textColor="@color/common_btn_txtcolor"
+                        android:textSize="@dimen/common_button_txtsize" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

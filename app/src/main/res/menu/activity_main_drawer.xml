@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_message"
+            android:icon="@drawable/account_icon_message_n"
+            android:title="Message"/>
+        <item
+            android:id="@+id/nav_recipe"
+            android:icon="@drawable/account_icon_my_recipe_n"
+            android:title="My Recipe" />
+        <item
+            android:id="@+id/nav_device"
+            android:icon="@drawable/account_icon_my_device_n"
+            android:title="My Device" />
+        <item
+            android:id="@+id/nav_store"
+            android:icon="@drawable/account_icon_store_n"
+            android:title="Store" />
+        <item
+            android:id="@+id/nav_feedback"
+            android:icon="@drawable/account_icon_feedback_n"
+            android:title="Feedback" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/account_icon_about_n"
+            android:title="About" />
+    </group>
+</menu>
