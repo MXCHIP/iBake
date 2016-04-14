@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/recomd_title_height"
+    android:layout_marginTop="@dimen/title_bar_height"
+    android:background="@drawable/layer_list"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/cloud_search_margin"
+    android:paddingTop="@dimen/cloud_search_margin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/common_margin_top"
+        android:layout_marginRight="@dimen/common_margin_top"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/input_radius"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:paddingBottom="@dimen/cloud_search_margin"
+            android:paddingLeft="@dimen/common_margin_top"
+            android:paddingRight="@dimen/common_margin_top"
+            android:paddingTop="@dimen/cloud_search_margin">
+
+            <ImageView
+                android:layout_width="@dimen/icon_size_min"
+                android:layout_height="@dimen/icon_size_min"
+                android:src="@drawable/recipe_icon_search" />
+
+            <EditText
+                android:id="@+id/cloud_cb_search_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/cloud_search_txt_height"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="@string/search_dev_lower"
+                android:paddingLeft="@dimen/common_margin_top"
+                android:textSize="@dimen/common_text_min2" />
+
+            <ImageView
+                android:id="@+id/cloud_cb_cleanbtn"
+                android:layout_width="@dimen/icon_size_min"
+                android:layout_height="@dimen/icon_size_min"
+                android:src="@drawable/search_clean"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/cloud_cb_search_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/common_margin_top"
+            android:text="@string/search_dev"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/common_text_size"
+            android:visibility="gone" />
+
+    </LinearLayout>
+</LinearLayout>

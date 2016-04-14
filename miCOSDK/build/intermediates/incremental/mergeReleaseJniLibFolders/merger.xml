@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="D:\TempScene\AndroidStudio\Fog2.0\miCOSDK\src\main\jniLibs"/></dataSet><dataSet config="release"><source path="D:\TempScene\AndroidStudio\Fog2.0\miCOSDK\src\release\jniLibs"/></dataSet></merger>

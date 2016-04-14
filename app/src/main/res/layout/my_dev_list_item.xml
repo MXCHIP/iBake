@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/my_dev_list"
+    android:gravity="center"
+    android:orientation="horizontal">
+    <!--android:background="@drawable/layer_list"-->
+
+    <LinearLayout
+        android:id="@+id/mydev_setting_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/mydev_icon_margin">
+
+        <ImageView
+            android:id="@+id/igadd"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:src="@drawable/mydevice_icon_setting" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="@dimen/mydev_img_size"
+            android:layout_marginLeft="@dimen/mydev_icon_margin"
+            android:background="@color/sin_line_color" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dev_item_r_layid"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:id="@+id/dev_item_imgid"
+            android:layout_width="@dimen/mydev_img_size"
+            android:layout_height="@dimen/mydev_img_size"
+            android:layout_marginLeft="@dimen/mydev_icon_margin"
+            android:background="@drawable/mydevice_icon_device_online" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/mydev_list_height"
+            android:layout_marginLeft="@dimen/mydev_icon_margin"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/dev_item_name_tvid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OVEN-C433"
+                android:textColor="@color/sin_6"
+                android:textSize="@dimen/common_text_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/dev_item_isonline_tvid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin_top"
+                android:text="Online"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/common_text_min2"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="@dimen/mydev_icon_margin"
+            android:layout_height="@dimen/mydev_icon_margin"
+            android:layout_marginRight="@dimen/mydev_icon_margin"
+            android:src="@drawable/mydevice_icon_enter" />
+    </LinearLayout>
+
+</LinearLayout>

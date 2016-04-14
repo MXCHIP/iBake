@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/recomd_title_height"
+        android:background="@color/sin_line_color"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_item_margin"
+        android:text="@string/dev_ctrl_recomd"
+        android:textStyle="bold" />
+
+    <!--1 food-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/line_item_bottom"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/delicacy_1_pic"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_img_height"
+            android:layout_margin="0dp"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/empty_recipe" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/common_margin_top">
+
+            <TextView
+                android:id="@+id/delicacy_1_text"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/icon_size"
+                android:layout_alignParentLeft="true"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxEms="11"
+                android:singleLine="true"
+                android:text="American kraft cheese goes well with the apple pie"
+                android:textColor="@color/good_text_color"
+                android:textSize="@dimen/common_text_min2" />
+
+            <TextView
+                android:id="@+id/delicacy_1_like_no"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/icon_size"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/comment_margin_right"
+                android:gravity="center"
+                android:text="97"
+                android:textColor="@color/good_no_text_color"
+                android:textSize="@dimen/common_text_min2"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/delicacy_1_like_img"
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/icon_favourate_2" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_margin_top"
+            android:background="#eeeeee" />
+
+    </LinearLayout>
+    <!--2 food-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/line_item_bottom"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/delicacy_2_pic"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_img_height"
+            android:layout_margin="0dp"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/empty_recipe" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/common_margin_top">
+
+            <TextView
+                android:id="@+id/delicacy_2_text"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/icon_size"
+                android:layout_alignParentLeft="true"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxEms="11"
+                android:singleLine="true"
+                android:text="American kraft cheese goes well with the apple pie"
+                android:textColor="@color/good_text_color"
+                android:textSize="@dimen/common_text_min2" />
+
+            <TextView
+                android:id="@+id/delicacy_2_like_no"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/icon_size"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/comment_margin_right"
+                android:gravity="center"
+                android:text="97"
+                android:textColor="@color/good_no_text_color"
+                android:textSize="@dimen/common_text_min2"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/delicacy_2_like_img"
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/icon_favourate_2" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_margin_top"
+            android:background="#eeeeee" />
+
+    </LinearLayout>
+    <!--3 food-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/line_item_bottom"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/delicacy_3_pic"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_img_height"
+            android:layout_margin="0dp"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/empty_recipe" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/common_margin_top">
+
+            <TextView
+                android:id="@+id/delicacy_3_text"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/icon_size"
+                android:layout_alignParentLeft="true"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxEms="11"
+                android:singleLine="true"
+                android:text="American kraft cheese goes well with the apple pie"
+                android:textColor="@color/good_text_color"
+                android:textSize="@dimen/common_text_min2" />
+
+            <TextView
+                android:id="@+id/delicacy_3_like_no"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/icon_size"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/comment_margin_right"
+                android:gravity="center"
+                android:text="97"
+                android:textColor="@color/good_no_text_color"
+                android:textSize="@dimen/common_text_min2"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/delicacy_3_like_img"
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/icon_favourate_2" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_margin_top"
+            android:background="#eeeeee" />
+
+    </LinearLayout>
+    <!--4 food-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/line_item_bottom"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/delicacy_4_pic"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_img_height"
+            android:layout_margin="0dp"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/empty_recipe" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/common_margin_top">
+
+            <TextView
+                android:id="@+id/delicacy_4_text"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/icon_size"
+                android:layout_alignParentLeft="true"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxEms="11"
+                android:singleLine="true"
+                android:text="American kraft cheese goes well with the apple pie"
+                android:textColor="@color/good_text_color"
+                android:textSize="@dimen/common_text_min2" />
+
+            <TextView
+                android:id="@+id/delicacy_4_like_no"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/icon_size"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/comment_margin_right"
+                android:gravity="center"
+                android:text="97"
+                android:textColor="@color/good_no_text_color"
+                android:textSize="@dimen/common_text_min2"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/delicacy_4_like_img"
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/icon_favourate_2" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_margin_top"
+            android:background="#eeeeee" />
+
+    </LinearLayout>
+    <!--5 food-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/line_item_bottom"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/delicacy_5_pic"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_img_height"
+            android:layout_margin="0dp"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/empty_recipe" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/common_margin_top">
+
+            <TextView
+                android:id="@+id/delicacy_5_text"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/icon_size"
+                android:layout_alignParentLeft="true"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxEms="11"
+                android:singleLine="true"
+                android:text="American kraft cheese goes well with the apple pie"
+                android:textColor="@color/good_text_color"
+                android:textSize="@dimen/common_text_min2" />
+
+            <TextView
+                android:id="@+id/delicacy_5_like_no"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/icon_size"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/comment_margin_right"
+                android:gravity="center"
+                android:text="97"
+                android:textColor="@color/good_no_text_color"
+                android:textSize="@dimen/common_text_min2"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/delicacy_5_like_img"
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/icon_favourate_2" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_margin_top"
+            android:background="#eeeeee" />
+
+    </LinearLayout>
+
+</LinearLayout>

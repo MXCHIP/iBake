@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <include layout="@layout/app_bar_title" />
+
+    <include layout="@layout/user_rsp_vercode_detail" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/rsp_checkvercode_btnid"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/input_btn_height"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorAccent"
+            android:text="@string/submit"
+            android:textColor="@color/common_btn_txtcolor"
+            android:textSize="@dimen/common_button_txtsize" />
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

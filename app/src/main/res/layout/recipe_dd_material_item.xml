@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/avatar_txt"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/common_item_margin">
+
+    <TextView
+        android:id="@+id/recipe_dd_buttertv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/recipe_dd_butter"
+        android:textColor="@color/sin_text_color"
+        android:textSize="@dimen/common_text_size" />
+
+    <TextView
+        android:id="@+id/recipe_dd_butterkgtv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/recipe_dd_butterkg"
+        android:textColor="@color/sin_text_color"
+        android:textSize="@dimen/common_text_size" />
+</LinearLayout>
