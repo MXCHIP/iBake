@@ -818,11 +818,11 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
             public void onFailure(int code, String message) {
                 Log.d(TAG + "onDestroy onFailure", code + " " + message);
             }
-
-            @Override
-            public void onDeviceStatusReceived(String msgType, String messages) {
-                Log.d(TAG + "onDestroy Rev", msgType + " " + messages);
-            }
+//
+//            @Override
+//            public void onDeviceStatusReceived(String msgType, String messages) {
+//                Log.d(TAG + "onDestroy Rev", msgType + " " + messages);
+//            }
         });
     }
 }

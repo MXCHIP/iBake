@@ -1,7 +1,8 @@
 package com.mxchip.callbacks;
 
-public abstract ControlDeviceCallBack {
-	public void onSuccess(String message);
-	public void onFailure(int code, String message);
-	public void onDeviceStatusReceived(String msgType, String messages);
+//TODO abstract class
+public abstract class ControlDeviceCallBack {
+	public void onSuccess(String message){}
+	public void onFailure(int code, String message){}
+	public void onDeviceStatusReceived(String msgType, String messages){}
 }

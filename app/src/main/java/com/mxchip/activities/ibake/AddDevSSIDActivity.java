@@ -213,10 +213,6 @@ public class AddDevSSIDActivity extends AppCompatActivity {
             public void onFailure(int code, String message) {
                 Log.d(TAG + " mDNS", code + " " + message);
             }
-
-            @Override
-            public void onDevicesFind(JSONArray deviceStatus) {
-            }
         });
     }
 

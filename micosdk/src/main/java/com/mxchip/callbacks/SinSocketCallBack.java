@@ -7,6 +7,7 @@ package com.mxchip.callbacks;
  * @Createtime 
  * @version 1.0
  */
+//TODO abstract class
 public abstract class SinSocketCallBack {
 	public void onLost() {}
 	public void onSuccess(String message) {}
