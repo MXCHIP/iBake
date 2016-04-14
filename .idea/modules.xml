@@ -5,7 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/Fog2.0.iml" filepath="$PROJECT_DIR$/Fog2.0.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
-      <module fileurl="file://$PROJECT_DIR$/miCOSDK/miCOSDK.iml" filepath="$PROJECT_DIR$/miCOSDK/miCOSDK.iml" />
+      <module fileurl="file://$PROJECT_DIR$/micosdk/miCOSDK.iml" filepath="$PROJECT_DIR$/micosdk/miCOSDK.iml" />
       <module fileurl="file://$PROJECT_DIR$/shapeloading/shapeloading.iml" filepath="$PROJECT_DIR$/shapeloading/shapeloading.iml" />
     </modules>
   </component>

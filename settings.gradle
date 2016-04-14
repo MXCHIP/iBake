@@ -1,1 +1,1 @@
-include ':app', ':miCOSDK', ':library', ':shapeloading'
+include ':app', ':micosdk', ':library', ':shapeloading'
