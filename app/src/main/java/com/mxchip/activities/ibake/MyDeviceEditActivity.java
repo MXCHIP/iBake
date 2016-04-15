@@ -56,6 +56,7 @@ public class MyDeviceEditActivity extends AppCompatActivity {
     private ImageView devname_editimg;
     private LinearLayout dev_detail_share;
     private Button mydevedit2_ctrl;
+    private LinearLayout device_item_ly;
 
     private String deviceid;
     private String devicepw;
@@ -94,6 +95,7 @@ public class MyDeviceEditActivity extends AppCompatActivity {
         devname_editimg = (ImageView) findViewById(R.id.devname_editimgid);
         dev_detail_share = (LinearLayout) findViewById(R.id.dev_detail_sharelyid);
         mydevedit2_ctrl = (Button) findViewById(R.id.mydevedit2_ctrl_btn);
+        device_item_ly = (LinearLayout) findViewById(R.id.device_item_lyid);
 
         imgbyte = (byte[]) getIntent().getSerializableExtra("deviceimg");
         device_detail_imgid.setImageBitmap(ConstHelper.Bytes2Bitmap(imgbyte));
@@ -238,7 +240,10 @@ public class MyDeviceEditActivity extends AppCompatActivity {
             @Override
             public void onSuccess(String message) {
                 Log.d(TAG + "getMemberList", message);
-                setAdapter(message);
+                if(!"[]".equals(ConstHelper.getFogData(message))){
+                    device_item_ly.setVisibility(View.VISIBLE);
+                    setAdapter(message);
+                }
             }
 
             @Override

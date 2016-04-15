@@ -79,12 +79,14 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/device_item_lyid"
             android:layout_width="match_parent"
             android:layout_height="@dimen/mydev_list_height"
             android:layout_marginTop="5dp"
             android:background="@color/sin_bg_color"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/device_item_tvid12"
