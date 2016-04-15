@@ -21,6 +21,7 @@ proguard/
 # Ignore gradle files
 .gradle/
 build/
+micosdk/build/
 
 # Eclipse project files
 .classpath
