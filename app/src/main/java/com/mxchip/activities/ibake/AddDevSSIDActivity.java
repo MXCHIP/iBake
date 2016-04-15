@@ -14,6 +14,7 @@ import com.mico.micosdk.MiCODevice;
 import com.mxchip.callbacks.EasyLinkCallBack;
 import com.mxchip.callbacks.ManageDeviceCallBack;
 import com.mxchip.callbacks.SearchDeviceCallBack;
+import com.mxchip.manage.ActivitiesManagerApplication;
 import com.mxchip.manage.ConstHelper;
 import com.mxchip.manage.ConstPara;
 import com.mxchip.manage.SetTitleBar;
@@ -234,7 +235,8 @@ public class AddDevSSIDActivity extends AppCompatActivity {
                         /**
                          * 绑定成功后跳到修改名称的界面
                          */
-                        toSuccessPage();
+                        String binddata = ConstHelper.getFogData(message);
+                        toSuccessPage(binddata);
                     } else {
                         ConstHelper.setToast(context, ConstHelper.getFogMessage(message));
                     }
@@ -249,15 +251,23 @@ public class AddDevSSIDActivity extends AppCompatActivity {
         }, shareph.getData("token"));
     }
 
-    private void toSuccessPage() {
-        Intent intent = new Intent(AddDevSSIDActivity.this, AddDevSuccessActivity.class);
-//        intent.putExtra("deviceid", deviceid);
-//        intent.putExtra("devname", devname);
-        startActivity(intent);
-        finish();
-        //  ActivitiesManagerApplication ama = new ActivitiesManagerApplication();
-        //  ama.addDestoryActivity(AddDevSSIDActivity.this, ConstPara.SSID_PAGE);
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    private void toSuccessPage(String data) {
+        Log.d(TAG + "tosuccessPage", data);
+
+        try {
+            JSONObject datajson = new JSONObject(data);
+            Intent intent = new Intent(AddDevSSIDActivity.this, AddDevSuccessActivity.class);
+            intent.putExtra("deviceid", datajson.getString("deviceid"));
+            intent.putExtra("devicepw", datajson.getString("devicepw"));
+            intent.putExtra("devname", datajson.getString("devicename"));
+            startActivity(intent);
+            finish();
+            ActivitiesManagerApplication ama = new ActivitiesManagerApplication();
+            ama.addDestoryActivity(AddDevSSIDActivity.this, ConstPara.SSID_PAGE);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     boolean retrypgtag = false;

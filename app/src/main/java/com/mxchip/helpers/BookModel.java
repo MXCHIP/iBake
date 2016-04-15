@@ -13,6 +13,7 @@ public class BookModel {
     public String book_name;
     public String out_book_pic;
     public String out_book_deviceid;
+    public String out_book_devicepw;
     public String sort_id;
     public String last_update_section_title;
     public String last_update_section_url;

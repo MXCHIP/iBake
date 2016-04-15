@@ -27,6 +27,7 @@ public class QrCodeActivity extends AppCompatActivity {
     private TextView dev_qrcode_name;
 
     private String deviceid;
+    private String devicepw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class QrCodeActivity extends AppCompatActivity {
         stb.setRightButton("none", "");
 
         deviceid = (String) getIntent().getSerializableExtra("deviceid");
+        devicepw = (String) getIntent().getSerializableExtra("devicepw");
 
         initView();
         getQrCode();
@@ -68,7 +70,8 @@ public class QrCodeActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(String message) {
-                qrcodeimg.setImageBitmap(micoDev.creatQrCode(message, 250, 250));
+                String qrcodemsg = "{\"deviceid\":\"" + deviceid + "\",\"devicepw\":\"" + devicepw + "\",\"vercode\":\"" + message + "\"}";
+                qrcodeimg.setImageBitmap(micoDev.creatQrCode(qrcodemsg, 250, 250));
             }
 
             @Override

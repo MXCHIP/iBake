@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.mico.micosdk.MiCOUser;
 import com.mxchip.callbacks.UserCallBack;
 import com.mxchip.manage.ActionSheetDialog;
+import com.mxchip.manage.ConstHelper;
 import com.mxchip.manage.SharePreHelper;
 
 import java.util.List;
@@ -78,19 +79,19 @@ public class MyDeviceUserAdapter extends BaseAdapter {
 
         holder.mydev_user_txid.setText((String) appInfo.get(keyString[0]));
         holder.mydev_user_phone_txid.setText((String) appInfo.get(keyString[1]));
-        holder.mydev_user_rm_imgid.setOnClickListener(new userButtonListener(position, convertView.getContext(), deviceid,  (String) appInfo.get(keyString[2])));
+        holder.mydev_user_rm_imgid.setOnClickListener(new userButtonListener(this, convertView.getContext(), deviceid, (String) appInfo.get(keyString[2])));
         return convertView;
     }
 }
 
 class userButtonListener implements View.OnClickListener {
-    private int position;
+    private BaseAdapter mba;;
     private Context mcontext;
     private String mdeviceid;
     private String menduserid;
 
-    userButtonListener(int pos,Context context, String deviceid, String enduserid) {
-        position = pos;
+    userButtonListener(BaseAdapter ba,Context context, String deviceid, String enduserid) {
+        mba = ba;
         mcontext = context;
         mdeviceid = deviceid;
         menduserid = enduserid;
@@ -100,8 +101,8 @@ class userButtonListener implements View.OnClickListener {
     public void onClick(View v) {
         Log.d("---userButton---", "Remove mdeviceid = " + menduserid);
         // TODO 移除某人的控制权限
-
-        new ActionSheetDialog(v.getContext())
+        final Context context = v.getContext();
+        new ActionSheetDialog(context)
                 .builder()
                 .setTitle("Remove the user?")
                 .setCancelable(false)
@@ -111,12 +112,13 @@ class userButtonListener implements View.OnClickListener {
                             @Override
                             public void onClick(int which) {
                                 Log.d("---My---", "removeBindRole");
-//                                removeBindRole();
+                                removeBindRole(context);
                             }
                         }).show();
+
     }
 
-    private void removeBindRole(){
+    private void removeBindRole(final Context context){
         MiCOUser micoUser = new MiCOUser();
         String token = new SharePreHelper(mcontext).getData("token");
 //        Log.d("---My---", mdeviceid + " " + menduserid + " " + token);
@@ -125,6 +127,8 @@ class userButtonListener implements View.OnClickListener {
             @Override
             public void onSuccess(String message) {
                 Log.d("---My---", message);
+                mba.notifyDataSetChanged();
+                ConstHelper.setToast(context, ConstHelper.getFogMessage(message));
             }
 
             @Override

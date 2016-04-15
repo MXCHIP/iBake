@@ -153,8 +153,9 @@ public class MyDeviceActivity extends AppCompatActivity implements AdapterView.O
                         String online = temp.getString("online").equals("0") ? "online" : "offline";
                         String img = temp.getString("product_icon");
                         String deviceid = temp.getString("device_id");
+                        String devicepw = temp.getString("device_pw");
                         Log.d(TAG + "getlist", name + ' ' + online + ' ' + img);
-                        adapter.addBook(name, online, img, deviceid);
+                        adapter.addBook(name, online, img, deviceid, devicepw);
                     }
                     mydevlistlistviewid.setAdapter(adapter);
                     shapeLoadingDialog.dismiss();
@@ -222,27 +223,32 @@ public class MyDeviceActivity extends AppCompatActivity implements AdapterView.O
 
         if (requestCode == ComminuteCode.RESULT_CODE && !(null == data)) {
             Log.d(TAG, "my code is -->" + data.getStringExtra("qrresult"));
-            String vercode = data.getStringExtra("qrresult");
-            grantYourDevice(vercode);
+            String message = data.getStringExtra("qrresult");
+            grantYourDevice(message);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void grantYourDevice(String vercode) {
+    private void grantYourDevice(String message) {
 
         ShareDeviceParams sdevp = new ShareDeviceParams();
         SharedPreferences sharedPreferences = getSharedPreferences("fogcloud", Activity.MODE_PRIVATE);
-        String deviceid = ConstPara.DEVICEID;
-        String devicepw = ConstPara.DEVICEPW;
         String bindingtype = ConstPara.BINDINGTYPE;
         int role = ConstPara.ROLE;
 
-        sdevp.bindvercode = vercode;
-        sdevp.deviceid = deviceid;
-        sdevp.devicepw = devicepw;
-        sdevp.role = role;
-        sdevp.bindingtype = bindingtype;
-        sdevp.iscallback = false;
+        try {
+            JSONObject msgObj = new JSONObject(message);
+            sdevp.deviceid = msgObj.getString("deviceid");
+            sdevp.devicepw = msgObj.getString("devicepw");
+            sdevp.bindvercode = msgObj.getString("vercode");
+            sdevp.role = role;
+            sdevp.bindingtype = bindingtype;
+            sdevp.iscallback = false;
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
 
         micoDev.addDeviceByVerCode(sdevp, new ManageDeviceCallBack() {
 

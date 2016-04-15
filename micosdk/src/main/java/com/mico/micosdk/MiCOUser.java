@@ -210,8 +210,7 @@ public class MiCOUser {
      * @param enduserid
      * @param usercb
      */
-    public void removeBindRole(String deviceid, String enduserid,
-                           UserCallBack usercb, String token) {
+    public void removeBindRole(String deviceid, String enduserid, UserCallBack usercb, String token) {
         if (comfunc.checkPara(deviceid, enduserid, token)) {
             JSONObject postParam = new JSONObject();
             try {

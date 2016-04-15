@@ -48,13 +48,14 @@ public class BookItemAdapter extends BaseAdapter {
 
     int i = 0;
 
-    public void addBook(String book_name, String out_book_url, String out_book_pic, String out_book_deviceid) {
+    public void addBook(String book_name, String out_book_url, String out_book_pic, String out_book_deviceid, String out_book_devicepw) {
         Log.d(TAG + "addbook", i++ + "");
         BookModel model = new BookModel();
         model.book_name = book_name;
         model.out_book_url = out_book_url;
         model.out_book_pic = out_book_pic;
         model.out_book_deviceid = out_book_deviceid;
+        model.out_book_devicepw = out_book_devicepw;
         mModels.add(model);
     }
 
@@ -135,6 +136,7 @@ public class BookItemAdapter extends BaseAdapter {
                         Log.d("---setimg---", model.out_book_deviceid + " model.out_book_deviceid");
                         Intent intent = new Intent(mContext, MyDeviceEditActivity.class);
                         intent.putExtra("deviceid", model.out_book_deviceid);
+                        intent.putExtra("devicepw", model.out_book_devicepw);
                         intent.putExtra("devicename", model.book_name);
                         intent.putExtra("deviceimg", ConstHelper.Bitmap2Bytes(bitmap));
                         mContext.startActivity(intent);

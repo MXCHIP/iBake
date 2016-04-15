@@ -58,6 +58,7 @@ public class MyDeviceEditActivity extends AppCompatActivity {
     private Button mydevedit2_ctrl;
 
     private String deviceid;
+    private String devicepw;
     private String devname;
     private byte[] imgbyte;
 
@@ -77,6 +78,7 @@ public class MyDeviceEditActivity extends AppCompatActivity {
         stb.setRightButton("delete", "");
 
         deviceid = (String) getIntent().getSerializableExtra("deviceid");
+        devicepw = (String) getIntent().getSerializableExtra("devicepw");
         initView();
         initOnClick();
 
@@ -106,6 +108,7 @@ public class MyDeviceEditActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MyDeviceEditActivity.this, QrCodeActivity.class);
                 intent.putExtra("deviceid", deviceid);
+                intent.putExtra("devicepw", devicepw);
                 intent.putExtra("imgbyte", imgbyte);
                 intent.putExtra("devname", devname);
                 startActivity(intent);
@@ -139,7 +142,7 @@ public class MyDeviceEditActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(int which) {
                                         Log.d(TAG, "to ----- removeMyDevice");
-//                                        removeMyDevice();
+                                        removeMyDevice();
                                     }
                                 }).show();
             }
@@ -260,6 +263,8 @@ public class MyDeviceEditActivity extends AppCompatActivity {
             @Override
             public void onSuccess(String message) {
                 Log.d(TAG, message);
+                ConstHelper.setToast(MyDeviceEditActivity.this, ConstHelper.getFogMessage(message));
+                finish();
             }
 
             @Override

@@ -50,7 +50,7 @@
         <activity android:name="com.mxchip.activities.ibake.DevCtrlActivity" android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.mxchip.activities.ibake.SetPasswordActivity" android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.mxchip.activities.ibake.ResetPasswordActivity" android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.mxchip.activities.ibake.SetPswCheckvercodeActivity" android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.mxchip.activities.ibake.SetPswCheckvercodeActivity" android:theme="@style/AppTheme.NoActionBar" android:windowSoftInputMode="adjustResize"/>
         <activity android:name="com.mxchip.activities.ibake.CloudCookBookActivity" android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.mxchip.activities.ibake.AddDevRetryActivity" android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.mxchip.activities.ibake.QrCodeActivity" android:theme="@style/AppTheme.NoActionBar" />
