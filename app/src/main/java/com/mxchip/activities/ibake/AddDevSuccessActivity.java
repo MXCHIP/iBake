@@ -17,6 +17,7 @@ import com.mico.micosdk.MiCOUser;
 import com.mingle.widget.ShapeLoadingDialog;
 import com.mxchip.callbacks.ManageDeviceCallBack;
 import com.mxchip.manage.ConstHelper;
+import com.mxchip.manage.ConstPara;
 import com.mxchip.manage.SetTitleBar;
 import com.mxchip.manage.SharePreHelper;
 
@@ -80,7 +81,7 @@ public class AddDevSuccessActivity extends AppCompatActivity {
                         shapeLoadingDialog.dismiss();
                         Log.d(TAG, ConstHelper.getFogData(message));
 
-                        if ("0".equals(ConstHelper.getFogCode(message))) {
+                        if (ConstPara._SUCCESSCODE.equals(ConstHelper.getFogCode(message))) {
 
                             /**
                              * 绑定成功后刷新

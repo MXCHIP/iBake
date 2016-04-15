@@ -62,7 +62,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                         Log.d(TAG, message.toString());
 
                         if (ConstHelper.checkPara(ConstHelper.getFogCode(message))) {
-                            if ("0".equals(ConstHelper.getFogCode(message))) {
+                            if (ConstPara._SUCCESSCODE.equals(ConstHelper.getFogCode(message))) {
 
                                 /**
                                  * 重置密码时候获取到验证码后跳到重新登录的界面

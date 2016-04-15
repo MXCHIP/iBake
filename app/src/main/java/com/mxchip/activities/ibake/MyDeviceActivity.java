@@ -256,7 +256,7 @@ public class MyDeviceActivity extends AppCompatActivity implements AdapterView.O
             public void onSuccess(String message) {
                 Log.d(TAG, message);
                 if (ConstHelper.checkPara(ConstHelper.getFogCode(message))) {
-                    if ("0".equals(ConstHelper.getFogCode(message))) {
+                    if (ConstPara._SUCCESSCODE.equals(ConstHelper.getFogCode(message))) {
 
                         /**
                          * 绑定成功后刷新

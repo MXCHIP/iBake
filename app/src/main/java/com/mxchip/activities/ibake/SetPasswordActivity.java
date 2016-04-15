@@ -87,7 +87,7 @@ public class SetPasswordActivity extends AppCompatActivity {
                         Log.d(TAG, message);
 
                         if (ConstHelper.checkPara(ConstHelper.getFogCode(message))) {
-                            if ("0".equals(ConstHelper.getFogCode(message))) {
+                            if (ConstPara._SUCCESSCODE.equals(ConstHelper.getFogCode(message))) {
                                 shareph.addData("devicepw", password1);
                                 shareph.addData("token", ConstHelper.getFogToken(message));
                                 /**

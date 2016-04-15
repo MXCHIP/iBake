@@ -230,7 +230,7 @@ public class AddDevSSIDActivity extends AppCompatActivity {
                 Log.d(TAG + " bindDevice", message);
 
                 if (ConstHelper.checkPara(ConstHelper.getFogCode(message))) {
-                    if ("0".equals(ConstHelper.getFogCode(message))) {
+                    if (ConstPara._SUCCESSCODE.equals(ConstHelper.getFogCode(message))) {
 
                         /**
                          * 绑定成功后跳到修改名称的界面
