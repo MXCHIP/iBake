@@ -246,7 +246,7 @@ public class AddDevSSIDActivity extends AppCompatActivity {
             @Override
             public void onFailure(int code, String message) {
                 Log.d(TAG + " bindDevice", message);
-                toRetryPage();
+//                toRetryPage();
             }
         }, shareph.getData("token"));
     }

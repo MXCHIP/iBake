@@ -291,8 +291,7 @@ public class MiCODevice {
 			try {
 				JSONObject postParam = new JSONObject();
 				postParam.put("deviceid", deviceid);
-				hsp.doHttpPut(Configuration.UNBINDDEVICE, postParam,
-						new UserCallBack() {
+				hsp.doHttpPut(Configuration.UNBINDDEVICE, postParam, new UserCallBack() {
 					
 					@Override
 					public void onSuccess(String message) {
@@ -395,7 +394,8 @@ public class MiCODevice {
                 postParam.put("format", commandType);
                 
                 hsp.doHttpPost(Configuration.SENDCOMMAND, postParam, new UserCallBack() {
-					
+//				hsp.doHttpPost("http://172.28.241.6:444", postParam, new UserCallBack() {
+
 					@Override
 					public void onSuccess(String message) {
 						comfunc.successCBCtrlDev(message, ctrldevcb);
