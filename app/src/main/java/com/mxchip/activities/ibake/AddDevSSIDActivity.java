@@ -287,7 +287,7 @@ public class AddDevSSIDActivity extends AppCompatActivity {
         progressDlg = new ProgressDialog(context);
         progressDlg.setTitle("EasyLink");
         progressDlg.setMessage("Send SSID and password to the device.");
-        progressDlg.setIcon(R.drawable.logo_login);
+        progressDlg.setIcon(R.drawable.logo_login_64);
         progressDlg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDlg.setCancelable(false);
         progressDlg.show();

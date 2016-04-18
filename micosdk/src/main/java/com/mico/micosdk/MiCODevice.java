@@ -175,7 +175,7 @@ public class MiCODevice {
 	
 	public void addDeviceByVerCode(ShareDeviceParams sdevp, final ManageDeviceCallBack managedevcb,String token){
 		
-		if (comfunc.checkPara(sdevp.bindvercode, sdevp.deviceid, sdevp.devicepw, sdevp.bindingtype, token)) {
+		if (comfunc.checkPara(sdevp.bindvercode, sdevp.deviceid, sdevp.bindingtype, token)) {
 			
 			if (0 < sdevp.role && (sdevp.role < 4)) {
 	            try {
@@ -353,7 +353,7 @@ public class MiCODevice {
 		String passWord = listendevparams.passWord;
 		String clientID = listendevparams.clientID;
 
-		if (comfunc.checkPara(deviceid, host, port, userName, passWord, clientID)) {
+		if (comfunc.checkPara(deviceid, host, port, userName, clientID)) {
 			String topic = Configuration.getTopic(deviceid);
 			if (null != mContext) {
 				

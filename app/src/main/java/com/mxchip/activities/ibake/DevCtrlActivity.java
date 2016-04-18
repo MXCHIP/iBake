@@ -85,6 +85,7 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
     private SharePreHelper shareph;
 
     private String deviceid;
+    private String devicepw;
     private String token;
     private String enduserid;
 
@@ -120,9 +121,10 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
 
         initView();
         initOnClick();
+        initCommandPara();
         initThisPage();
 
-        initCommandPara();
+        getDeviceInfo();
     }
 
     private void initView() {
@@ -182,6 +184,7 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
     private void initCommandPara() {
 
         deviceid = (String) getIntent().getSerializableExtra("deviceid");
+        devicepw = (String) getIntent().getSerializableExtra("devicepw");
         enduserid = shareph.getData("enduserid");
         token = shareph.getData("token");
         reSetCommand();
@@ -375,7 +378,7 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
     private void initThisPage() {
 
         getSimpListView();
-        getDeviceInfo();
+//        getDeviceInfo();
 
         dev_ctrl_btnsid.setTag("close");
 //        showKGLight("on", dev_ctrl_light);
@@ -507,7 +510,7 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
         ldp.host = ConstPara.MQTT_HOST;
         ldp.port = ConstPara.MQTT_PORT;
         ldp.userName = enduserid;
-        ldp.passWord = shareph.getData("devicepw");
+        ldp.passWord = shareph.getData("mqttpw");
         ldp.deviceid = deviceid;
         ldp.clientID = enduserid;
 
@@ -524,7 +527,7 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
         micoDev.startListenDevice(ldp, new ControlDeviceCallBack() {
             @Override
             public void onSuccess(String message) {
-                Log.d(TAG + "onSuccess", message);
+                Log.d(TAG + "ListenonSuccess", message);
             }
 
             @Override
@@ -589,11 +592,15 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
 
     //    处理获得的指令
     private void dealWithStatus(String payload) {
+        if(payload.indexOf("{") > -1){
             JSONObject tttjson = ConstHelper.getPayload(payload);
-            Message msg = new Message();
-            msg.what = 1;
-            msg.obj = tttjson;
-            handler.sendMessage(msg);
+            if(null != tttjson){
+                Message msg = new Message();
+                msg.what = 1;
+                msg.obj = tttjson;
+                handler.sendMessage(msg);
+            }
+        }
     }
 
     /**
@@ -619,6 +626,9 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
         try {
             JSONObject jsonTmp = new JSONObject(obj.toString());
             JSONArray jsarr = jsonTmp.getJSONArray("attrSet");
+
+            if(null == jsarr)
+                return;
 
             String jsonKey = "";
             String jsonVal = "";
@@ -695,10 +705,10 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
                 Log.d(TAG + "onFailure", code + " " + message);
             }
 
-            @Override
-            public void onDeviceStatusReceived(String msgType, String messages) {
-                Log.d(TAG + "onDeviceStatusReceived", msgType + " " + messages);
-            }
+//            @Override
+//            public void onDeviceStatusReceived(String msgType, String messages) {
+//                Log.d(TAG + "onDeviceStatusReceived", msgType + " " + messages);
+//            }
         }, token);
     }
 

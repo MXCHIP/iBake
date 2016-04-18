@@ -50,9 +50,8 @@ public class MiCOMQTT implements ServiceConnection {
 			String userName, String passWord, String clientID, String topic,
 			MqttServiceListener mqttServiceListener) {
 			msl = mqttServiceListener;
-			if (host.equals("") || port.equals("") || userName.equals("")
-					|| passWord.equals("") || clientID.equals("")
-					|| topic.equals("")) {
+//			if (host.equals("") || port.equals("") || userName.equals("") || passWord.equals("") || clientID.equals("") || topic.equals("")) {
+			if (host.equals("") || port.equals("") || userName.equals("") || clientID.equals("") || topic.equals("")) {
 				msl.onMqttReceiver("status", "Parameters can not be empty.");
 			} else {
 				if (!mqtttag) {
@@ -72,7 +71,7 @@ public class MiCOMQTT implements ServiceConnection {
 			tcHandler = new Handler() {
 				@Override
 				public void handleMessage(Message msg) {
-					super.handleMessage(msg);
+//					super.handleMessage(msg);
 					if (1 == msg.what) {
 						msl.onMqttReceiver("status", (String) msg.obj);
 					} else if (2 == msg.what) {

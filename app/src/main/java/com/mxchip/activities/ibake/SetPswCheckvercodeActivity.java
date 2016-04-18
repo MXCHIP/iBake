@@ -103,7 +103,7 @@ public class SetPswCheckvercodeActivity extends AppCompatActivity {
                                 } else if (ConstHelper.checkPara(ConstHelper.getFogToken(message))) {
                                     shareph.addData("username", userName);
                                     shareph.addData("enduserid", ConstHelper.getFogEndUserid(message));
-                                    shareph.addData("devicepw", vercoden);
+                                    shareph.addData("mqttpw", vercoden);
                                     shareph.addData("token", ConstHelper.getFogToken(message));
 
                                     // 跳转去注册界面并把username传递过去

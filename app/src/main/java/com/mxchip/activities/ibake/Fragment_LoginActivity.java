@@ -86,7 +86,7 @@ public class Fragment_LoginActivity extends Fragment implements OnClickListener 
                                 } else if (ConstHelper.checkPara(ConstHelper.getFogToken(message))) {
                                     shareph.addData("username", userName);
                                     shareph.addData("enduserid", ConstHelper.getFogEndUserid(message));
-                                    shareph.addData("devicepw", password);
+                                    shareph.addData("mqttpw", password);
                                     shareph.addData("token", ConstHelper.getFogToken(message));
                                     shapeLoadingDialog.dismiss();
                                     // 跳转到登录成功的首页

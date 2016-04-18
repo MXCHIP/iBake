@@ -88,7 +88,7 @@ public class SetPasswordActivity extends AppCompatActivity {
 
                         if (ConstHelper.checkPara(ConstHelper.getFogCode(message))) {
                             if (ConstPara._SUCCESSCODE.equals(ConstHelper.getFogCode(message))) {
-                                shareph.addData("devicepw", password1);
+                                shareph.addData("mqttpw", password1);
                                 shareph.addData("token", ConstHelper.getFogToken(message));
                                 /**
                                  * 注册成功后跳到重新登录的界面

@@ -108,6 +108,7 @@ public class BookItemAdapter extends BaseAdapter {
                 Log.d("---setimg---", model.out_book_deviceid + " to control device page");
                 Intent intent = new Intent(mContext, DevCtrlActivity.class);
                 intent.putExtra("deviceid", model.out_book_deviceid);
+                intent.putExtra("devicepw", model.out_book_devicepw);
                 intent.putExtra("devicename", model.book_name);
                 mContext.startActivity(intent);
                 mContext.finish();

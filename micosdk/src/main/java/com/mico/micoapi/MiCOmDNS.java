@@ -46,8 +46,7 @@ public class MiCOmDNS {
 					try {
 						while (isStarted) {
 							if (intf != null && jmdns != null) {
-								startDeviceSearch(context, serviceName,
-										searchdevcb);
+								startDeviceSearch(context, serviceName, searchdevcb);
 								Thread.sleep(1000 * 3);
 							} else {
 								if (intf == null) {
