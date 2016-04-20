@@ -22,7 +22,7 @@ import android.util.Log;
 
 public class MqttService extends Service {
 	private ServiceBinder serviceBinder = new ServiceBinder();
-	private String LOG_TAG = "---service---";
+	private String LOG_TAG = "MiCOMqttService";
 
 	private MqttClient client;
 	private MqttConnectOptions options;

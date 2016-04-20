@@ -231,7 +231,7 @@ public class MiCODevice {
 
 						@Override
 						public void onSuccess(String message) {
-							Log.d("---POST---", message);
+//							Log.d("---POST---", message);
 							if (null != message && !message.equals("")) {
 								try {
 									JSONObject msgobj = new JSONObject(message);
@@ -247,7 +247,7 @@ public class MiCODevice {
 
 						@Override
 						public void onFailure(int code, String message) {
-							Log.d("---POST---", code + " " + message);
+//							Log.d("---POST---", code + " " + message);
 							comfunc.failureCBBindDev(code, message, managedevcb);
 						}
 					});
@@ -360,7 +360,7 @@ public class MiCODevice {
 						new MqttServiceListener() {
 							@Override
 							public void onMqttReceiver(String msgType, String messages) {
-								Log.d("---" + msgType + "---", messages);
+//								Log.d("---" + msgType + "---", messages);
 								comfunc.onDevStatusReceived(msgType, messages, ctrldevcb);
 							}
 						});
