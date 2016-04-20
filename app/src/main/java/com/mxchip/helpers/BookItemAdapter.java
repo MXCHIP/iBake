@@ -29,7 +29,7 @@ import java.util.Vector;
  */
 public class BookItemAdapter extends BaseAdapter {
 
-    private String TAG = "---BookItemAdapter---";
+//    private String TAG = "---BookItemAdapter---";
 
     private LayoutInflater mInflater;
     private Activity mContext;
@@ -49,7 +49,7 @@ public class BookItemAdapter extends BaseAdapter {
     int i = 0;
 
     public void addBook(String book_name, String out_book_url, String out_book_pic, String out_book_deviceid, String out_book_devicepw) {
-        Log.d(TAG + "addbook", i++ + "");
+//        Log.d(TAG + "addbook", i++ + "");
         BookModel model = new BookModel();
         model.book_name = book_name;
         model.out_book_url = out_book_url;
@@ -84,8 +84,6 @@ public class BookItemAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        Log.d("---getView---", position + "");
-
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.my_dev_list_item, null);
         }
@@ -105,7 +103,7 @@ public class BookItemAdapter extends BaseAdapter {
         detail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("---setimg---", model.out_book_deviceid + " to control device page");
+//                Log.d("---setimg---", model.out_book_deviceid + " to control device page");
                 Intent intent = new Intent(mContext, DevCtrlActivity.class);
                 intent.putExtra("deviceid", model.out_book_deviceid);
                 intent.putExtra("devicepw", model.out_book_devicepw);
@@ -134,7 +132,7 @@ public class BookItemAdapter extends BaseAdapter {
                 setimg.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Log.d("---setimg---", model.out_book_deviceid + " model.out_book_deviceid");
+//                        Log.d("---setimg---", model.out_book_deviceid + " model.out_book_deviceid");
                         Intent intent = new Intent(mContext, MyDeviceEditActivity.class);
                         intent.putExtra("deviceid", model.out_book_deviceid);
                         intent.putExtra("devicepw", model.out_book_devicepw);
@@ -174,11 +172,11 @@ public class BookItemAdapter extends BaseAdapter {
         public void onScrollStateChanged(AbsListView view, int scrollState) {
             switch (scrollState) {
                 case AbsListView.OnScrollListener.SCROLL_STATE_FLING:
-                    Log.d(TAG, "SCROLL_STATE_FLING");
+//                    Log.d(TAG, "SCROLL_STATE_FLING");
                     syncImageLoader.lock();
                     break;
                 case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
-                    Log.d(TAG, "SCROLL_STATE_IDLE");
+//                    Log.d(TAG, "SCROLL_STATE_IDLE");
                     loadImage();
                     break;
                 case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:

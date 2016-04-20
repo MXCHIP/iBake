@@ -15,6 +15,13 @@ public class CommandBean {
     public String KG_Preheat = "";
     public String KG_Light = "";
     public String KG_Fan = "";
+
+    public String WorkTime = "";
+    public String KG_Top = "";
+    public String Temp_Top = "";
+    public String KG_Bottom = "";
+    public String Temp_Bottom = "";
+
     public String WF = "";
     public JSONObject extrajson = null;
 
@@ -28,6 +35,13 @@ public class CommandBean {
         this.KG_Preheat = "";
         this.KG_Light = "";
         this.KG_Fan = "";
+
+        this.WorkTime = "";
+        this.KG_Top = "";
+        this.Temp_Top = "";
+        this.KG_Bottom = "";
+        this.Temp_Bottom = "";
+
         this.WF = "";
         this.extrajson = null;
     }

@@ -126,7 +126,8 @@ class userButtonListener implements View.OnClickListener {
         micoUser.removeBindRole(mdeviceid, menduserid, new UserCallBack() {
             @Override
             public void onSuccess(String message) {
-                mba.notifyDataSetChanged();
+//                mba.notifyDataSetInvalidated();
+//                mba.notifyDataSetChanged();
                 ConstHelper.setToast(context, ConstHelper.getFogMessage(message));
             }
 

@@ -29,8 +29,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(icicle);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
-            window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
         setContentView(R.layout.splashscreen);
 
@@ -78,10 +77,20 @@ public class SplashScreenActivity extends AppCompatActivity {
                     toLoginPage();
                 } else if (ConstHelper.checkPara(ConstHelper.getFogToken(message))) {
                     shareph.addData(ConstPara.SHARE_TOKEN, ConstHelper.getFogToken(message));
-                    Intent intent = new Intent(SplashScreenActivity.this, HomePageActivity.class);
-                    startActivity(intent);
-                    finish();
-                    overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+                    Intent intent = null;
+                    if(ConstHelper.checkPara(shareph.getData(ConstPara.SHARE_LASTDEVICEID))){
+                        intent = new Intent(SplashScreenActivity.this, DevCtrlActivity.class);
+                        intent.putExtra(ConstPara.INTENT_DEVNAME, shareph.getData(ConstPara.SHARE_LASTDEVNAME));
+                        intent.putExtra(ConstPara.INTENT_DEVID, shareph.getData(ConstPara.SHARE_LASTDEVICEID));
+                        intent.putExtra(ConstPara.INTENT_DEVPW, shareph.getData(ConstPara.SHARE_LASTDEVICEPW));
+                    }else{
+                        intent = new Intent(SplashScreenActivity.this, HomePageActivity.class);
+                    }
+                    if(null != intent){
+                        startActivity(intent);
+                        finish();
+                        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+                    }
                 }
             }
 

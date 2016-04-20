@@ -262,7 +262,7 @@ public class MyDeviceActivity extends AppCompatActivity implements AdapterView.O
                          * 绑定成功后刷新
                          */
                         ConstHelper.setToast(MyDeviceActivity.this, ConstHelper.getFogMessage(message));
-                        reload();
+//                        reload();
                     } else {
                         ConstHelper.setToast(MyDeviceActivity.this, ConstHelper.getFogMessage(message));
                     }

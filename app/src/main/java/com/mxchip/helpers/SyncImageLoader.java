@@ -20,8 +20,6 @@ import java.util.HashMap;
  */
 public class SyncImageLoader {
 
-    private String TAG = "---SyncImageLoader---";
-
     private Object lock = new Object();
 
     private boolean mAllowLoad = true;
@@ -79,7 +77,6 @@ public class SyncImageLoader {
             @Override
             public void run() {
                 if (!mAllowLoad) {
-                    Log.d(TAG, "prepare to load");
                     synchronized (lock) {
                         try {
                             lock.wait();
@@ -143,7 +140,6 @@ public class SyncImageLoader {
     }
 
     public static Drawable loadImageFromUrl(String url) throws IOException {
-        Log.d("---loadImageFromUrl---", url);
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             File f = new File(Environment.getExternalStorageDirectory() + "/iBakImgs/" + MD5.getMD5(url));
             if (f.exists()) {

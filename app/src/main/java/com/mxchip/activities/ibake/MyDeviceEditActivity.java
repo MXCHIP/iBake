@@ -234,7 +234,7 @@ public class MyDeviceEditActivity extends AppCompatActivity {
         edit_dev_user_lvid.setAdapter(adapter);
     }
 
-    private void getMemberList() {
+    public void getMemberList() {
 
         micoUser.getMemberList(deviceid, new UserCallBack() {
             @Override

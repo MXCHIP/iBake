@@ -63,7 +63,13 @@ public class ConstPara {
     public static String SHARE_ENDERUSERID = "enduserid";
     public static String SHARE_MQTTPW = "mqttpw";
     public static String SHARE_TOKEN = "token";
-    public static String SHARE_DEVICEPW = "devicepw";
+    public static String SHARE_LASTDEVNAME = "lastdevicename";
+    public static String SHARE_LASTDEVICEID = "lastdeviceid";
+    public static String SHARE_LASTDEVICEPW = "lastdevicepw";
+
+    public static String INTENT_DEVNAME = "devicename";
+    public static String INTENT_DEVID = "deviceid";
+    public static String INTENT_DEVPW = "devicepw";
 
     public static final int ALBUM_REQUEST_CODE = 1;
 

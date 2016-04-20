@@ -28,7 +28,6 @@ import com.mxchip.manage.CommandBean;
 import com.mxchip.manage.CommandHelper;
 import com.mxchip.manage.ConstHelper;
 import com.mxchip.manage.ConstPara;
-import com.mxchip.manage.ExtraBean;
 import com.mxchip.manage.SetTitleBar;
 import com.mxchip.manage.SharePreHelper;
 import com.mxchip.manage.TempMap;
@@ -85,11 +84,11 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
     private SharePreHelper shareph;
 
     private String deviceid;
+    private String devicename;
     private String devicepw;
     private String token;
     private String enduserid;
 
-    private ExtraBean eb = null;
     private CommandBean cb = null;
     private int tempTAG = 0;//1 上管 2 下管 3 烘烤时间
     private String chooseTemp;//1 上管 2 下管
@@ -113,7 +112,7 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
         micoDev = new MiCODevice(context);
         shareph = new SharePreHelper(context);
 
-        String devicename = (String) getIntent().getSerializableExtra("devicename");
+        devicename = (String) getIntent().getSerializableExtra(ConstPara.INTENT_DEVNAME);
         stb = new SetTitleBar(DevCtrlActivity.this);
         stb.setTitleName(devicename);
         stb.setLeftButton("drawer", "drawer");
@@ -183,8 +182,8 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
      */
     private void initCommandPara() {
 
-        deviceid = (String) getIntent().getSerializableExtra("deviceid");
-        devicepw = (String) getIntent().getSerializableExtra("devicepw");
+        deviceid = (String) getIntent().getSerializableExtra(ConstPara.INTENT_DEVID);
+        devicepw = (String) getIntent().getSerializableExtra(ConstPara.INTENT_DEVPW);
         enduserid = shareph.getData(ConstPara.SHARE_ENDERUSERID);
         token = shareph.getData(ConstPara.SHARE_TOKEN);
         reSetCommand();
@@ -193,8 +192,6 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
     }
 
     private void reSetCommand() {
-
-        eb = new ExtraBean();
         cb = new CommandBean();
 
         cb.appid = ConstPara._APPID;
@@ -263,21 +260,21 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
                 switch (tempTAG) {
                     case 1:
                         if (ConstHelper.checkPara(chooseTemp)) {
-                            eb.KG_Top = "1";
-                            eb.Temp_Top = chooseTemp;
+                            cb.KG_Top = "1";
+                            cb.Temp_Top = chooseTemp;
                             temptop_txt.setText(chooseTemp + ConstPara.DEGREE);
                         }
                         break;
                     case 2:
                         if (ConstHelper.checkPara(chooseTemp)) {
-                            eb.KG_Bottom = "1";
-                            eb.Temp_Bottom = chooseTemp;
+                            cb.KG_Bottom = "1";
+                            cb.Temp_Bottom = chooseTemp;
                             tempbottom_txt.setText(chooseTemp + ConstPara.DEGREE);
                         }
                         break;
                     case 3:
                         chooseTime = chooseTimeTmp;
-                        eb.WorkTime = chooseTime + "";
+                        cb.WorkTime = chooseTime + "";
                         baketime_txt.setText(chooseTime + ConstPara.MINUTES);
                         break;
                     default:
@@ -294,16 +291,13 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
 
                 showdevCtrlButton("stop");
 
-                eb.WorkMode = "14";
-                eb.WF_ID = "11";
-
                 cb.KG_Start = "1";
-                cb.WF = "1";
+                cb.WF = "0";
 
 //                cb.KG_Turn = "1";
 //                cb.KG_Fan = "0";
 
-                cb.extrajson = CommandHelper.setExtra(eb);
+//                cb.extrajson = CommandHelper.setExtra(eb);
                 sendCommand(CommandHelper.combCommand(cb));
             }
         });
@@ -522,6 +516,10 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
             @Override
             public void onSuccess(String message) {
                 Log.d(TAG + "ListenonSuccess", message);
+
+                shareph.addData(ConstPara.SHARE_LASTDEVNAME, devicename);
+                shareph.addData(ConstPara.SHARE_LASTDEVICEID, deviceid);
+                shareph.addData(ConstPara.SHARE_LASTDEVICEPW, devicepw);
             }
 
             @Override
@@ -632,7 +630,11 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
 
                 jsonVal =  ConstHelper.getJsonValue(jsonTmp.getString(jsonKey));
                 switch (jsonKey){
-                    case "KG_Power":
+                    case "KG_Start":
+                        if("0".equals(jsonVal))
+                            showdevCtrlButton("stop");
+                        else if("1".equals(jsonVal))
+                            showdevCtrlButton("start");
                         break;
                     case "KG_Light":
                         showKGLight("on", dev_ctrl_light);
@@ -683,7 +685,6 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
     //发送指令
     private void sendCommand(String command) {
 
-        String devicepw = shareph.getData(ConstPara.SHARE_DEVICEPW);
         String commandType = ConstPara.MQTT_CMD_TYPE;
 
         String token = shareph.getData(ConstPara.SHARE_TOKEN);
@@ -699,10 +700,6 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
                 Log.d(TAG + "onFailure", code + " " + message);
             }
 
-//            @Override
-//            public void onDeviceStatusReceived(String msgType, String messages) {
-//                Log.d(TAG + "onDeviceStatusReceived", msgType + " " + messages);
-//            }
         }, token);
     }
 
@@ -822,11 +819,6 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
             public void onFailure(int code, String message) {
                 Log.d(TAG + "onDestroy onFailure", code + " " + message);
             }
-//
-//            @Override
-//            public void onDeviceStatusReceived(String msgType, String messages) {
-//                Log.d(TAG + "onDestroy Rev", msgType + " " + messages);
-//            }
         });
     }
 }

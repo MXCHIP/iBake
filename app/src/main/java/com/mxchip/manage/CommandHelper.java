@@ -36,12 +36,13 @@ public class CommandHelper {
                             break;
                         case "extrajson":
                             break;
-                        case "WF":
-                            if(null == cb.extrajson)
-                                break;
-                            list.add("WF");
-                            cmdbody.put("WF", setWF(cb.WF, cb.extrajson));
-                            break;
+                        //TODO 普通的指令，非食谱(本地或者云食谱)
+//                        case "WF":
+//                            if(null == cb.extrajson)
+//                                break;
+//                            list.add("WF");
+//                            cmdbody.put("WF", setWF(cb.WF, cb.extrajson));
+//                            break;
                         default:
                             try {
                                 temp = fl.get(cb).toString();
