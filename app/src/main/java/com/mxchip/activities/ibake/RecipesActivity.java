@@ -11,6 +11,7 @@ import com.mico.micosdk.MiCOUser;
 import com.mxchip.callbacks.UserCallBack;
 import com.mxchip.helpers.CookBookItemAdapter;
 import com.mxchip.manage.ConstHelper;
+import com.mxchip.manage.ConstPara;
 import com.mxchip.manage.SetTitleBar;
 import com.mxchip.manage.SharePreHelper;
 
@@ -54,7 +55,7 @@ public class RecipesActivity extends AppCompatActivity implements AdapterView.On
         int type = 2;
         String productid = "6486b2d1-0ee9-4647-baa3-78b9cbc778f7";
         SharePreHelper shareph = new SharePreHelper(RecipesActivity.this);
-        String token = shareph.getData("token");
+        String token = shareph.getData(ConstPara.SHARE_TOKEN);
         micoUser.getCookBookList(type, productid, new UserCallBack() {
             @Override
             public void onSuccess(String message) {

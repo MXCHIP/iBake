@@ -57,6 +57,14 @@ public class ConstPara {
     public static String TITLENAME_MUFFIN = "MUFFIN";
     public static String TITLENAME_RECIPEEDIT = "RECIPE EDIT";
     public static String TITLENAME_STEP = "STEP 1";
+
+    public static String SHARE_GUIDE = "guide";
+    public static String SHARE_USERNAME = "username";
+    public static String SHARE_ENDERUSERID = "enduserid";
+    public static String SHARE_MQTTPW = "mqttpw";
+    public static String SHARE_TOKEN = "token";
+    public static String SHARE_DEVICEPW = "devicepw";
+
     public static final int ALBUM_REQUEST_CODE = 1;
 
     public static final int CAMERA_REQUEST_CODE = 2;

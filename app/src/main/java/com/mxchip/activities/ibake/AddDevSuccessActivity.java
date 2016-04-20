@@ -74,7 +74,7 @@ public class AddDevSuccessActivity extends AppCompatActivity {
                 showLoading();
                 String deviceid = (String) getIntent().getSerializableExtra("deviceid");
                 String alias = devname.getText().toString().trim();
-                String token = shareph.getData("token");
+                String token = shareph.getData(ConstPara.SHARE_TOKEN);
                 micoDev.updateDeviceAlias(deviceid, alias, new ManageDeviceCallBack() {
                     @Override
                     public void onSuccess(String message) {

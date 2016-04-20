@@ -248,7 +248,7 @@ public class AddDevSSIDActivity extends AppCompatActivity {
                 Log.d(TAG + " bindDevice", message);
 //                toRetryPage();
             }
-        }, shareph.getData("token"));
+        }, shareph.getData(ConstPara.SHARE_TOKEN));
     }
 
     private void toSuccessPage(String data) {

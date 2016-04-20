@@ -10,8 +10,6 @@ import android.util.Log;
  */
 public class SharePreHelper {
 
-    private String TAG = "---SharePreHelper---";
-
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
@@ -30,9 +28,6 @@ public class SharePreHelper {
      * @param value
      */
     public void addData(String key, String value) {
-
-        Log.d(TAG, "addData -- " + key + "" + value);
-
         // 将用户登录成功后获取的token放入local storege里
         editor.putString(key, value);
         // 提交当前数据
@@ -40,12 +35,10 @@ public class SharePreHelper {
     }
 
     public String getData(String key) {
-        Log.d(TAG, "getData -- " + key);
         return sharedPreferences.getString(key, "");
     }
 
     public void removeData(String key) {
-        Log.d(TAG, "removeData -- " + key);
         editor.remove(key);
         editor.commit();
     }

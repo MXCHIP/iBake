@@ -185,8 +185,8 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
 
         deviceid = (String) getIntent().getSerializableExtra("deviceid");
         devicepw = (String) getIntent().getSerializableExtra("devicepw");
-        enduserid = shareph.getData("enduserid");
-        token = shareph.getData("token");
+        enduserid = shareph.getData(ConstPara.SHARE_ENDERUSERID);
+        token = shareph.getData(ConstPara.SHARE_TOKEN);
         reSetCommand();
 
         screenWidth = getWindowManager().getDefaultDisplay().getWidth();
@@ -510,19 +510,13 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
         ldp.host = ConstPara.MQTT_HOST;
         ldp.port = ConstPara.MQTT_PORT;
         ldp.userName = enduserid;
-        ldp.passWord = shareph.getData("mqttpw");
+        ldp.passWord = shareph.getData(ConstPara.SHARE_MQTTPW);
         ldp.deviceid = deviceid;
         ldp.clientID = enduserid;
 
         /**
          * TODO 使用fog1.0测试
          */
-//        ldp.host = "api.easylink.io";
-//        ldp.port = ConstPara.MQTT_PORT;
-//        ldp.userName = shareph.getData("devicepw");
-//        ldp.passWord = shareph.getData("devicepw");
-//        ldp.deviceid = "d64f517c/c8934691813c";
-//        ldp.clientID = shareph.getData("devicepw");
 
         micoDev.startListenDevice(ldp, new ControlDeviceCallBack() {
             @Override
@@ -689,10 +683,10 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
     //发送指令
     private void sendCommand(String command) {
 
-        String devicepw = shareph.getData("devicepw");
+        String devicepw = shareph.getData(ConstPara.SHARE_DEVICEPW);
         String commandType = ConstPara.MQTT_CMD_TYPE;
 
-        String token = shareph.getData("token");
+        String token = shareph.getData(ConstPara.SHARE_TOKEN);
         micoDev.sendCommand(deviceid, devicepw, command, commandType, new ControlDeviceCallBack() {
             @Override
             public void onSuccess(String message) {

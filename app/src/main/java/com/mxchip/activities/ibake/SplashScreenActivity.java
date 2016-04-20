@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import com.mico.micosdk.MiCOUser;
 import com.mxchip.callbacks.UserCallBack;
 import com.mxchip.manage.ConstHelper;
+import com.mxchip.manage.ConstPara;
 import com.mxchip.manage.SharePreHelper;
 
 /**
@@ -43,11 +44,9 @@ public class SplashScreenActivity extends AppCompatActivity {
     private void checkToken() {
         shareph = new SharePreHelper(SplashScreenActivity.this);
 
-        Log.d(TAG + "onCreate", shareph.getData("token"));
-
-        if(ConstHelper.checkPara(shareph.getData("guide"))){
-            if (ConstHelper.checkPara(shareph.getData("token"))) {
-                refreshToken(shareph.getData("token"));
+        if(ConstHelper.checkPara(shareph.getData(ConstPara.SHARE_GUIDE))){
+            if (ConstHelper.checkPara(shareph.getData(ConstPara.SHARE_TOKEN))) {
+                refreshToken(shareph.getData(ConstPara.SHARE_TOKEN));
             } else {
                 toLoginPage();
             }
@@ -78,7 +77,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                     ConstHelper.setToast(SplashScreenActivity.this, ConstHelper.getFogErr(message));
                     toLoginPage();
                 } else if (ConstHelper.checkPara(ConstHelper.getFogToken(message))) {
-                    shareph.addData("token", ConstHelper.getFogToken(message));
+                    shareph.addData(ConstPara.SHARE_TOKEN, ConstHelper.getFogToken(message));
                     Intent intent = new Intent(SplashScreenActivity.this, HomePageActivity.class);
                     startActivity(intent);
                     finish();

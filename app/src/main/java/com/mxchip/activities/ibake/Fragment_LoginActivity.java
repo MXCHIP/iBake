@@ -53,8 +53,8 @@ public class Fragment_LoginActivity extends Fragment implements OnClickListener 
         passwordid = (EditText) view.findViewById(R.id.password_etid);
         forget_layout = (LinearLayout) view.findViewById(R.id.login_forget_layoutid);
 
-        if (ConstHelper.checkPara(shareph.getData("username"))) {
-            usernameid.setText(shareph.getData("username"));
+        if (ConstHelper.checkPara(shareph.getData(ConstPara.SHARE_USERNAME))) {
+            usernameid.setText(shareph.getData(ConstPara.SHARE_USERNAME));
         }
     }
 
@@ -84,10 +84,10 @@ public class Fragment_LoginActivity extends Fragment implements OnClickListener 
                                 if (ConstHelper.checkPara(ConstHelper.getFogErr(message))) {
                                     ConstHelper.setToast(getActivity(), ConstHelper.getFogErr(message));
                                 } else if (ConstHelper.checkPara(ConstHelper.getFogToken(message))) {
-                                    shareph.addData("username", userName);
-                                    shareph.addData("enduserid", ConstHelper.getFogEndUserid(message));
-                                    shareph.addData("mqttpw", password);
-                                    shareph.addData("token", ConstHelper.getFogToken(message));
+                                    shareph.addData(ConstPara.SHARE_USERNAME, userName);
+                                    shareph.addData(ConstPara.SHARE_ENDERUSERID, ConstHelper.getFogEndUserid(message));
+                                    shareph.addData(ConstPara.SHARE_MQTTPW, password);
+                                    shareph.addData(ConstPara.SHARE_TOKEN, ConstHelper.getFogToken(message));
                                     shapeLoadingDialog.dismiss();
                                     // 跳转到登录成功的首页
                                     Intent intent = new Intent(v.getContext(), HomePageActivity.class);

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.mico.micosdk.MiCODevice;
 import com.mxchip.callbacks.ManageDeviceCallBack;
 import com.mxchip.manage.ConstHelper;
+import com.mxchip.manage.ConstPara;
 import com.mxchip.manage.SetTitleBar;
 import com.mxchip.manage.SharePreHelper;
 
@@ -63,7 +64,7 @@ public class QrCodeActivity extends AppCompatActivity {
 
     private void getQrCode() {
         SharePreHelper shareph = new SharePreHelper(context);
-        String token = shareph.getData("token");
+        String token = shareph.getData(ConstPara.SHARE_TOKEN);
         Log.d(TAG, token);
 
         micoDev.getShareVerCode(deviceid, new ManageDeviceCallBack() {

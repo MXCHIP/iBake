@@ -13,6 +13,7 @@ import com.mico.micosdk.MiCOUser;
 import com.mxchip.callbacks.UserCallBack;
 import com.mxchip.manage.ActionSheetDialog;
 import com.mxchip.manage.ConstHelper;
+import com.mxchip.manage.ConstPara;
 import com.mxchip.manage.SharePreHelper;
 
 import java.util.List;
@@ -120,13 +121,11 @@ class userButtonListener implements View.OnClickListener {
 
     private void removeBindRole(final Context context){
         MiCOUser micoUser = new MiCOUser();
-        String token = new SharePreHelper(mcontext).getData("token");
-//        Log.d("---My---", mdeviceid + " " + menduserid + " " + token);
+        String token = new SharePreHelper(mcontext).getData(ConstPara.SHARE_TOKEN);
 
         micoUser.removeBindRole(mdeviceid, menduserid, new UserCallBack() {
             @Override
             public void onSuccess(String message) {
-                Log.d("---My---", message);
                 mba.notifyDataSetChanged();
                 ConstHelper.setToast(context, ConstHelper.getFogMessage(message));
             }

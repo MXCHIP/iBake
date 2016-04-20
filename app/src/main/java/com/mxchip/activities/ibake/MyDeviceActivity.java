@@ -140,7 +140,7 @@ public class MyDeviceActivity extends AppCompatActivity implements AdapterView.O
 
     public void loadDate() {
         SharePreHelper shareph = new SharePreHelper(MyDeviceActivity.this);
-        String token = shareph.getData("token");
+        String token = shareph.getData(ConstPara.SHARE_TOKEN);
         micoUser.getDeviceList(new UserCallBack() {
             @Override
             public void onSuccess(String message) {

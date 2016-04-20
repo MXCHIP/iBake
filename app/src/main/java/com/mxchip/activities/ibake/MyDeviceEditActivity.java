@@ -84,7 +84,7 @@ public class MyDeviceEditActivity extends AppCompatActivity {
         initOnClick();
 
         SharePreHelper shareph = new SharePreHelper(context);
-        token = shareph.getData("token");
+        token = shareph.getData(ConstPara.SHARE_TOKEN);
     }
 
 

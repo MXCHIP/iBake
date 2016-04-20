@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
+import com.mxchip.manage.ConstPara;
 import com.mxchip.manage.SharePreHelper;
 
 public class EntryFragment extends Fragment {
@@ -28,7 +29,7 @@ public class EntryFragment extends Fragment {
                         Log.d("---emter---", "OK");
 
                         SharePreHelper shareph = new SharePreHelper(getContext());
-                        shareph.addData("guide", "1");
+                        shareph.addData(ConstPara.SHARE_GUIDE, "1");
 
                         Intent intent = new Intent(getContext(), SplashScreenActivity.class);
                         startActivity(intent);

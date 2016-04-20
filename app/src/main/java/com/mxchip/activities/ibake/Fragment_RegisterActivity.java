@@ -92,10 +92,10 @@ public class Fragment_RegisterActivity extends Fragment implements View.OnClickL
                                     ConstHelper.setToast(getActivity(), ConstHelper.getFogMessage(message));
 
                                 } else if (ConstHelper.checkPara(ConstHelper.getFogToken(message))) {
-                                    shareph.addData("username", userName);
-                                    shareph.addData("enduserid", ConstHelper.getFogEndUserid(message));
-                                    shareph.addData("mqttpw", vercoden);
-                                    shareph.addData("token", ConstHelper.getFogToken(message));
+                                    shareph.addData(ConstPara.SHARE_USERNAME, userName);
+                                    shareph.addData(ConstPara.SHARE_ENDERUSERID, ConstHelper.getFogEndUserid(message));
+                                    shareph.addData(ConstPara.SHARE_MQTTPW, vercoden);
+                                    shareph.addData(ConstPara.SHARE_TOKEN, ConstHelper.getFogToken(message));
 
                                     // 跳转去注册界面并把username传递过去
                                     Intent intent = new Intent(v.getContext(), SetPasswordActivity.class);
