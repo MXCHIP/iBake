@@ -98,7 +98,8 @@ public class MyDeviceEditActivity extends AppCompatActivity {
         device_item_ly = (LinearLayout) findViewById(R.id.device_item_lyid);
 
         imgbyte = (byte[]) getIntent().getSerializableExtra("deviceimg");
-        device_detail_imgid.setImageBitmap(ConstHelper.Bytes2Bitmap(imgbyte));
+        if(null != imgbyte)
+            device_detail_imgid.setImageBitmap(ConstHelper.Bytes2Bitmap(imgbyte));
 
         devname = (String) getIntent().getSerializableExtra("devicename");
         dev_detail_name.setText(devname);

@@ -88,6 +88,7 @@ public class BookItemAdapter extends BaseAdapter {
         }
         final BookModel model = mModels.get(position);
         convertView.setTag(position);
+
         LinearLayout detail = (LinearLayout) convertView.findViewById(R.id.dev_item_r_layid);
         TextView dev_item_isonline_tvid = (TextView) convertView.findViewById(R.id.dev_item_isonline_tvid);
         TextView dev_item_name_tvid = (TextView) convertView.findViewById(R.id.dev_item_name_tvid);
@@ -95,9 +96,9 @@ public class BookItemAdapter extends BaseAdapter {
         dev_item_name_tvid.setText(model.book_name);
         dev_item_isonline_tvid.setText(model.out_book_online);
 
-        if("online".equals(model.out_book_online)){
-            syncImageLoader.loadImage(position, model, model.out_book_pic, imageLoadListener);
-        }else{
+        syncImageLoader.loadImage(position, model, model.out_book_pic, imageLoadListener);
+
+        if ("offline".equals(model.out_book_online)) {
             dev_item_name_tvid.setTextColor(ConstPara.IS_OFFLINE_COLOR);
             dev_item_isonline_tvid.setTextColor(ConstPara.IS_OFFLINE_COLOR);
 
@@ -110,7 +111,7 @@ public class BookItemAdapter extends BaseAdapter {
         detail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if("online".equals(model.out_book_online)){
+                if ("online".equals(model.out_book_online)) {
                     Intent intent = new Intent(mContext, DevCtrlActivity.class);
                     intent.putExtra("deviceid", model.out_book_deviceid);
                     intent.putExtra("devicepw", model.out_book_devicepw);
@@ -119,8 +120,8 @@ public class BookItemAdapter extends BaseAdapter {
                     mContext.finish();
                     ActivitiesManagerApplication ama = new ActivitiesManagerApplication();
                     ama.destoryActivity(ConstPara.HOME_PAGE);
-                }else{
-                    ConstHelper.setToast(mContext, ConstHelper.getFogMessage(ConstPara.IS_OFFLINE));
+                } else {
+                    ConstHelper.setToast(mContext, ConstPara.IS_OFFLINE);
                 }
             }
         });
@@ -135,19 +136,25 @@ public class BookItemAdapter extends BaseAdapter {
             View view = mListView.findViewWithTag(t);
             if (view != null) {
                 ImageView iv = (ImageView) view.findViewById(R.id.dev_item_imgid);
+                Bitmap bitmap = ConstHelper.drawable2Bitmap(drawable);
+
+                if("offline".equals(model.out_book_online))
+                    bitmap = ConstHelper.getGrayBitmap(bitmap);
+
+                final Bitmap nowBitMap = bitmap;
+                iv.setImageBitmap(nowBitMap);
+
+                // iv.setBackgroundDrawable(drawable);
+
                 LinearLayout setimg = (LinearLayout) view.findViewById(R.id.mydev_setting_btn);
-                final Bitmap bitmap = ConstHelper.drawable2Bitmap(drawable);
-//                iv.setImageBitmap(bitmap);
-                iv.setBackgroundDrawable(drawable);
                 setimg.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        Log.d("---setimg---", model.out_book_deviceid + " model.out_book_deviceid");
                         Intent intent = new Intent(mContext, MyDeviceEditActivity.class);
                         intent.putExtra("deviceid", model.out_book_deviceid);
                         intent.putExtra("devicepw", model.out_book_devicepw);
                         intent.putExtra("devicename", model.book_name);
-                        intent.putExtra("deviceimg", ConstHelper.Bitmap2Bytes(bitmap));
+                        intent.putExtra("deviceimg", ConstHelper.Bitmap2Bytes(nowBitMap));
                         mContext.startActivity(intent);
                     }
                 });
