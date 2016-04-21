@@ -100,8 +100,8 @@ public class MyDeviceEditActivity extends AppCompatActivity {
         imgbyte = (byte[]) getIntent().getSerializableExtra("deviceimg");
         device_detail_imgid.setImageBitmap(ConstHelper.Bytes2Bitmap(imgbyte));
 
-        String devicename = (String) getIntent().getSerializableExtra("devicename");
-        dev_detail_name.setText(devicename);
+        devname = (String) getIntent().getSerializableExtra("devicename");
+        dev_detail_name.setText(devname);
     }
 
     private void initOnClick() {
@@ -170,13 +170,9 @@ public class MyDeviceEditActivity extends AppCompatActivity {
                     JSONObject devinfo = new JSONObject(ConstHelper.getFogData(message));
                     String aliasTmp = devinfo.getString("alias");
                     if (ConstHelper.checkPara(aliasTmp)) {
-//                    if(ConstHelper.checkPara(devinfo.getString("alias"))){
                         devname = devinfo.getString("alias");
-                    } else {
-                        JSONObject product = new JSONObject(devinfo.getString("product"));
-                        devname = product.getString("pname");
+                        dev_detail_name.setText(devname);
                     }
-                    dev_detail_name.setText(devname);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -234,7 +230,7 @@ public class MyDeviceEditActivity extends AppCompatActivity {
         edit_dev_user_lvid.setAdapter(adapter);
     }
 
-    public void getMemberList() {
+    private void getMemberList() {
 
         micoUser.getMemberList(deviceid, new UserCallBack() {
             @Override

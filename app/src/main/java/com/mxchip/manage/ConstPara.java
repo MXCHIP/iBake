@@ -1,5 +1,7 @@
 package com.mxchip.manage;
 
+import android.graphics.Color;
+
 /**
  * Created by Rocke on 2016/03/09.
  */
@@ -34,6 +36,10 @@ public class ConstPara {
     public static String SSID_NAME_BODY = "NO WiFi";
 
     public static String PARA_EMPTY = "Parameters can not be empty.";
+    public static String IS_OFFLINE = "This device is offline.";
+    public static int IS_OFFLINE_COLOR = Color.rgb(173, 173, 173);
+
+
     public static String ISWORKING = "is working";
     public static String MQTT_HOST = "115.28.161.90";
 

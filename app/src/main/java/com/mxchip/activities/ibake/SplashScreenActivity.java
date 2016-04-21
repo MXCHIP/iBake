@@ -15,6 +15,9 @@ import com.mxchip.manage.ConstHelper;
 import com.mxchip.manage.ConstPara;
 import com.mxchip.manage.SharePreHelper;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by Rocke on 2016/03/15.
  */
@@ -22,6 +25,8 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     private String TAG = "---SplashScreenActivity---";
     private SharePreHelper shareph;
+    private String newToken;
+    private String lastdeviceid;
     private MiCOUser micoUser = new MiCOUser();
 
     @Override
@@ -76,20 +81,33 @@ public class SplashScreenActivity extends AppCompatActivity {
                     ConstHelper.setToast(SplashScreenActivity.this, ConstHelper.getFogErr(message));
                     toLoginPage();
                 } else if (ConstHelper.checkPara(ConstHelper.getFogToken(message))) {
-                    shareph.addData(ConstPara.SHARE_TOKEN, ConstHelper.getFogToken(message));
-                    Intent intent = null;
-                    if(ConstHelper.checkPara(shareph.getData(ConstPara.SHARE_LASTDEVICEID))){
-                        intent = new Intent(SplashScreenActivity.this, DevCtrlActivity.class);
-                        intent.putExtra(ConstPara.INTENT_DEVNAME, shareph.getData(ConstPara.SHARE_LASTDEVNAME));
-                        intent.putExtra(ConstPara.INTENT_DEVID, shareph.getData(ConstPara.SHARE_LASTDEVICEID));
-                        intent.putExtra(ConstPara.INTENT_DEVPW, shareph.getData(ConstPara.SHARE_LASTDEVICEPW));
+
+                    newToken = ConstHelper.getFogToken(message);
+
+                    shareph.addData(ConstPara.SHARE_TOKEN, newToken);
+
+                    lastdeviceid = shareph.getData(ConstPara.SHARE_LASTDEVICEID);
+
+                    if(ConstHelper.checkPara(lastdeviceid)){
+                        micoUser.getDeviceInfo(lastdeviceid, new UserCallBack() {
+                            @Override
+                            public void onSuccess(String message) {
+                                Log.d(TAG + "getDeviceInfo", ConstHelper.getFogData(message));
+                                try {
+                                    JSONObject devinfo = new JSONObject(ConstHelper.getFogData(message));
+                                    pageRouter("ctrldev", devinfo);
+                                } catch (JSONException e) {
+                                    pageRouter("homepage", null);
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(int code, String message) {
+                                pageRouter("homepage", null);
+                            }
+                        }, newToken);
                     }else{
-                        intent = new Intent(SplashScreenActivity.this, HomePageActivity.class);
-                    }
-                    if(null != intent){
-                        startActivity(intent);
-                        finish();
-                        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+                        pageRouter("homepage", null);
                     }
                 }
             }
@@ -108,5 +126,31 @@ public class SplashScreenActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+    }
+
+    private void pageRouter(String pagetag, JSONObject devinfo){
+        Intent intent = new Intent(SplashScreenActivity.this, HomePageActivity.class);
+        switch (pagetag){
+            case "ctrldev":
+                try {
+                    if(Boolean.parseBoolean(devinfo.getString("online"))){
+                        intent = new Intent(SplashScreenActivity.this, DevCtrlActivity.class);
+                        intent.putExtra(ConstPara.INTENT_DEVNAME, devinfo.getString("alias"));
+                        intent.putExtra(ConstPara.INTENT_DEVID, lastdeviceid);
+                        intent.putExtra(ConstPara.INTENT_DEVPW, devinfo.getString("devicepw"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                break;
+            default:
+                break;
+        }
+
+        if(null != intent){
+            startActivity(intent);
+            finish();
+            overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+        }
     }
 }

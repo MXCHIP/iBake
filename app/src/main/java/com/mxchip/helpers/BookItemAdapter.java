@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,11 +47,11 @@ public class BookItemAdapter extends BaseAdapter {
 
     int i = 0;
 
-    public void addBook(String book_name, String out_book_url, String out_book_pic, String out_book_deviceid, String out_book_devicepw) {
+    public void addBook(String book_name, String out_book_online, String out_book_pic, String out_book_deviceid, String out_book_devicepw) {
 //        Log.d(TAG + "addbook", i++ + "");
         BookModel model = new BookModel();
         model.book_name = book_name;
-        model.out_book_url = out_book_url;
+        model.out_book_online = out_book_online;
         model.out_book_pic = out_book_pic;
         model.out_book_deviceid = out_book_deviceid;
         model.out_book_devicepw = out_book_devicepw;
@@ -90,28 +89,39 @@ public class BookItemAdapter extends BaseAdapter {
         final BookModel model = mModels.get(position);
         convertView.setTag(position);
         LinearLayout detail = (LinearLayout) convertView.findViewById(R.id.dev_item_r_layid);
-//        ImageView iv = (ImageView) convertView.findViewById(R.id.dev_item_imgid);
-        TextView dev_item_name_tvid = (TextView) convertView.findViewById(R.id.dev_item_name_tvid);
         TextView dev_item_isonline_tvid = (TextView) convertView.findViewById(R.id.dev_item_isonline_tvid);
+        TextView dev_item_name_tvid = (TextView) convertView.findViewById(R.id.dev_item_name_tvid);
 
         dev_item_name_tvid.setText(model.book_name);
-        dev_item_isonline_tvid.setText(model.out_book_url);
-//        iv.setBackgroundResource(R.drawable.mydevice_icon_device_online);
+        dev_item_isonline_tvid.setText(model.out_book_online);
 
-        syncImageLoader.loadImage(position, model, model.out_book_pic, imageLoadListener);
+        if("online".equals(model.out_book_online)){
+            syncImageLoader.loadImage(position, model, model.out_book_pic, imageLoadListener);
+        }else{
+            dev_item_name_tvid.setTextColor(ConstPara.IS_OFFLINE_COLOR);
+            dev_item_isonline_tvid.setTextColor(ConstPara.IS_OFFLINE_COLOR);
+
+            ImageView dev_item_isonline_img = (ImageView) convertView.findViewById(R.id.dev_item_isonline_img);
+            ImageView iv = (ImageView) convertView.findViewById(R.id.dev_item_imgid);
+            dev_item_isonline_img.setVisibility(View.GONE);
+            iv.setBackgroundResource(R.drawable.nydevice_icon_device_offline);
+        }
 
         detail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Log.d("---setimg---", model.out_book_deviceid + " to control device page");
-                Intent intent = new Intent(mContext, DevCtrlActivity.class);
-                intent.putExtra("deviceid", model.out_book_deviceid);
-                intent.putExtra("devicepw", model.out_book_devicepw);
-                intent.putExtra("devicename", model.book_name);
-                mContext.startActivity(intent);
-                mContext.finish();
-                ActivitiesManagerApplication ama = new ActivitiesManagerApplication();
-                ama.destoryActivity(ConstPara.HOME_PAGE);
+                if("online".equals(model.out_book_online)){
+                    Intent intent = new Intent(mContext, DevCtrlActivity.class);
+                    intent.putExtra("deviceid", model.out_book_deviceid);
+                    intent.putExtra("devicepw", model.out_book_devicepw);
+                    intent.putExtra("devicename", model.book_name);
+                    mContext.startActivity(intent);
+                    mContext.finish();
+                    ActivitiesManagerApplication ama = new ActivitiesManagerApplication();
+                    ama.destoryActivity(ConstPara.HOME_PAGE);
+                }else{
+                    ConstHelper.setToast(mContext, ConstHelper.getFogMessage(ConstPara.IS_OFFLINE));
+                }
             }
         });
 

@@ -74,7 +74,7 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/imageView8"
+            android:id="@+id/dev_item_isonline_img"
             android:layout_width="@dimen/mydev_icon_margin"
             android:layout_height="@dimen/mydev_icon_margin"
             android:layout_marginRight="@dimen/mydev_icon_margin"

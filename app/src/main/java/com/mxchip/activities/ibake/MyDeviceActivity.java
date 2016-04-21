@@ -150,11 +150,11 @@ public class MyDeviceActivity extends AppCompatActivity implements AdapterView.O
                     for (int i = 0; i < datas.length(); i++) {
                         JSONObject temp = (JSONObject) datas.get(i);
                         String name = temp.getString("device_name");
-                        String online = temp.getString("online").equals("0") ? "online" : "offline";
+                        String online = Boolean.parseBoolean(temp.getString("online")) ? "online" : "offline";
                         String img = temp.getString("product_icon");
                         String deviceid = temp.getString("device_id");
                         String devicepw = temp.getString("device_pw");
-                        Log.d(TAG + "getlist", name + ' ' + online + ' ' + img);
+//                        Log.d(TAG + "getlist", name + ' ' + online + ' ' + img);
                         adapter.addBook(name, online, img, deviceid, devicepw);
                     }
                     mydevlistlistviewid.setAdapter(adapter);
