@@ -111,7 +111,9 @@ public class BookItemAdapter extends BaseAdapter {
         detail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ("online".equals(model.out_book_online)) {
+
+                //TODO 设备是否在线
+//                if ("online".equals(model.out_book_online)) {
                     Intent intent = new Intent(mContext, DevCtrlActivity.class);
                     intent.putExtra("deviceid", model.out_book_deviceid);
                     intent.putExtra("devicepw", model.out_book_devicepw);
@@ -120,9 +122,9 @@ public class BookItemAdapter extends BaseAdapter {
                     mContext.finish();
                     ActivitiesManagerApplication ama = new ActivitiesManagerApplication();
                     ama.destoryActivity(ConstPara.HOME_PAGE);
-                } else {
-                    ConstHelper.setToast(mContext, ConstPara.IS_OFFLINE);
-                }
+//                } else {
+//                    ConstHelper.setToast(mContext, ConstPara.IS_OFFLINE);
+//                }
             }
         });
 
@@ -189,11 +191,9 @@ public class BookItemAdapter extends BaseAdapter {
         public void onScrollStateChanged(AbsListView view, int scrollState) {
             switch (scrollState) {
                 case AbsListView.OnScrollListener.SCROLL_STATE_FLING:
-//                    Log.d(TAG, "SCROLL_STATE_FLING");
                     syncImageLoader.lock();
                     break;
                 case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
-//                    Log.d(TAG, "SCROLL_STATE_IDLE");
                     loadImage();
                     break;
                 case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:

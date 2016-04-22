@@ -15,6 +15,7 @@ public class CommandBean {
     public String KG_Preheat = "";
     public String KG_Light = "";
     public String KG_Fan = "";
+    public String WorkMode = "";
 
     public String WorkTime = "";
     public String KG_Top = "";
@@ -35,6 +36,7 @@ public class CommandBean {
         this.KG_Preheat = "";
         this.KG_Light = "";
         this.KG_Fan = "";
+        this.WorkMode = "";
 
         this.WorkTime = "";
         this.KG_Top = "";

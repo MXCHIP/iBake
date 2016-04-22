@@ -292,7 +292,8 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
                 showdevCtrlButton("stop");
 
                 cb.KG_Start = "1";
-                cb.WF = "0";
+                cb.WorkMode = "1";
+//                cb.WF = "0";
 
 //                cb.KG_Turn = "1";
 //                cb.KG_Fan = "0";
