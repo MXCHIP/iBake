@@ -92,15 +92,18 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
     private CommandBean cb = null;
     private int tempTAG = 0;//1 上管 2 下管 3 烘烤时间
     private String chooseTemp;//1 上管 2 下管
-    private int chooseTime = 0;//烘烤时间
+    private int chooseTime = 30;//烘烤时间
     private int chooseTimeTmp = 0;//烘烤时间
 
     float moveStep = 0; //托动条的移动步调
     TextView text;
     int screenWidth; //屏幕宽度
-    String startTimeStr = "00:30";
-    String endTimeStr = "02:30";
+    String startTimeStr = ConstPara.START_TIME;
+    String endTimeStr = ConstPara.END_TIME;
     int st_h,st_m;
+
+    //workstatus标记 false界面参数不可调，true界面参数可调
+    Boolean WSTAG = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -273,9 +276,11 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
                         }
                         break;
                     case 3:
-                        chooseTime = chooseTimeTmp;
-                        cb.WorkTime = chooseTime + "";
-                        baketime_txt.setText(chooseTime + ConstPara.MINUTES);
+                        if(0 !=chooseTimeTmp){
+                            chooseTime = chooseTimeTmp;
+                            cb.WorkTime = chooseTime + "";
+                            baketime_txt.setText(chooseTime + ConstPara.MINUTES);
+                        }
                         break;
                     default:
                         break;
@@ -340,8 +345,7 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
         }
     }
 
-    //workstatus标记 false界面参数不可调，true界面参数可调
-    Boolean WSTAG = false;
+
    private void showdevCtrlButton(String type) {
         switch (type) {
             case "start":
@@ -623,28 +627,35 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
             if(null == jsarr)
                 return;
 
+            if(WSTAG)
+                return;
+
             String jsonKey = "";
             String jsonVal = "";
             for(int i = 0; i < jsarr.length(); i++){
-//                Log.d(TAG + "JSONArray", jsarr.getString(i));
                 jsonKey = jsarr.getString(i);
 
-                jsonVal =  ConstHelper.getJsonValue(jsonTmp.getString(jsonKey));
+//                jsonVal =  ConstHelper.getJsonValue(jsonTmp.getString(jsonKey));
+                jsonVal =  jsonTmp.getString(jsonKey);
                 switch (jsonKey){
                     case "KG_Start":
                         if("0".equals(jsonVal))
-                            showdevCtrlButton("stop");
-                        else if("1".equals(jsonVal))
                             showdevCtrlButton("start");
+                        else if("1".equals(jsonVal))
+                            showdevCtrlButton("stop");
                         break;
                     case "KG_Light":
-                        showKGLight("on", dev_ctrl_light);
+                        if("1".equals(jsonVal))
+                            showKGLight("on", dev_ctrl_light);
+                        else
+                            showKGLight("off", dev_ctrl_light);
                         break;
                     case "WorkTime":
+                        baketime_txt.setText(jsonVal + ConstPara.MINUTES);
                         break;
                     case "KG_Preheat":
-                        circletitle_txt.setText(jsonVal);
-                        showdevCtrlButton("stop");
+//                        circletitle_txt.setText(jsonVal);
+//                        showdevCtrlButton("stop");
                         break;
                     case "WorkStatus":
                         updateCircleTitle(jsonVal);
@@ -676,11 +687,11 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
     private void updateCircleTitle(String status){
 
         circletitle_txt.setText(wsm.getStatusName(status));
-        if(wsm.DJ_CODE.equals(status)){
-            showdevCtrlButton("start");
-        }else{
-            showdevCtrlButton("stop");
-        }
+//        if(wsm.DJ_CODE.equals(status)){
+//            showdevCtrlButton("start");
+//        }else{
+//            showdevCtrlButton("stop");
+//        }
     }
 
     //发送指令

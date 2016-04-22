@@ -48,7 +48,7 @@
     <string name="downtemptxt">Down.Temp</string>
     <string name="baketimetxt">Bake.Time</string>
     <string name="preheattxt">Preheat</string>
-    <string name="inittemp">55℃</string>
+    <string name="inittemp">105℃</string>
     <string name="inittime">30min</string>
     <string name="tempmark">℃</string>
 

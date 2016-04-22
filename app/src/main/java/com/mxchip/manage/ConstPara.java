@@ -86,9 +86,11 @@ public class ConstPara {
 
     public static String tempJson = "{\"topic\":\"d2c/e79f0250-ea5e-11e5-a739-00163e0204c0/status\",\"payload\":{'deviceid':'e79f0250-ea5e-11e5-a739-00163e0204c0','attrSet':['KG_Power','KG_Fan','KG_Turn','KG_Light','WorkTime','WorkStatus','EC','WF','KG_Preheat','Temp_Top','Temp_Bottom','WF_CurrentStep','WF_TimeLeft','Cur_TempBottom','Cur_TempTop'],'KG_Power':{'value':'0'},'KG_Fan':{'value':'0'},'KG_Turn':{'value':'0'},'KG_Light':{'value':'1'},'WorkTime':{'value':'20'},'WorkStatus':{'value':'0'},'EC':{'value':'0'},'WF':{'value':'1','extra':{'WorkMode':'0','WF_ID':'0','Type':'0','StepNum':'0','TimeTotal':'0'}},'KG_Preheat':{'value':'0'},'Temp_Top':{'value':'35'},'Temp_Bottom':{'value':'65'},'WF_CurrentStep':{'value':'0'},'WF_TimeLeft':{'value':'46'},'Cur_TempBottom':{'value':'36'},'Cur_TempTop':{'value':'80'}}}";
 
-    public static String[] PLANETS = new String[]{"70℃", "65℃", "60℃", "55℃", "50℃", "45℃", "40℃", "35℃"};
+    public static String[] PLANETS = new String[]{"250℃","245℃","240℃","235℃","230℃","225℃","220℃","215℃","210℃","205℃","200℃","195℃","190℃","185℃","180℃","175℃","170℃","165℃","160℃","155℃","150℃","145℃","140℃","135℃","130℃","125℃","120℃","115℃","110℃","105℃","100℃","95℃","90℃","85℃","80℃","75℃","70℃","65℃","60℃"};
     public static String DEGREE = "℃";
     public static String MINUTES = "min";
+    public static String START_TIME = "00:00";
+    public static String END_TIME = "03:00";
 
 }
 
