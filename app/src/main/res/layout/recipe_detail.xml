@@ -22,6 +22,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/recipe_detial_ilikeit"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/recipe_dd_line_height"
                 android:layout_weight="1"

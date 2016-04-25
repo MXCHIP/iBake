@@ -14,6 +14,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.alibaba.sdk.android.AlibabaSDK;
+import com.alibaba.sdk.android.trade.TradeConfigs;
 import com.alibaba.sdk.android.trade.TradeConstants;
 import com.alibaba.sdk.android.trade.TradeService;
 import com.alibaba.sdk.android.trade.page.ItemDetailPage;
@@ -271,8 +272,9 @@ public class ConstHelper {
         return (int) (pxValue / scale + 0.5f);
     }
 
-
+    //初始化阿里百川的SDK
     public static void initAlibabaSDK(final Context context) {
+        TradeConfigs.defaultTaokePid = ConstPara._MMPID;
         AlibabaSDK.asyncInit(context, new InitResultCallback() {
             @Override
             public void onSuccess() {
@@ -286,6 +288,7 @@ public class ConstHelper {
         });
     }
 
+    //通过itemid打开淘宝的宝贝详情界面
     public static void showItemDetailPage(Activity context, String isvcode, String itemid) {
         TradeService tradeService = AlibabaSDK.getService(TradeService.class);
         Map<String, String> exParams = new HashMap<String, String>();

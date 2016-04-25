@@ -313,4 +313,24 @@ public class MiCOUser {
             comfunc.illegalCallBack(usercb);
         }
     }
+
+    /**
+     *
+     * @param cookbookid
+     * @param usercb
+     * @param token
+     */
+    public void addCookBookLikeNo(int cookbookid, UserCallBack usercb, String token) {
+        if (cookbookid>0 && comfunc.checkPara(token)) {
+            JSONObject postParam = new JSONObject();
+            try {
+                postParam.put("cookbook", cookbookid);
+                hsp.doHttpPost(Configuration.ADDCOOKBOOKLIKENO, postParam, usercb, token);
+            } catch (JSONException e1) {
+                e1.printStackTrace();
+            }
+        } else {
+            comfunc.illegalCallBack(usercb);
+        }
+    }
 }

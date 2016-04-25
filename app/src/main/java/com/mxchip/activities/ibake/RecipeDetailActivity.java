@@ -2,15 +2,19 @@ package com.mxchip.activities.ibake;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.mico.micosdk.MiCOUser;
+import com.mxchip.callbacks.UserCallBack;
 import com.mxchip.manage.ConstHelper;
 import com.mxchip.manage.ConstPara;
 import com.mxchip.manage.SetTitleBar;
+import com.mxchip.manage.SharePreHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,6 +30,8 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
     private ListView recipe_dd_material_lv;
     private LinearLayout recipe_detial_showtaobao;
+    private LinearLayout recipe_detial_ilikeit;
+
     private String itemid = ConstPara._ITEMID;
 
     @Override
@@ -33,7 +39,6 @@ public class RecipeDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_detail);
 
-        String recipeid = (String) getIntent().getSerializableExtra(ConstPara.INTENT_RECIPEID);
         String recipename = (String) getIntent().getSerializableExtra(ConstPara.INTENT_RECIPENAME);
         stb = new SetTitleBar(RecipeDetailActivity.this);
         stb.setTitleName(recipename);
@@ -49,6 +54,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
     private void initMaterial() {
         recipe_dd_material_lv = (ListView) findViewById(R.id.recipe_dd_material_lv);
         recipe_detial_showtaobao = (LinearLayout) findViewById(R.id.recipe_detial_showtaobao);
+        recipe_detial_ilikeit = (LinearLayout) findViewById(R.id.recipe_detial_ilikeit);
 
         SimpleAdapter adapter = new SimpleAdapter(this, getData(), R.layout.recipe_dd_material_item,
                 new String[]{"name", "kg"},
@@ -64,6 +70,29 @@ public class RecipeDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ConstHelper.showItemDetailPage(RecipeDetailActivity.this, null, itemid);
+            }
+        });
+
+        //点个赞
+        recipe_detial_ilikeit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MiCOUser micouser = new MiCOUser();
+                String recipeid = (String) getIntent().getSerializableExtra(ConstPara.INTENT_RECIPEID);
+                SharePreHelper shareph = new SharePreHelper(RecipeDetailActivity.this);
+                String token = shareph.getData(ConstPara.SHARE_TOKEN);
+
+                micouser.addCookBookLikeNo(Integer.parseInt(recipeid), new UserCallBack() {
+                    @Override
+                    public void onSuccess(String message) {
+                        Log.d(TAG, message);
+                    }
+
+                    @Override
+                    public void onFailure(int code, String message) {
+                        Log.d(TAG, code +  "msg = " +message);
+                    }
+                }, token);
             }
         });
     }
