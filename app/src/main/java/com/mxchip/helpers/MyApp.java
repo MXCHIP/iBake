@@ -2,6 +2,11 @@ package com.mxchip.helpers;
 
 import android.app.Application;
 import android.os.Environment;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.alibaba.sdk.android.AlibabaSDK;
+import com.taobao.tae.sdk.callback.InitResultCallback;
 
 import java.io.File;
 
@@ -14,10 +19,9 @@ public class MyApp extends Application {
     public void onCreate() {
         // Auto-generated method stub
         super.onCreate();
-        File f = new File(Environment.getExternalStorageDirectory()+"/iBakImgs/");
-        if(!f.exists()){
+        File f = new File(Environment.getExternalStorageDirectory() + "/iBakImgs/");
+        if (!f.exists()) {
             f.mkdir();
         }
     }
-
 }

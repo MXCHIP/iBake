@@ -25,6 +25,8 @@ public class RecipeDetailActivity extends AppCompatActivity {
     private SetTitleBar stb;
 
     private ListView recipe_dd_material_lv;
+    private LinearLayout recipe_detial_showtaobao;
+    private String itemid = ConstPara._ITEMID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,16 +42,30 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
         initMaterial();
         addLinearLayout();
+        initOnClick();
     }
 
     //    获取一共需要哪些食材
     private void initMaterial() {
         recipe_dd_material_lv = (ListView) findViewById(R.id.recipe_dd_material_lv);
+        recipe_detial_showtaobao = (LinearLayout) findViewById(R.id.recipe_detial_showtaobao);
 
         SimpleAdapter adapter = new SimpleAdapter(this, getData(), R.layout.recipe_dd_material_item,
                 new String[]{"name", "kg"},
                 new int[]{R.id.recipe_dd_buttertv, R.id.recipe_dd_butterkgtv});
         recipe_dd_material_lv.setAdapter(adapter);
+    }
+
+    private void initOnClick(){
+        ConstHelper.initAlibabaSDK(RecipeDetailActivity.this);
+
+        //打开淘宝的界面
+        recipe_detial_showtaobao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ConstHelper.showItemDetailPage(RecipeDetailActivity.this, null, itemid);
+            }
+        });
     }
 
     private List<Map<String, Object>> getData() {

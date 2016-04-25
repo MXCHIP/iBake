@@ -1,0 +1,49 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.alibaba.sdk.android">
+  <uses-sdk android:minSdkVersion="8"/>
+  <application>
+        <activity android:name="com.alibaba.sdk.android.login.ui.LoginWebViewActivity"/>
+        <activity android:name="com.alibaba.sdk.android.login.ui.QrLoginConfirmActivity"/>
+        <activity android:name="com.alibaba.sdk.android.login.ui.QrLoginActivity" android:theme="@style/tae_sdk_login_qr_activity_style"/>
+        <activity android:name="com.alibaba.sdk.android.webview.BaseWebViewActivity"/>
+        <activity android:name="com.alibaba.sdk.android.webview.feedback.FeedbackActivity" android:theme="@style/feedback_title">
+        </activity>
+        <activity android:name="com.alibaba.sdk.android.webview.feedback.SendFeedbackActivity" android:theme="@style/feedback_title">
+        </activity>
+        <receiver android:exported="false" android:name="com.alibaba.sdk.android.hotpatch.HotPatchBroadcastReceiver" android:process=":hotpatch">
+            <intent-filter>
+                <action android:name="com.alibaba.sdk.android.hotpatch.action.HOT_PATCH"/>
+            </intent-filter>
+        </receiver>
+        <activity android:name="com.alibaba.sdk.android.trade.ui.TradeWebViewActivity">
+            <intent-filter>
+                <action android:name="COM_TAOBAO_TAE_SDK_TRADE_WEB_VIEW_ACTION"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:launchMode="singleTask" android:name="com.alibaba.sdk.android.trade.ui.NativeTaobaoClientActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="23353864.nativeTaobao" android:scheme="alisdk"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="orientation|keyboardHidden|navigation" android:exported="false" android:name="com.alipay.sdk.app.H5PayActivity" android:screenOrientation="behind" android:windowSoftInputMode="adjustResize|stateHidden">
+        </activity>
+        <activity android:configChanges="orientation|keyboardHidden|navigation" android:exported="false" android:name="com.alipay.sdk.auth.AuthActivity" android:screenOrientation="behind">
+        </activity>
+    </application>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_SETTINGS"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>    
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+</manifest>

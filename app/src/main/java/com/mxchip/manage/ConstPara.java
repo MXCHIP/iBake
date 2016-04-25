@@ -20,6 +20,10 @@ public class ConstPara {
     public static String DEVICEPW = "9605";
     public static String MDNS_SER_NAME = "_easylink._tcp.local.";
 
+    public static String _ISVCODE = "iBake";
+    public static String _MMPID = "mm_14421418_0_0";
+    public static String _ITEMID = "43594092205";
+
     //分享用户的权限 2：管理员 3：普通用户
     public static int ROLE = 2;
     //绑定类型

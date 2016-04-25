@@ -1,5 +1,6 @@
 package com.mxchip.manage;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,12 +10,22 @@ import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.widget.Toast;
+
+import com.alibaba.sdk.android.AlibabaSDK;
+import com.alibaba.sdk.android.trade.TradeConstants;
+import com.alibaba.sdk.android.trade.TradeService;
+import com.alibaba.sdk.android.trade.page.ItemDetailPage;
+import com.taobao.tae.sdk.callback.InitResultCallback;
+import com.taobao.tae.sdk.model.TaokeParams;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Rocke on 2016/03/09.
@@ -51,6 +62,8 @@ import java.io.ByteArrayOutputStream;
  * overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
  */
 public class ConstHelper {
+    private static String TAG = "---ConstHelper---";
+
     /**
      * 判断是否为空
      *
@@ -256,5 +269,45 @@ public class ConstHelper {
     public static int px2dip(Context context, float pxValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
+    }
+
+
+    public static void initAlibabaSDK(final Context context) {
+        AlibabaSDK.asyncInit(context, new InitResultCallback() {
+            @Override
+            public void onSuccess() {
+                setToast(context, "TaeSDK 初始化成功");
+            }
+
+            @Override
+            public void onFailure(int code, String message) {
+                Log.w(TAG, "初始化异常，code = " + code + ", info = " + message);
+            }
+        });
+    }
+
+    public static void showItemDetailPage(Activity context, String isvcode, String itemid) {
+        TradeService tradeService = AlibabaSDK.getService(TradeService.class);
+        Map<String, String> exParams = new HashMap<String, String>();
+
+        if(!ConstHelper.checkPara(isvcode))
+            isvcode = ConstPara._ISVCODE;
+
+        exParams.put(TradeConstants.ISV_CODE, isvcode);
+        exParams.put(TradeConstants.ITEM_DETAIL_VIEW_TYPE, TradeConstants.TAOBAO_NATIVE_VIEW);
+        ItemDetailPage itemDetailPage = new ItemDetailPage(itemid, exParams);
+        TaokeParams taokeParams = new TaokeParams();
+        taokeParams.pid = ConstPara._MMPID;
+        tradeService.show(itemDetailPage, taokeParams, context, null, new com.alibaba.sdk.android.trade.callback.TradeProcessCallback() {
+            @Override
+            public void onPaySuccess(com.alibaba.sdk.android.trade.model.TradeResult tradeResult) {
+
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+
+            }
+        });
     }
 }
