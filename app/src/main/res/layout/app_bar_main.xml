@@ -19,7 +19,7 @@
             android:orientation="vertical">
 
             <include layout="@layout/content_main" />
-            <include layout="@layout/simp_list"/>
+            <include layout="@layout/sweet_time"/>
         </LinearLayout>
 
     </ScrollView>

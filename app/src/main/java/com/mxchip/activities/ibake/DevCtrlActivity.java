@@ -387,7 +387,7 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
      * 推荐食谱页面
      */
     public void getSimpListView() {
-        View simp_list = getLayoutInflater().inflate(R.layout.simp_list, null);
+        View simp_list = getLayoutInflater().inflate(R.layout.sweet_time, null);
         frameSwitch.removeAllViews();
         frameSwitch.addView(simp_list, LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT);
         initDelicacy();

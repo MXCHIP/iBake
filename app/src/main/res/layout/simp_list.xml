@@ -69,7 +69,6 @@
                 android:background="@drawable/icon_favourate_2" />
         </RelativeLayout>
 
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="@dimen/common_margin_top"

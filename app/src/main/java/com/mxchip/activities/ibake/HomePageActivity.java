@@ -4,12 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
+import com.mico.micosdk.MiCOUser;
+import com.mxchip.callbacks.UserCallBack;
 import com.mxchip.helpers.GetDelicacy;
+import com.mxchip.manage.ConstPara;
 import com.mxchip.manage.SetTitleBar;
 import com.mxchip.manage.SharePreHelper;
 
@@ -94,4 +98,5 @@ public class HomePageActivity extends AppCompatActivity
         stb.commonOnNavItemSelected(item);
         return true;
     }
+
 }
