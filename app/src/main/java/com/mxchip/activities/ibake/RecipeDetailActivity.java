@@ -9,6 +9,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.mxchip.manage.ConstHelper;
+import com.mxchip.manage.ConstPara;
 import com.mxchip.manage.SetTitleBar;
 
 import java.util.ArrayList;
@@ -30,13 +31,12 @@ public class RecipeDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_detail);
 
-        String recipeid = (String) getIntent().getSerializableExtra("recipeid");
-        String recipename = (String) getIntent().getSerializableExtra("recipename");
+        String recipeid = (String) getIntent().getSerializableExtra(ConstPara.INTENT_RECIPEID);
+        String recipename = (String) getIntent().getSerializableExtra(ConstPara.INTENT_RECIPENAME);
         stb = new SetTitleBar(RecipeDetailActivity.this);
         stb.setTitleName(recipename);
         stb.setLeftButton("back", "finish");
         stb.setRightButton("edit", "edit");
-
 
         initMaterial();
         addLinearLayout();

@@ -1,6 +1,7 @@
 package com.mxchip.helpers;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.mico.micosdk.MiCOUser;
 import com.mxchip.activities.ibake.R;
+import com.mxchip.activities.ibake.RecipeDetailActivity;
 import com.mxchip.callbacks.UserCallBack;
 import com.mxchip.manage.ConstHelper;
 import com.mxchip.manage.ConstPara;
@@ -151,8 +153,11 @@ public class GetDelicacy {
                             @Override
                             public void onClick(View v) {
                                 try {
-                                    //TODO 通过id跳转去详情页面
-                                    Log.d(TAG, "this is "+ items.getString("id"));
+                                    Intent intent = new Intent(mactivity, RecipeDetailActivity.class);
+                                    intent.putExtra(ConstPara.INTENT_RECIPENAME, items.getString("name"));
+                                    intent.putExtra(ConstPara.INTENT_RECIPEID, items.getString("id"));
+                                    mactivity.startActivity(intent);
+                                    mactivity.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();

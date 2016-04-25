@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.mxchip.activities.ibake.R;
 import com.mxchip.activities.ibake.RecipeDetailActivity;
 import com.mxchip.manage.ConstHelper;
+import com.mxchip.manage.ConstPara;
 
 import java.util.Vector;
 
@@ -77,8 +78,6 @@ public class CookBookItemAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        Log.d("---getView---", position + "");
-
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.cloud_cookbook_list_item, null);
         }
@@ -92,16 +91,15 @@ public class CookBookItemAdapter extends BaseAdapter {
         cloud_cb_item_txt.setText(model.cb_name);
         cloud_cb_item_like_no.setText(model.cb_likeno);
 
-        if(ConstHelper.checkPara(model.cb_img))
+        if (ConstHelper.checkPara(model.cb_img))
             syncImageLoader.loadImage(position, model, model.cb_img, imageLoadListener);
 
         cb_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("---setimg---", model.cb_name + " to control device page --> " + model.cb_recipeid);
                 Intent intent = new Intent(mContext, RecipeDetailActivity.class);
-                intent.putExtra("recipename", model.cb_name);
-                intent.putExtra("recipeid", model.cb_recipeid);
+                intent.putExtra(ConstPara.INTENT_RECIPENAME, model.cb_name);
+                intent.putExtra(ConstPara.INTENT_RECIPEID, model.cb_recipeid);
                 mContext.startActivity(intent);
                 mContext.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
             }

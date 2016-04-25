@@ -99,15 +99,6 @@ public class RecipesActivity extends AppCompatActivity implements AdapterView.On
             e.printStackTrace();
         }
         recipes_list.setAdapter(adapter);
-
-
-//        for (int i = 0; i < 10; i++) {
-//            String cb_name = "Delicious crisp bread " + i;
-//            String cb_img = "http://sh.sinaimg.cn/2011/1115/U5839P18DT20111115095540.jpg";
-//            int cb_likeno = i / 2 == 1 ? 20 + i : 25 + i;
-//            int cb_recipeid = i;
-//            adapter.addBook(cb_name, cb_img, cb_likeno + "", cb_recipeid + "");
-//        }
     }
 
     @Override
