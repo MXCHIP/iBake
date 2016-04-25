@@ -536,12 +536,8 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
             public void onDeviceStatusReceived(String msgType, String messages) {
                 Log.d(TAG + "onDeviceStatusReceived", msgType + " " + messages);
                 dealWithStatus(messages);
-
-                //TODO 使用fog1.0测试
-//                dealWithStatus(ConstPara.tempJson);
             }
         });
-//        dealWithStatus(tempJson);
     }
 
     //暂未用到
@@ -572,7 +568,6 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
 //    });
 
 
-    int hhh = 0;
     /**
      * 这里处理设备上报的数据
      */

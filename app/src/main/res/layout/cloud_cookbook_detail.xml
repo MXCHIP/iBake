@@ -92,7 +92,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/cloud_cb_lay_height"
             android:layout_weight="1"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/full_box"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -100,7 +100,7 @@
                 android:id="@+id/cloud_cb_cakeimg"
                 android:layout_width="@dimen/cloud_cb_img_size"
                 android:layout_height="@dimen/cloud_cb_img_size"
-                android:src="@drawable/recipe_btn_cake_s" />
+                android:src="@drawable/recipe_btn_cake_n" />
 
             <TextView
                 android:id="@+id/cloud_cb_caketxt"
@@ -108,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_margin_top"
                 android:text="@string/cloud_cb_cake"
-                android:textColor="@color/common_btn_txtcolor"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/common_text_min" />
         </LinearLayout>
 
@@ -158,7 +158,7 @@
                 android:id="@+id/cloud_cb_pizzaimg"
                 android:layout_width="@dimen/cloud_cb_img_size"
                 android:layout_height="@dimen/cloud_cb_img_size"
-                android:src="@drawable/recipe_btn_pizza_s" />
+                android:src="@drawable/recipe_btn_pizza_n" />
 
             <TextView
                 android:id="@+id/cloud_cb_pizzatxt"
@@ -183,7 +183,7 @@
                 android:id="@+id/cloud_cb_fishimg"
                 android:layout_width="@dimen/cloud_cb_img_size"
                 android:layout_height="@dimen/cloud_cb_img_size"
-                android:src="@drawable/recipe_btn_fish_s" />
+                android:src="@drawable/recipe_btn_fish_n" />
 
             <TextView
                 android:id="@+id/cloud_cb_fishtxt"

@@ -78,12 +78,6 @@ public class GetDelicacy {
                     iv5.setImageBitmap(bitmap);
                     break;
             }
-//                setimg.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//
-//                    }
-//                });
         }
 
         @Override
@@ -99,7 +93,6 @@ public class GetDelicacy {
 
     public void getSweetTime() {
         sweet_time_lycontain.removeAllViews();
-        final String imgurl1 = "http://sh.sinaimg.cn/2011/1115/U5839P18DT20111115095540.jpg";
 
         MiCOUser micoUser = new MiCOUser();
         int type = 2;
@@ -111,17 +104,11 @@ public class GetDelicacy {
             public void onSuccess(String message) {
 
                 Log.d(TAG + "onSuccess", message);
+
                 try {
                     JSONArray itemsArr = new JSONArray(ConstHelper.getFogData(message));
-
-                    JSONObject items = null;
-                    String recName = "";
-                    String likeno = "";
-
                     for (int i = 0; i < itemsArr.length() && i < 5; i++) {
-                        items = itemsArr.getJSONObject(i);
-                        recName = items.getString("name");
-                        likeno = items.getString("favorite_count");
+                        final JSONObject items  = itemsArr.getJSONObject(i);
 
                         //有一个就新建一个view
                         View viewOne1 = mactivity.getLayoutInflater().inflate(R.layout.homepage_sweet_time_item, null);
@@ -153,11 +140,25 @@ public class GetDelicacy {
                         like_no_txt1 = (TextView) viewOne1.findViewById(R.id.delicacy_1_like_no);
 
                         //分别给名字、点赞个数、图片赋值
-                        txt1.setText(i + "wode");
-                        like_no_txt1.setText(i + "10");
+                        txt1.setText(items.getString("name"));
+                        like_no_txt1.setText(items.getString("favorite_count"));
 
                         if(ConstHelper.checkPara(items.getString("mainimageurl")))
                             syncImageLoader.loadImage(i + 1, null, items.getString("mainimageurl"), imageLoadListener);
+
+                        // 给整个view设置一个click事件
+                        viewOne1.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                try {
+                                    //TODO 通过id跳转去详情页面
+                                    Log.d(TAG, "this is "+ items.getString("id"));
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
