@@ -62,7 +62,7 @@ public class ConstHelper {
             return false;
         } else if (param.length > 0) {
             for (String str : param) {
-                if (null == str || str.equals("") || str.equals("null")) {
+                if (null == str || str.equals("") || str.equals("null") || str.equals("undefined")) {
                     return false;
                 }
             }

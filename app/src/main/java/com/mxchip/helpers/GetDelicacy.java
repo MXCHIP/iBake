@@ -148,7 +148,6 @@ public class GetDelicacy {
                                 iv5 = (ImageView) viewOne1.findViewById(R.id.delicacy_1_pic);
                                 break;
                         }
-                        syncImageLoader.loadImage(i + 1, null, items.getString("mainimageurl"), imageLoadListener);
 
                         //view的点赞个数
                         like_no_txt1 = (TextView) viewOne1.findViewById(R.id.delicacy_1_like_no);
@@ -156,7 +155,9 @@ public class GetDelicacy {
                         //分别给名字、点赞个数、图片赋值
                         txt1.setText(i + "wode");
                         like_no_txt1.setText(i + "10");
-                        syncImageLoader.loadImage(i + 1, null, imgurl1, imageLoadListener);
+
+                        if(ConstHelper.checkPara(items.getString("mainimageurl")))
+                            syncImageLoader.loadImage(i + 1, null, items.getString("mainimageurl"), imageLoadListener);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
