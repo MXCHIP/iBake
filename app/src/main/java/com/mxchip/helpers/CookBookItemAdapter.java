@@ -92,7 +92,8 @@ public class CookBookItemAdapter extends BaseAdapter {
         cloud_cb_item_txt.setText(model.cb_name);
         cloud_cb_item_like_no.setText(model.cb_likeno);
 
-        syncImageLoader.loadImage(position, model, model.cb_img, imageLoadListener);
+        if(ConstHelper.checkPara(model.cb_img))
+            syncImageLoader.loadImage(position, model, model.cb_img, imageLoadListener);
 
         cb_layout.setOnClickListener(new View.OnClickListener() {
             @Override

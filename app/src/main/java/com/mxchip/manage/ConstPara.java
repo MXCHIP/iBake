@@ -12,7 +12,7 @@ public class ConstPara {
 
     //APP在云端注册后得到的APPID的值
     public static String _APPID = "d8cdf9c6-de8c-11e5-a739-00163e0204c0";
-    public static String _PRODUCTID = "6486b2d1-0ee9-4647-baa3-78b9cbc778f7";
+    public static String _PRODUCTID = "6486b2d1-0ee9-4647-baa3-78b9cbc778f7";//"6486b2d1-0ee9-4647-baa3-78b9cbc778f7"
 	public static String _DEVMAC = "d0bae40c2fee";
     //device ID
     public static String DEVICEID = "05be3a4e-ea5a-11e5-a739-00163e0204c0";
@@ -37,7 +37,10 @@ public class ConstPara {
 
     public static String PARA_EMPTY = "Parameters can not be empty.";
     public static String IS_OFFLINE = "This device is offline.";
+
     public static int IS_OFFLINE_COLOR = Color.rgb(173, 173, 173);
+    public static int MAIN_COLOR = Color.parseColor("#FCCB0F");
+    public static int RECIP_TXT_COLOR = Color.parseColor("#655106");
 
 
     public static String ISWORKING = "is working";
@@ -51,18 +54,29 @@ public class ConstPara {
     public static String TITLENAME_MYDEVICE = "MY DEVICE";
     public static String TITLENAME_OFFICAL = "OFFICAL";
 
-    public static String TITLENAME_OTHER = "OTHER";
-    public static String TITLENAME_BREAD = "BREAD";
-    public static String TITLENAME_CAKE = "CAKE";
-    public static String TITLENAME_BISCUIT = "BISCUIT";
-    public static String TITLENAME_PIZZA = "PIZZA";
-    public static String TITLENAME_FISH = "FISH";
-    public static String TITLENAME_MEAT = "MEAT";
-    public static String TITLENAME_CHICKEN = "CHICKEN";
-    public static String TITLENAME_EGGTAN = "EGG TANT";
-    public static String TITLENAME_MUFFIN = "MUFFIN";
-    public static String TITLENAME_RECIPEEDIT = "RECIPE EDIT";
-    public static String TITLENAME_STEP = "STEP 1";
+    public static final String TITLENAME_OTHER = "OTHER";
+
+    public static final String TITLENAME_BREAD = "BREAD";
+    public static final int RECIP_TYPE_BREAD = 1;
+    public static final String TITLENAME_CAKE = "CAKE";
+    public static final int RECIP_TYPE_CAKE= 2;
+    public static final String TITLENAME_BISCUIT = "BISCUIT";
+    public static final int RECIP_TYPE_BISCUIT = 3;
+    public static final String TITLENAME_PIZZA = "PIZZA";
+    public static final int RECIP_TYPE_PIZZA = 4;
+    public static final String TITLENAME_FISH = "FISH";
+    public static final int RECIP_TYPE_FISH = 5;
+    public static final String TITLENAME_MEAT = "MEAT";
+    public static final int RECIP_TYPE_MEAT = 6;
+    public static final String TITLENAME_CHICKEN = "CHICKEN";
+    public static final int RECIP_TYPE_CHICKEN = 7;
+    public static final String TITLENAME_EGGTAN = "EGG TANT";
+    public static final int RECIP_TYPE_EGG = 8;
+    public static final String TITLENAME_MUFFIN = "MUFFIN";
+    public static final int RECIP_TYPE_MUFFIN = 9;
+
+    public static final String TITLENAME_RECIPEEDIT = "RECIPE EDIT";
+    public static final String TITLENAME_STEP = "STEP 1";
 
     public static String SHARE_GUIDE = "guide";
     public static String SHARE_USERNAME = "username";
@@ -76,6 +90,9 @@ public class ConstPara {
     public static String INTENT_DEVNAME = "devicename";
     public static String INTENT_DEVID = "deviceid";
     public static String INTENT_DEVPW = "devicepw";
+
+    public static String INTENT_RECIPENAME = "recipename";
+    public static String INTENT_RECIPETYPE = "recipetype";
 
     public static final int ALBUM_REQUEST_CODE = 1;
 

@@ -170,63 +170,63 @@ public class CloudCookBookActivity extends AppCompatActivity {
         cloud_cb_breadly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchRecipe("bread", cloud_cb_breadly, cloud_cb_breadimg, cloud_cb_breadtxt);
+                switchRecipe(ConstPara.TITLENAME_BREAD, cloud_cb_breadly, cloud_cb_breadimg, cloud_cb_breadtxt);
             }
         });
         //cake
         cloud_cb_cakely.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchRecipe("cake", cloud_cb_cakely, cloud_cb_cakeimg, cloud_cb_caketxt);
+                switchRecipe(ConstPara.TITLENAME_CAKE, cloud_cb_cakely, cloud_cb_cakeimg, cloud_cb_caketxt);
             }
         });
         //biscuit
         cloud_cb_biscuitly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchRecipe("biscuit", cloud_cb_biscuitly, cloud_cb_biscuitimg, cloud_cb_biscuittxt);
+                switchRecipe(ConstPara.TITLENAME_BISCUIT, cloud_cb_biscuitly, cloud_cb_biscuitimg, cloud_cb_biscuittxt);
             }
         });
         //pizza
         cloud_cb_pizzaly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchRecipe("pizza", cloud_cb_pizzaly, cloud_cb_pizzaimg, cloud_cb_pizzatxt);
+                switchRecipe(ConstPara.TITLENAME_PIZZA, cloud_cb_pizzaly, cloud_cb_pizzaimg, cloud_cb_pizzatxt);
             }
         });
         //fish
         cloud_cb_fishly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchRecipe("fish", cloud_cb_fishly, cloud_cb_fishimg, cloud_cb_fishtxt);
+                switchRecipe(ConstPara.TITLENAME_FISH, cloud_cb_fishly, cloud_cb_fishimg, cloud_cb_fishtxt);
             }
         });
         //meat
         cloud_cb_meatly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchRecipe("meat", cloud_cb_meatly, cloud_cb_meatimg, cloud_cb_meattxt);
+                switchRecipe(ConstPara.TITLENAME_MEAT, cloud_cb_meatly, cloud_cb_meatimg, cloud_cb_meattxt);
             }
         });
         //chicken
         cloud_cb_chickenly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchRecipe("chicken", cloud_cb_chickenly, cloud_cb_chickenimg, cloud_cb_chickentxt);
+                switchRecipe(ConstPara.TITLENAME_CHICKEN, cloud_cb_chickenly, cloud_cb_chickenimg, cloud_cb_chickentxt);
             }
         });
         //egg
         cloud_cb_eggly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchRecipe("egg", cloud_cb_eggly, cloud_cb_eggimg, cloud_cb_eggtxt);
+                switchRecipe(ConstPara.TITLENAME_EGGTAN, cloud_cb_eggly, cloud_cb_eggimg, cloud_cb_eggtxt);
             }
         });
         //muffin
         cloud_cb_muffinly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchRecipe("muffin", cloud_cb_muffinly, cloud_cb_muffinimg, cloud_cb_muffintxt);
+                switchRecipe(ConstPara.TITLENAME_MUFFIN, cloud_cb_muffinly, cloud_cb_muffinimg, cloud_cb_muffintxt);
             }
         });
     }
@@ -235,7 +235,6 @@ public class CloudCookBookActivity extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            // if the imgview is gone getvisibility() is 0
             int isvisib = cloud_cb_cleanbtn.getVisibility();
             if ((0 == isvisib)) {
                 cloud_cb_search.clearFocus();
@@ -247,55 +246,68 @@ public class CloudCookBookActivity extends AppCompatActivity {
         return true;
     }
 
-    private void switchRecipe(String type, LinearLayout layout, ImageView imageView, TextView textView) {
+    private void switchRecipe(String name, LinearLayout layout, ImageView imageView, TextView textView) {
 
         //将TAG的UI置为初始化
         initTagView();
 
         //将选中的变色
-        layout.setBackgroundColor(Color.parseColor("#FCCB0F"));
-        textView.setTextColor(Color.parseColor("#655106"));
-        switch (type) {
-            case "bread":
+        layout.setBackgroundColor(ConstPara.MAIN_COLOR);
+        textView.setTextColor(ConstPara.RECIP_TXT_COLOR);
+
+        int type = ConstPara.RECIP_TYPE_BREAD;
+
+        switch (name) {
+            case ConstPara.TITLENAME_BREAD:
                 imageView.setImageResource(R.drawable.recipe_btn_bread_s);
+                type = ConstPara.RECIP_TYPE_BREAD;
                 break;
-            case "cake":
+            case ConstPara.TITLENAME_CAKE:
                 imageView.setImageResource(R.drawable.recipe_btn_cake_s);
+                type = ConstPara.RECIP_TYPE_CAKE;
                 break;
-            case "biscuit":
+            case ConstPara.TITLENAME_BISCUIT:
                 imageView.setImageResource(R.drawable.recipe_btn_biscuit_s);
+                type = ConstPara.RECIP_TYPE_BISCUIT;
                 break;
-            case "pizza":
+            case ConstPara.TITLENAME_PIZZA:
                 imageView.setImageResource(R.drawable.recipe_btn_pizza_s);
+                type = ConstPara.RECIP_TYPE_PIZZA;
                 break;
-            case "fish":
+            case ConstPara.TITLENAME_FISH:
                 imageView.setImageResource(R.drawable.recipe_btn_fish_s);
+                type = ConstPara.RECIP_TYPE_FISH;
                 break;
-            case "meat":
+            case ConstPara.TITLENAME_MEAT:
                 imageView.setImageResource(R.drawable.recipe_btn_meat_s);
+                type = ConstPara.RECIP_TYPE_MEAT;
                 break;
-            case "chicken":
+            case ConstPara.TITLENAME_CHICKEN:
                 imageView.setImageResource(R.drawable.recipe_btn_chicken_s);
+                type = ConstPara.RECIP_TYPE_CHICKEN;
                 break;
-            case "egg":
+            case ConstPara.TITLENAME_EGGTAN:
                 imageView.setImageResource(R.drawable.recipe_btn_egg_tant_s);
+                type = ConstPara.RECIP_TYPE_EGG;
                 break;
-            case "muffin":
+            case ConstPara.TITLENAME_MUFFIN:
                 imageView.setImageResource(R.drawable.recipe_btn_muffin_s);
+                type = ConstPara.RECIP_TYPE_MUFFIN;
                 break;
         }
 
         //重新赋值
-        TAG_TYPE = type;TAG_LAYOUT = layout;TAG_IMG = imageView;TAG_TEXT = textView;
+        TAG_NAME = name;TAG_LAYOUT = layout;TAG_IMG = imageView;TAG_TEXT = textView;
 
         //跳转页面
         Intent intent = new Intent(CloudCookBookActivity.this, RecipesActivity.class);
-        intent.putExtra("recipename", ConstPara.TITLENAME_CAKE);
+        intent.putExtra(ConstPara.INTENT_RECIPENAME, name);
+        intent.putExtra(ConstPara.INTENT_RECIPETYPE, type);
         startActivity(intent);
     }
 
     //名字标签
-    String TAG_TYPE = "";
+    String TAG_NAME = "";
     //layout标签
     LinearLayout TAG_LAYOUT;
     //图片标签
@@ -305,37 +317,37 @@ public class CloudCookBookActivity extends AppCompatActivity {
 
     private void initTagView(){
 
-        if(!ConstHelper.checkPara(TAG_TYPE))
+        if(!ConstHelper.checkPara(TAG_NAME))
             return;
 
         TAG_LAYOUT.setBackgroundResource(R.drawable.full_box);
         TAG_TEXT.setTextColor(Color.parseColor("#FCCB0F"));
-        switch (TAG_TYPE) {
-            case "bread":
+        switch (TAG_NAME) {
+            case ConstPara.TITLENAME_BREAD:
                 TAG_IMG.setImageResource(R.drawable.recipe_btn_bread_n);
                 break;
-            case "cake":
+            case ConstPara.TITLENAME_CAKE:
                 TAG_IMG.setImageResource(R.drawable.recipe_btn_cake_n);
                 break;
-            case "biscuit":
+            case ConstPara.TITLENAME_BISCUIT:
                 TAG_IMG.setImageResource(R.drawable.recipe_btn_biscuit_n);
                 break;
-            case "pizza":
+            case ConstPara.TITLENAME_PIZZA:
                 TAG_IMG.setImageResource(R.drawable.recipe_btn_pizza_n);
                 break;
-            case "fish":
+            case ConstPara.TITLENAME_FISH:
                 TAG_IMG.setImageResource(R.drawable.recipe_btn_fish_n);
                 break;
-            case "meat":
+            case ConstPara.TITLENAME_MEAT:
                 TAG_IMG.setImageResource(R.drawable.recipe_btn_meat_n);
                 break;
-            case "chicken":
+            case ConstPara.TITLENAME_CHICKEN:
                 TAG_IMG.setImageResource(R.drawable.recipe_btn_chicken_n);
                 break;
-            case "egg":
+            case ConstPara.TITLENAME_EGGTAN:
                 TAG_IMG.setImageResource(R.drawable.recipe_btn_egg_tant_n);
                 break;
-            case "muffin":
+            case ConstPara.TITLENAME_MUFFIN:
                 TAG_IMG.setImageResource(R.drawable.recipe_btn_muffin_n);
                 break;
         }

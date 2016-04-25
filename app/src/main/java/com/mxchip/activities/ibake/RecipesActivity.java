@@ -15,6 +15,10 @@ import com.mxchip.manage.ConstPara;
 import com.mxchip.manage.SetTitleBar;
 import com.mxchip.manage.SharePreHelper;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by Rocke on 2016/03/28.
  */
@@ -30,36 +34,38 @@ public class RecipesActivity extends AppCompatActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipes_list);
 
-        String recipename = (String) getIntent().getSerializableExtra("recipename");
+        String recipename = (String) getIntent().getSerializableExtra(ConstPara.INTENT_RECIPENAME);
 
         stb = new SetTitleBar(RecipesActivity.this);
-        if (ConstHelper.checkPara(recipename))
+        if (ConstHelper.checkPara(recipename)) {
             stb.setTitleName(recipename);
+        }
         stb.setLeftButton("back", "finish");
         stb.setRightButton("none", "");
 
         initView();
-        initOnClick();
     }
 
     private void initView() {
         recipes_list = (ListView) findViewById(R.id.recipes_list);
 
         initDevList();
-
-//        testCookBookList();
     }
 
-    private void testCookBookList() {
+    private void cookBookList() {
         MiCOUser micoUser = new MiCOUser();
-        int type = 2;
-        String productid = "6486b2d1-0ee9-4647-baa3-78b9cbc778f7";
+        int type = getIntent().getIntExtra(ConstPara.INTENT_RECIPETYPE, 1);
+
+        String productid = ConstPara._PRODUCTID;
+
         SharePreHelper shareph = new SharePreHelper(RecipesActivity.this);
         String token = shareph.getData(ConstPara.SHARE_TOKEN);
+
         micoUser.getCookBookList(type, productid, new UserCallBack() {
             @Override
             public void onSuccess(String message) {
-                Log.d(TAG + "onFailure",  message);
+                Log.d(TAG + "onSuccess",  message);
+                loadDate(message);
             }
 
             @Override
@@ -69,25 +75,39 @@ public class RecipesActivity extends AppCompatActivity implements AdapterView.On
         }, token);
     }
 
-    private void initOnClick() {
-
-    }
-
     private void initDevList() {
         adapter = new CookBookItemAdapter(RecipesActivity.this, recipes_list);
         recipes_list.setOnItemClickListener(this);
-        loadDate();
+        cookBookList();
     }
 
-    public void loadDate() {
-        for (int i = 0; i < 10; i++) {
-            String cb_name = "Delicious crisp bread " + i;
-            String cb_img = "http://sh.sinaimg.cn/2011/1115/U5839P18DT20111115095540.jpg";
-            int cb_likeno = i / 2 == 1 ? 20 + i : 25 + i;
-            int cb_recipeid = i;
-            adapter.addBook(cb_name, cb_img, cb_likeno + "", cb_recipeid + "");
+    public void loadDate(String data) {
+
+        try {
+            JSONArray itemsArr = new JSONArray(ConstHelper.getFogData(data));
+            for (int i = 0; i < itemsArr.length(); i++) {
+                final JSONObject items  = itemsArr.getJSONObject(i);
+
+                String cb_name = items.getString("name");
+                String cb_img = items.getString("mainimageurl");
+                String cb_likeno = items.getString("favorite_count");
+                String cb_recipeid = items.getString("id");
+
+                adapter.addBook(cb_name, cb_img, cb_likeno, cb_recipeid);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
         recipes_list.setAdapter(adapter);
+
+
+//        for (int i = 0; i < 10; i++) {
+//            String cb_name = "Delicious crisp bread " + i;
+//            String cb_img = "http://sh.sinaimg.cn/2011/1115/U5839P18DT20111115095540.jpg";
+//            int cb_likeno = i / 2 == 1 ? 20 + i : 25 + i;
+//            int cb_recipeid = i;
+//            adapter.addBook(cb_name, cb_img, cb_likeno + "", cb_recipeid + "");
+//        }
     }
 
     @Override
