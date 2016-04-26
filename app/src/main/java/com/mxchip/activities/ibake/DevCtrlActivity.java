@@ -8,6 +8,7 @@ import android.os.Message;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -827,5 +828,20 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
                 Log.d(TAG + "onDestroy onFailure", code + " " + message);
             }
         });
+    }
+
+    private long mExitTime;
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if ((System.currentTimeMillis() - mExitTime) > 2000) {
+                ConstHelper.setToast(this, ConstPara._AGAINFINISH);
+                mExitTime = System.currentTimeMillis();
+            } else {
+                finish();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

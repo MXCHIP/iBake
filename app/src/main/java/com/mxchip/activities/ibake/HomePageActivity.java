@@ -5,14 +5,17 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.mico.micosdk.MiCOUser;
 import com.mxchip.callbacks.UserCallBack;
 import com.mxchip.helpers.GetDelicacy;
+import com.mxchip.manage.ConstHelper;
 import com.mxchip.manage.ConstPara;
 import com.mxchip.manage.SetTitleBar;
 import com.mxchip.manage.SharePreHelper;
@@ -97,6 +100,21 @@ public class HomePageActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         stb.commonOnNavItemSelected(item);
         return true;
+    }
+
+    private long mExitTime;
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if ((System.currentTimeMillis() - mExitTime) > 2000) {
+                ConstHelper.setToast(this, ConstPara._AGAINFINISH);
+                mExitTime = System.currentTimeMillis();
+            } else {
+                finish();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
 }

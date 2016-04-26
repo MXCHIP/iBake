@@ -79,6 +79,11 @@ public class SetTitleBar {
                     case "drawer":
                         drawer.openDrawer(GravityCompat.START);
                         break;
+                    case "homepage":
+                        Intent intent = new Intent(baractivity, HomePageActivity.class);
+                        baractivity.startActivity(intent);
+                        baractivity.finish();
+                        break;
                     default:
                         break;
                 }

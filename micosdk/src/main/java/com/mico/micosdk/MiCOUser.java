@@ -342,8 +342,8 @@ public class MiCOUser {
      */
     public void getCookBookInfo(int cookbookid, UserCallBack usercb, String token) {
         if (comfunc.checkPara(token) && cookbookid > 0) {
-            String postParam = "";
-            hsp.doHttpGet(Configuration.GETCOOKBOOKINFO + cookbookid, postParam, usercb, token);
+            String postParam = "?cookbookid="+cookbookid;
+            hsp.doHttpGet(Configuration.GETCOOKBOOKINFO, postParam, usercb, token);
         } else {
             comfunc.illegalCallBack(usercb);
         }

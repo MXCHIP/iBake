@@ -62,7 +62,7 @@ public class MyDeviceActivity extends AppCompatActivity implements AdapterView.O
 
         stb = new SetTitleBar(MyDeviceActivity.this);
         stb.setTitleName(ConstPara.TITLENAME_MYDEVICE);
-        stb.setLeftButton("back", "finish");
+        stb.setLeftButton("back", "homepage");
         stb.setRightButton("scan", "scan");
 
         initView();
