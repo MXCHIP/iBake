@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -13,9 +14,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.mico.micosdk.MiCOUser;
+import com.mxchip.callbacks.UserCallBack;
 import com.mxchip.manage.ConstHelper;
 import com.mxchip.manage.ConstPara;
 import com.mxchip.manage.SetTitleBar;
+import com.mxchip.manage.SharePreHelper;
 
 /**
  * Created by Rocke on 2016/03/10.
@@ -137,6 +141,31 @@ public class CloudCookBookActivity extends AppCompatActivity {
                 }
             }
         });
+
+        cloud_cb_search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String cookbookname = cloud_cb_search.getText().toString().trim();
+                SharePreHelper shareph = new SharePreHelper(CloudCookBookActivity.this);
+                if (ConstHelper.checkPara(cookbookname)) {
+
+                    MiCOUser miCOUser = new MiCOUser();
+                    miCOUser.searchCookBookByName(cookbookname, new UserCallBack() {
+                        @Override
+                        public void onSuccess(String message) {
+                            Log.d(TAG, message);
+                        }
+
+                        @Override
+                        public void onFailure(int code, String message) {
+                            Log.d(TAG, code + "msg = " + message);
+                        }
+                    },shareph.getData(ConstPara.SHARE_TOKEN));
+                }
+            }
+        });
+
+
         cloud_cb_search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

@@ -25,7 +25,10 @@ public class Configuration {
     public static String UPDATEDEVALIAS = _URLHEAD + "updateDeviceAlias/";
 
     public static String GETCOOKBOOKLIST = _COOKBOOK + "cookbook_list/";
+    public static String GETCOOKBOOKINFO = _COOKBOOK + "cbdetailview/";
+//    public static String GETCOOKBOOKINFO = _COOKBOOK + "cbmultinfo/";
     public static String ADDCOOKBOOKLIKENO = _COOKBOOK + "cblikeadd/";
+    public static String SEARCHCOOKBOOKBYNAME = _COOKBOOK + "cbserachview/";
 
     public static String getTopic(String deviceid) {
         //TODO 使用fog1.0测试

@@ -34,6 +34,10 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
     private String itemid = ConstPara._ITEMID;
 
+    MiCOUser micouser;
+    int recipeid;
+    String token;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +49,17 @@ public class RecipeDetailActivity extends AppCompatActivity {
         stb.setLeftButton("back", "finish");
         stb.setRightButton("edit", "edit");
 
+
+        micouser = new MiCOUser();
+        recipeid = Integer.parseInt((String) getIntent().getSerializableExtra(ConstPara.INTENT_RECIPEID));
+        SharePreHelper shareph = new SharePreHelper(RecipeDetailActivity.this);
+        token = shareph.getData(ConstPara.SHARE_TOKEN);
+
         initMaterial();
         addLinearLayout();
         initOnClick();
+        getThisBookInfo();
+
     }
 
     //    获取一共需要哪些食材
@@ -62,7 +74,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
         recipe_dd_material_lv.setAdapter(adapter);
     }
 
-    private void initOnClick(){
+    private void initOnClick() {
         ConstHelper.initAlibabaSDK(RecipeDetailActivity.this);
 
         //打开淘宝的界面
@@ -77,12 +89,9 @@ public class RecipeDetailActivity extends AppCompatActivity {
         recipe_detial_ilikeit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MiCOUser micouser = new MiCOUser();
-                String recipeid = (String) getIntent().getSerializableExtra(ConstPara.INTENT_RECIPEID);
-                SharePreHelper shareph = new SharePreHelper(RecipeDetailActivity.this);
-                String token = shareph.getData(ConstPara.SHARE_TOKEN);
 
-                micouser.addCookBookLikeNo(Integer.parseInt(recipeid), new UserCallBack() {
+
+                micouser.addCookBookLikeNo(recipeid, new UserCallBack() {
                     @Override
                     public void onSuccess(String message) {
                         Log.d(TAG, message);
@@ -90,7 +99,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(int code, String message) {
-                        Log.d(TAG, code +  "msg = " +message);
+                        Log.d(TAG, code + "msg = " + message);
                     }
                 }, token);
             }
@@ -138,6 +147,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
     }
 
     private List<Map<String, Object>> geOnetData(ListView nowlv) {
+
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         Map<String, Object> map;
         ViewGroup.LayoutParams params = nowlv.getLayoutParams();
@@ -154,5 +164,19 @@ public class RecipeDetailActivity extends AppCompatActivity {
         nowlv.setLayoutParams(params);
 
         return list;
+    }
+
+    private void getThisBookInfo() {
+        micouser.getCookBookInfo(recipeid, new UserCallBack() {
+            @Override
+            public void onSuccess(String message) {
+                Log.d(TAG, message);
+            }
+
+            @Override
+            public void onFailure(int code, String message) {
+                Log.d(TAG, code + "msg = " + message);
+            }
+        }, token);
     }
 }

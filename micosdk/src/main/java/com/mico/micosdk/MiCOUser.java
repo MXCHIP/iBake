@@ -333,4 +333,34 @@ public class MiCOUser {
             comfunc.illegalCallBack(usercb);
         }
     }
+
+    /**
+     * get cookbook info by cookbookid
+     * @param cookbookid
+     * @param usercb
+     * @param token
+     */
+    public void getCookBookInfo(int cookbookid, UserCallBack usercb, String token) {
+        if (comfunc.checkPara(token) && cookbookid > 0) {
+            String postParam = "";
+            hsp.doHttpGet(Configuration.GETCOOKBOOKINFO + cookbookid, postParam, usercb, token);
+        } else {
+            comfunc.illegalCallBack(usercb);
+        }
+    }
+
+    /**
+     *
+     * @param cookbookname
+     * @param usercb
+     * @param token
+     */
+    public void searchCookBookByName(String cookbookname, UserCallBack usercb, String token) {
+        if (comfunc.checkPara(cookbookname, token)) {
+            String postParam = "?cookbook_name=" + cookbookname;
+            hsp.doHttpGet(Configuration.SEARCHCOOKBOOKBYNAME, postParam, usercb, token);
+        } else {
+            comfunc.illegalCallBack(usercb);
+        }
+    }
 }
