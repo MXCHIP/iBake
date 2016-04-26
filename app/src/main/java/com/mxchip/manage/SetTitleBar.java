@@ -189,7 +189,6 @@ public class SetTitleBar {
         drawer.closeDrawer(GravityCompat.START);
     }
 
-
     public void commonOnNavItemSelected(MenuItem item) {
         int id = item.getItemId();
         Intent intent = null;
