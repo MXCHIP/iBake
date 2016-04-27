@@ -72,7 +72,7 @@
                         android:src="@drawable/recipe_total_baking_time" />
 
                     <TextView
-                        android:id="@+id/textView11"
+                        android:id="@+id/recipe_dd_cooktime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -88,7 +88,7 @@
                         android:src="@drawable/recipe_icon_cooked" />
 
                     <TextView
-                        android:id="@+id/textView12"
+                        android:id="@+id/recipe_dd_likeno_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

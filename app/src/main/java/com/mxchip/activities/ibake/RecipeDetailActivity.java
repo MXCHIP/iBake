@@ -1,20 +1,32 @@
 package com.mxchip.activities.ibake;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.mico.micosdk.MiCOUser;
 import com.mxchip.callbacks.UserCallBack;
+import com.mxchip.helpers.BookModel;
+import com.mxchip.helpers.SyncImageLoader;
 import com.mxchip.manage.ConstHelper;
 import com.mxchip.manage.ConstPara;
 import com.mxchip.manage.SetTitleBar;
 import com.mxchip.manage.SharePreHelper;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,20 +67,21 @@ public class RecipeDetailActivity extends AppCompatActivity {
         SharePreHelper shareph = new SharePreHelper(RecipeDetailActivity.this);
         token = shareph.getData(ConstPara.SHARE_TOKEN);
 
-        initMaterial();
+        initView();
         addLinearLayout();
         initOnClick();
         getThisBookInfo();
-
     }
 
-    //    获取一共需要哪些食材
-    private void initMaterial() {
+    private  void initView(){
         recipe_dd_material_lv = (ListView) findViewById(R.id.recipe_dd_material_lv);
         recipe_detial_showtaobao = (LinearLayout) findViewById(R.id.recipe_detial_showtaobao);
         recipe_detial_ilikeit = (LinearLayout) findViewById(R.id.recipe_detial_ilikeit);
+    }
 
-        SimpleAdapter adapter = new SimpleAdapter(this, getData(), R.layout.recipe_dd_material_item,
+    //    获取一共需要哪些食材
+    private void initMaterial(JSONArray ingredients) {
+        SimpleAdapter adapter = new SimpleAdapter(this, getData(ingredients), R.layout.recipe_dd_material_item,
                 new String[]{"name", "kg"},
                 new int[]{R.id.recipe_dd_buttertv, R.id.recipe_dd_butterkgtv});
         recipe_dd_material_lv.setAdapter(adapter);
@@ -106,20 +119,29 @@ public class RecipeDetailActivity extends AppCompatActivity {
         });
     }
 
-    private List<Map<String, Object>> getData() {
+    /**
+     * 更新材料列表
+     * @return
+     */
+    private List<Map<String, Object>> getData(JSONArray ingredients) {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         Map<String, Object> map;
         ViewGroup.LayoutParams params = recipe_dd_material_lv.getLayoutParams();
-
-        int i = 1;
-        for (; i < 11; i++) {
-            map = new HashMap<String, Object>();
-            map.put("name", "butter " + i);
-            map.put("kg", 100 + i);
-            list.add(map);
+        int i = 0;
+        try {
+            for (; i < ingredients.length(); i++) {
+                JSONObject temp = (JSONObject) ingredients.get(i);
+                map = new HashMap<String, Object>();
+                map.put("name", temp.getString("item_name"));
+                map.put("kg", temp.getString("quantity"));
+                list.add(map);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+
         //动态设置listview的高度
-        params.height = ConstHelper.dip2px(RecipeDetailActivity.this, 20 * (i - 1));
+        params.height = ConstHelper.dip2px(RecipeDetailActivity.this, 20 * i);
         recipe_dd_material_lv.setLayoutParams(params);
 
         return list;
@@ -146,6 +168,11 @@ public class RecipeDetailActivity extends AppCompatActivity {
         nowlv.setAdapter(adapter);
     }
 
+    /**
+     * TODO 某个步骤所需要的材料，目前被取消
+     * @param nowlv
+     * @return
+     */
     private List<Map<String, Object>> geOnetData(ListView nowlv) {
 
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
@@ -171,6 +198,35 @@ public class RecipeDetailActivity extends AppCompatActivity {
             @Override
             public void onSuccess(String message) {
                 Log.d(TAG, message);
+                try {
+                    JSONObject datas = new JSONObject(ConstHelper.getFogData(message));
+                    JSONObject temp = new JSONObject(datas.getString("Coobook"));
+
+                    String imgurl = temp.getString("mainimageurl");
+                    String name = temp.getString("name");
+                    String timecount = temp.getString("timecount");
+                    String favorite_count = temp.getString("favorite_count");
+                    String introduction = temp.getString("introduction");
+
+                    TextView recipe_dd_title = (TextView)findViewById(R.id.recipe_dd_title);
+                    TextView recipe_dd_cooktime = (TextView)findViewById(R.id.recipe_dd_cooktime);
+                    TextView recipe_dd_likeno_txt = (TextView)findViewById(R.id.recipe_dd_likeno_txt);
+                    TextView recipe_dd_destxt = (TextView)findViewById(R.id.recipe_dd_destxt);
+                    recipe_dd_title.setText(name);
+                    recipe_dd_cooktime.setText(timecount + ConstPara.MINUTES);
+                    recipe_dd_likeno_txt.setText(favorite_count);
+                    recipe_dd_destxt.setText(introduction);
+
+                    JSONArray ingredients = new JSONArray(datas.getString("Items"));
+                    initMaterial(ingredients);
+
+                    //更新主图
+                    SyncImageLoader syncImageLoader = new SyncImageLoader();
+                    syncImageLoader.loadImage(HOME_PAGE, null, imgurl, imageLoadListener);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
 
             @Override
@@ -179,4 +235,24 @@ public class RecipeDetailActivity extends AppCompatActivity {
             }
         }, token);
     }
+
+    final int HOME_PAGE = 0;
+    SyncImageLoader.OnImageLoadListener imageLoadListener = new SyncImageLoader.OnImageLoadListener() {
+
+        @Override
+        public void onImageLoad(final BookModel model, Integer t, final Drawable drawable) {
+            ImageView imageView = null;
+            switch (t){
+                case HOME_PAGE:
+                    imageView = (ImageView) findViewById(R.id.recipe_dd_img);
+            }
+            if (imageView != null) {
+                imageView.setBackgroundDrawable(drawable);
+            }
+        }
+
+        @Override
+        public void onError(Integer t) {
+        }
+    };
 }
