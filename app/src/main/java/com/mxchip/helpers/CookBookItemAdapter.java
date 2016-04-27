@@ -116,8 +116,8 @@ public class CookBookItemAdapter extends BaseAdapter {
             if (view != null) {
                 ImageView cloud_cb_item_pic = (ImageView) view.findViewById(R.id.cloud_cb_item_pic);
                 final Bitmap bitmap = ConstHelper.drawable2Bitmap(drawable);
-                cloud_cb_item_pic.setBackgroundDrawable(drawable);
-//                cloud_cb_item_pic.setImageBitmap(bitmap);
+//                cloud_cb_item_pic.setBackgroundDrawable(drawable);
+                cloud_cb_item_pic.setImageBitmap(bitmap);
             }
         }
 
@@ -146,25 +146,44 @@ public class CookBookItemAdapter extends BaseAdapter {
 
         @Override
         public void onScrollStateChanged(AbsListView view, int scrollState) {
-            switch (scrollState) {
-                case AbsListView.OnScrollListener.SCROLL_STATE_FLING:
-//                    Log.d(TAG, "SCROLL_STATE_FLING");
-                    syncImageLoader.lock();
-                    break;
-                case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
-//                    Log.d(TAG, "SCROLL_STATE_IDLE");
-                    loadImage();
-                    break;
-                case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
-                    syncImageLoader.lock();
-                    break;
-                default:
-                    break;
-            }
+//            switch (scrollState) {
+//                //是当用户由于之前划动屏幕并抬起手指，屏幕产生惯性滑动时
+//                case AbsListView.OnScrollListener.SCROLL_STATE_FLING:
+//                    syncImageLoader.lock();
+//                    break;
+//                //当屏幕停止滚动时
+//                case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
+//                    loadImage();
+//                    break;
+//                //是当用户在以触屏方式滚动屏幕并且手指仍然还在屏幕上时
+//                case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
+//                    syncImageLoader.lock();
+//                    break;
+//                default:
+//                    break;
+//            }
         }
 
         @Override
         public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+            /**
+             * we want to load the next chunk of data before the user reach the end of the list.
+             * 在列表打到末尾之前，我们要加载下一个数据块
+             * firstVisibleItem 表示在当前屏幕显示的第一个listItem在整个listView里面的位置（下标从0开始）
+             * visibleItemCount表示在现时屏幕可以见到的ListItem(部分显示的ListItem也算)总数
+             * totalItemCount表示ListView的ListItem总数
+             * listView.getLastVisiblePosition()表示在现时屏幕最后一个ListItem
+             * (最后ListItem要完全显示出来才算)在整个ListView的位置（下标从0开始）
+             */
+
+            Log.d("load", ""+firstVisibleItem+"----"+visibleItemCount+"-----"+totalItemCount);
+            if(firstVisibleItem + visibleItemCount < totalItemCount - 3){
+                Log.d("load", "if------<>");
+                return;
+            }else{
+                Log.d("load", "false------>");
+                loadImage();
+            }
         }
     };
 }
