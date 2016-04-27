@@ -198,45 +198,46 @@
                     android:layout_marginTop="@dimen/icon_margin_left"
                     android:divider="@null" />
 
-                <TextView
-                    android:id="@+id/recipe_dddashline03"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/recipe_dd_line_top"
-                    android:layout_below="@+id/recipe_dd_material_lv"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="@dimen/common_item_margin"
-                    android:layout_marginRight="@dimen/common_item_margin"
-                    android:layout_marginTop="@dimen/icon_margin_left"
-                    android:background="@drawable/dash_line" />
+                <!--TODO 暂时不显示工具了-->
+                <!--<TextView-->
+                    <!--android:id="@+id/recipe_dddashline03"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="@dimen/recipe_dd_line_top"-->
+                    <!--android:layout_below="@+id/recipe_dd_material_lv"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:layout_marginLeft="@dimen/common_item_margin"-->
+                    <!--android:layout_marginRight="@dimen/common_item_margin"-->
+                    <!--android:layout_marginTop="@dimen/icon_margin_left"-->
+                    <!--android:background="@drawable/dash_line" />-->
 
-                <TextView
-                    android:id="@+id/recipe_dd_utensilsname"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/recipe_dddashline03"
-                    android:layout_marginLeft="@dimen/common_item_margin"
-                    android:layout_marginTop="@dimen/icon_margin_left"
-                    android:text="@string/recipe_dd_utensilsname"
-                    android:textColor="@color/good_text_color"
-                    android:textSize="@dimen/common_text_size"
-                    android:textStyle="bold" />
+                <!--<TextView-->
+                    <!--android:id="@+id/recipe_dd_utensilsname"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/recipe_dddashline03"-->
+                    <!--android:layout_marginLeft="@dimen/common_item_margin"-->
+                    <!--android:layout_marginTop="@dimen/icon_margin_left"-->
+                    <!--android:text="@string/recipe_dd_utensilsname"-->
+                    <!--android:textColor="@color/good_text_color"-->
+                    <!--android:textSize="@dimen/common_text_size"-->
+                    <!--android:textStyle="bold" />-->
 
-                <TextView
-                    android:id="@+id/recipe_dd_utensilstxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/recipe_dd_utensilsname"
-                    android:layout_marginLeft="@dimen/common_item_margin"
-                    android:layout_marginTop="@dimen/icon_margin_left"
-                    android:text="@string/recipe_dd_utensils"
-                    android:textColor="@color/sin_6"
-                    android:textSize="@dimen/common_text_size" />
+                <!--<TextView-->
+                    <!--android:id="@+id/recipe_dd_utensilstxt"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/recipe_dd_utensilsname"-->
+                    <!--android:layout_marginLeft="@dimen/common_item_margin"-->
+                    <!--android:layout_marginTop="@dimen/icon_margin_left"-->
+                    <!--android:text="@string/recipe_dd_utensils"-->
+                    <!--android:textColor="@color/sin_6"-->
+                    <!--android:textSize="@dimen/common_text_size" />-->
 
                 <LinearLayout
                     android:id="@+id/recipe_dd_more_lys"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/recipe_dd_utensilstxt"
+                    android:layout_below="@+id/recipe_dd_material_lv"
                     android:layout_marginTop="@dimen/icon_margin_left"
                     android:orientation="vertical"
                     android:gravity="center">

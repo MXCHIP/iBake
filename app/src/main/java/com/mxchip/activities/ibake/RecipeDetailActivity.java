@@ -68,7 +68,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
         token = shareph.getData(ConstPara.SHARE_TOKEN);
 
         initView();
-        addLinearLayout();
+
         initOnClick();
         getThisBookInfo();
     }
@@ -147,26 +147,50 @@ public class RecipeDetailActivity extends AppCompatActivity {
         return list;
     }
 
-    private void addLinearLayout() {
+    private void addLinearLayout(JSONArray steps) {
         LinearLayout recipe_dd_more_lys = (LinearLayout) findViewById(R.id.recipe_dd_more_lys);
-        View viewOne1 = getLayoutInflater().inflate(R.layout.recipe_bake_steps, null);
-        View viewOne2 = getLayoutInflater().inflate(R.layout.recipe_bake_steps, null);
         recipe_dd_more_lys.removeAllViews();
-        recipe_dd_more_lys.addView(viewOne1, LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT);
-        recipe_dd_more_lys.addView(viewOne2, LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT);
 
-        addNowMaterial(viewOne1);
-        addNowMaterial(viewOne2);
+        try {
+            for (int i = steps.length(); i > 0; i--) {
+                JSONObject temp = (JSONObject) steps.get(i-1);
+
+                String num_step = temp.getString("num_step");
+                String step_description = temp.getString("step_description");
+
+                //更新步骤
+                View viewOne1 = getLayoutInflater().inflate(R.layout.recipe_bake_steps, null);
+                recipe_dd_more_lys.addView(viewOne1, LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT);
+              // addNowMaterial(viewOne1);
+
+                //更新步骤tag
+                TextView recipe_bake_step_no = (TextView)viewOne1.findViewById(R.id.recipe_bake_step_no);
+                recipe_bake_step_no.setText(num_step + "/" + steps.length());
+                //更新步骤描述
+                TextView recipe_bake_step_des = (TextView)viewOne1.findViewById(R.id.recipe_bake_step_des);
+                recipe_bake_step_des.setText(step_description);
+
+                // 如果有图片
+              // String imgurl = temp.getString("mainimageurl");
+              // if(ConstHelper.checkPara(imgurl)){
+              //     SyncImageLoader syncImageLoader = new SyncImageLoader();
+              //     syncImageLoader.loadImage(HOME_PAGE, null, imgurl, imageLoadListener);
+              // }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void addNowMaterial(View view) {
-        ListView nowlv = (ListView) view.findViewById(R.id.recipe_bake_step_material_lv);
-
-        SimpleAdapter adapter = new SimpleAdapter(this, geOnetData(nowlv), R.layout.recipe_dd_material_item,
-                new String[]{"name", "kg"},
-                new int[]{R.id.recipe_dd_buttertv, R.id.recipe_dd_butterkgtv});
-        nowlv.setAdapter(adapter);
-    }
+    //TODO 每个步骤的所需食材
+//    private void addNowMaterial(View view) {
+//        ListView nowlv = (ListView) view.findViewById(R.id.recipe_bake_step_material_lv);
+//
+//        SimpleAdapter adapter = new SimpleAdapter(this, geOnetData(nowlv), R.layout.recipe_dd_material_item,
+              // new String[]{"name", "kg"},
+              // new int[]{R.id.recipe_dd_buttertv, R.id.recipe_dd_butterkgtv});
+//        nowlv.setAdapter(adapter);
+//    }
 
     /**
      * TODO 某个步骤所需要的材料，目前被取消
@@ -207,6 +231,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
                     String timecount = temp.getString("timecount");
                     String favorite_count = temp.getString("favorite_count");
                     String introduction = temp.getString("introduction");
+                    itemid = temp.getString("iteamid");
 
                     TextView recipe_dd_title = (TextView)findViewById(R.id.recipe_dd_title);
                     TextView recipe_dd_cooktime = (TextView)findViewById(R.id.recipe_dd_cooktime);
@@ -223,6 +248,10 @@ public class RecipeDetailActivity extends AppCompatActivity {
                     //更新主图
                     SyncImageLoader syncImageLoader = new SyncImageLoader();
                     syncImageLoader.loadImage(HOME_PAGE, null, imgurl, imageLoadListener);
+
+                    //更新步骤
+                    JSONArray steps = new JSONArray(datas.getString("Steps"));
+                    addLinearLayout(steps);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

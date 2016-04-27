@@ -54,56 +54,57 @@
         android:textColor="@color/sin_6"
         android:textSize="@dimen/common_text_size" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/title_bar_margin"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/common_item_margin">
+    <!--TODO 暂时不显示每步材料和工具-->
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="@dimen/title_bar_margin"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:paddingLeft="@dimen/common_item_margin">-->
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/ingredient"
-            android:textColor="@color/good_text_color"
-            android:textSize="@dimen/common_text_size"
-            android:textStyle="bold" />
+        <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="@string/ingredient"-->
+            <!--android:textColor="@color/good_text_color"-->
+            <!--android:textSize="@dimen/common_text_size"-->
+            <!--android:textStyle="bold" />-->
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/quantity"
-            android:textColor="@color/good_text_color"
-            android:textSize="@dimen/common_text_size"
-            android:textStyle="bold" />
-    </LinearLayout>
+        <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="@string/quantity"-->
+            <!--android:textColor="@color/good_text_color"-->
+            <!--android:textSize="@dimen/common_text_size"-->
+            <!--android:textStyle="bold" />-->
+    <!--</LinearLayout>-->
 
-    <ListView
-        android:id="@+id/recipe_bake_step_material_lv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/icon_margin_left"
-        android:divider="@null" />
+    <!--<ListView-->
+        <!--android:id="@+id/recipe_bake_step_material_lv"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="@dimen/icon_margin_left"-->
+        <!--android:divider="@null" />-->
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/common_item_margin"
-        android:paddingLeft="@dimen/common_item_margin"
-        android:text="@string/kitchenu_utensils"
-        android:textColor="@color/good_text_color"
-        android:textSize="@dimen/common_text_size"
-        android:textStyle="bold" />
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="@dimen/common_item_margin"-->
+        <!--android:paddingLeft="@dimen/common_item_margin"-->
+        <!--android:text="@string/kitchenu_utensils"-->
+        <!--android:textColor="@color/good_text_color"-->
+        <!--android:textSize="@dimen/common_text_size"-->
+        <!--android:textStyle="bold" />-->
 
 
-    <TextView
-        android:id="@+id/recipe_bake_step_utensils"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/common_item_margin"
-        android:text="@string/recipe_dd_utensils"
-        android:textColor="@color/sin_6"
-        android:textSize="@dimen/common_text_size" />
+    <!--<TextView-->
+        <!--android:id="@+id/recipe_bake_step_utensils"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:padding="@dimen/common_item_margin"-->
+        <!--android:text="@string/recipe_dd_utensils"-->
+        <!--android:textColor="@color/sin_6"-->
+        <!--android:textSize="@dimen/common_text_size" />-->
 </LinearLayout>
