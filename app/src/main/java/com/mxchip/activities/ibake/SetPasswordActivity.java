@@ -73,18 +73,13 @@ public class SetPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Log.d(TAG, "onclick");
-
                 final String password1 = password.getText().toString().trim();
                 String password2 = passwordcf.getText().toString().trim();
-
-                Log.d(TAG, password1 + " " + password2 + " " + token);
 
                 micoUser.register(password1, password2, new UserCallBack() {
 
                     @Override
                     public void onSuccess(String message) {
-                        Log.d(TAG, message);
 
                         if (ConstHelper.checkPara(ConstHelper.getFogCode(message))) {
                             if (ConstPara._SUCCESSCODE.equals(ConstHelper.getFogCode(message))) {
