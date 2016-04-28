@@ -1,9 +1,6 @@
 package com.mxchip.activities.ibake;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -44,6 +41,8 @@ public class RecipeDetailActivity extends AppCompatActivity {
     private LinearLayout recipe_detial_showtaobao;
     private LinearLayout recipe_detial_ilikeit;
 
+    private ImageView recipe_detial_img;
+
     private String itemid = ConstPara._ITEMID;
 
     MiCOUser micouser;
@@ -76,6 +75,8 @@ public class RecipeDetailActivity extends AppCompatActivity {
         recipe_dd_material_lv = (ListView) findViewById(R.id.recipe_dd_material_lv);
         recipe_detial_showtaobao = (LinearLayout) findViewById(R.id.recipe_detial_showtaobao);
         recipe_detial_ilikeit = (LinearLayout) findViewById(R.id.recipe_detial_ilikeit);
+
+        recipe_detial_img = (ImageView)findViewById(R.id.recipe_detial_img);
     }
 
     //    获取一共需要哪些食材
@@ -102,18 +103,53 @@ public class RecipeDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Integer integer = (Integer) recipe_detial_img.getTag();
+                integer = integer == null ? 0 : integer;
+                if (integer == R.drawable.recipe_icon_like) {
+                    //TODO 取消点赞 delCookBookLikeNo
+                    recipe_dd_likeno_txt.setText(like_count + "");
+                    recipe_detial_img.setImageResource(R.drawable.recipe_icon_favourate_3);
+                    recipe_detial_img.setTag(R.drawable.recipe_icon_favourate_3);
 
-                micouser.addCookBookLikeNo(recipeid, new UserCallBack() {
-                    @Override
-                    public void onSuccess(String message) {
-                        Log.d(TAG, message);
-                    }
+//                    micouser.delCookBookLikeNo(recipeid, new UserCallBack() {
+//                        @Override
+//                        public void onSuccess(String message) {
+//                            Log.d(TAG, message);
+//                            if (ConstHelper.getFogCode(message).equals(ConstPara._SUCCESSCODE)) {
+//                                recipe_dd_likeno_txt.setText(like_count + "");
+//                                recipe_detial_img.setImageResource(R.drawable.recipe_icon_favourate_3);
+//                                recipe_detial_img.setTag(R.drawable.recipe_icon_favourate_3);
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onFailure(int code, String message) {
+//                            Log.d(TAG, code + "msg = " + message);
+//                            ConstHelper.setToast(RecipeDetailActivity.this, ConstHelper.getFogMessage(message));
+//                        }
+//                    }, token);
+                } else {
+                    //recipe_icon_favourate_3
+                    micouser.addCookBookLikeNo(recipeid, new UserCallBack() {
+                        @Override
+                        public void onSuccess(String message) {
+                            Log.d(TAG, message);
 
-                    @Override
-                    public void onFailure(int code, String message) {
-                        Log.d(TAG, code + "msg = " + message);
-                    }
-                }, token);
+                            if (ConstHelper.getFogCode(message).equals(ConstPara._SUCCESSCODE)) {
+                                recipe_dd_likeno_txt.setText((like_count + 1) + "");
+                                recipe_detial_img.setImageResource(R.drawable.recipe_icon_like);
+                                recipe_detial_img.setTag(R.drawable.recipe_icon_like);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(int code, String message) {
+                            Log.d(TAG, code + "msg = " + message);
+                            ConstHelper.setToast(RecipeDetailActivity.this, ConstHelper.getFogMessage(message));
+                        }
+                    }, token);
+                }
+
             }
         });
     }
@@ -216,6 +252,8 @@ public class RecipeDetailActivity extends AppCompatActivity {
         return list;
     }
 
+    TextView recipe_dd_likeno_txt;
+    int like_count;
     private void getThisBookInfo() {
         micouser.getCookBookInfo(recipeid, new UserCallBack() {
             @Override
@@ -228,21 +266,28 @@ public class RecipeDetailActivity extends AppCompatActivity {
                     String imgurl = temp.getString("mainimageurl");
                     String name = temp.getString("name");
                     String timecount = temp.getString("timecount");
-                    String favorite_count = temp.getString("favorite_count");
+                    like_count = Integer.parseInt(temp.getString("like_count"));
                     String introduction = temp.getString("introduction");
                     itemid = temp.getString("iteamid");
 
                     TextView recipe_dd_title = (TextView)findViewById(R.id.recipe_dd_title);
                     TextView recipe_dd_cooktime = (TextView)findViewById(R.id.recipe_dd_cooktime);
-                    TextView recipe_dd_likeno_txt = (TextView)findViewById(R.id.recipe_dd_likeno_txt);
+                    recipe_dd_likeno_txt = (TextView)findViewById(R.id.recipe_dd_likeno_txt);
                     TextView recipe_dd_destxt = (TextView)findViewById(R.id.recipe_dd_destxt);
                     recipe_dd_title.setText(name);
                     recipe_dd_cooktime.setText(timecount + ConstPara.MINUTES);
-                    recipe_dd_likeno_txt.setText(favorite_count);
+                    recipe_dd_likeno_txt.setText(like_count+"");
                     recipe_dd_destxt.setText(introduction);
 
                     JSONArray ingredients = new JSONArray(datas.getString("Items"));
                     initMaterial(ingredients);
+
+                    if(datas.getString("Ilike").equals("1")){
+                        recipe_detial_img.setImageResource(R.drawable.recipe_icon_like);
+                        recipe_detial_img.setTag(R.drawable.recipe_icon_like);
+                    }else{
+                        recipe_detial_img.setTag(R.drawable.recipe_icon_favourate_3);
+                    }
 
                     //更新主图
                     SyncImageLoader syncImageLoader = new SyncImageLoader();

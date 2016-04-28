@@ -30,6 +30,7 @@
                 android:gravity="center">
 
                 <ImageView
+                    android:id="@+id/recipe_detial_img"
                     android:layout_width="@dimen/icon_size"
                     android:layout_height="@dimen/icon_size"
                     android:src="@drawable/recipe_icon_favourate_3" />

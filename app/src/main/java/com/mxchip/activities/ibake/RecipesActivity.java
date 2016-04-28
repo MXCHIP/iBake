@@ -121,7 +121,7 @@ public class RecipesActivity extends AppCompatActivity implements AdapterView.On
 
                 String cb_name = items.getString("name");
                 String cb_img = items.getString("mainimageurl");
-                String cb_likeno = items.getString("favorite_count");
+                String cb_likeno = items.getString("like_count");
                 String cb_recipeid = items.getString("id");
 
                 adapter.addBook(cb_name, cb_img, cb_likeno, cb_recipeid);

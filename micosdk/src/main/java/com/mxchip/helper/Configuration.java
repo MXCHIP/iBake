@@ -27,6 +27,7 @@ public class Configuration {
     public static String GETCOOKBOOKLIST = _COOKBOOK + "cookbook_list/";
     public static String GETCOOKBOOKINFO = _COOKBOOK + "cbmultinfo/";
     public static String ADDCOOKBOOKLIKENO = _COOKBOOK + "cblikeadd/";
+    public static String DELCOOKBOOKLIKENO = _COOKBOOK + "cblikedel/";
     public static String SEARCHCOOKBOOKBYNAME = _COOKBOOK + "cbsearch/";
 
     public static String getTopic(String deviceid) {

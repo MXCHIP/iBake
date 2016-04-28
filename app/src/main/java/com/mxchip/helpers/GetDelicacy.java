@@ -143,7 +143,7 @@ public class GetDelicacy {
 
                         //分别给名字、点赞个数、图片赋值
                         txt1.setText(items.getString("name"));
-                        like_no_txt1.setText(items.getString("favorite_count"));
+                        like_no_txt1.setText(items.getString("like_count"));
 
                         if(ConstHelper.checkPara(items.getString("mainimageurl")))
                             syncImageLoader.loadImage(i + 1, null, items.getString("mainimageurl"), imageLoadListener);

@@ -105,10 +105,12 @@ public class ConstPara {
     public static String INTENT_REQTYPE_TYPE = "getbytype";
 
     public static final int ALBUM_REQUEST_CODE = 1;
-
     public static final int CAMERA_REQUEST_CODE = 2;
+
     public static final int CROP_REQUEST_CODE = 4;
     public static String IMAGE_UNSPECIFIED = "image/*";
+
+    public static final String  _ALREADY_LIKE_NO = "31036";
 
     public static String[] PLANETS = new String[]{"250℃","245℃","240℃","235℃","230℃","225℃","220℃","215℃","210℃","205℃","200℃","195℃","190℃","185℃","180℃","175℃","170℃","165℃","160℃","155℃","150℃","145℃","140℃","135℃","130℃","125℃","120℃","115℃","110℃","105℃","100℃","95℃","90℃","85℃","80℃","75℃","70℃","65℃","60℃"};
     public static String DEGREE = "℃";
