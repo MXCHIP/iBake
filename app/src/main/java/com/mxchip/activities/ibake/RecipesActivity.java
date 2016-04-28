@@ -28,13 +28,18 @@ public class RecipesActivity extends AppCompatActivity implements AdapterView.On
     private ListView recipes_list;
     private CookBookItemAdapter adapter;
     private SetTitleBar stb;
+    private String reqtype;
+    private String recipename;
+    private MiCOUser micoUser;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipes_list);
 
-        String recipename = (String) getIntent().getSerializableExtra(ConstPara.INTENT_RECIPENAME);
+        reqtype = (String) getIntent().getSerializableExtra(ConstPara.INTENT_REQTYPE);
+        recipename = (String) getIntent().getSerializableExtra(ConstPara.INTENT_RECIPENAME);
 
         stb = new SetTitleBar(RecipesActivity.this);
         if (ConstHelper.checkPara(recipename)) {
@@ -42,6 +47,10 @@ public class RecipesActivity extends AppCompatActivity implements AdapterView.On
         }
         stb.setLeftButton("back", "finish");
         stb.setRightButton("none", "");
+
+        micoUser = new MiCOUser();
+        SharePreHelper shareph = new SharePreHelper(RecipesActivity.this);
+        token = shareph.getData(ConstPara.SHARE_TOKEN);
 
         initView();
     }
@@ -52,19 +61,17 @@ public class RecipesActivity extends AppCompatActivity implements AdapterView.On
         initDevList();
     }
 
-    private void cookBookList() {
-        MiCOUser micoUser = new MiCOUser();
+    /**
+     * 通过type来获取食谱列表
+     */
+    private void cookBookListBytype() {
         int type = getIntent().getIntExtra(ConstPara.INTENT_RECIPETYPE, 1);
-
         String productid = ConstPara._PRODUCTID;
-
-        SharePreHelper shareph = new SharePreHelper(RecipesActivity.this);
-        String token = shareph.getData(ConstPara.SHARE_TOKEN);
 
         micoUser.getCookBookList(type, productid, new UserCallBack() {
             @Override
             public void onSuccess(String message) {
-                Log.d(TAG + "onSuccess",  message);
+                Log.d(TAG + "onSuccess", message);
                 loadDate(message);
             }
 
@@ -75,10 +82,34 @@ public class RecipesActivity extends AppCompatActivity implements AdapterView.On
         }, token);
     }
 
+    private void getCBListByname(){
+        if (ConstHelper.checkPara(recipename)) {
+
+            MiCOUser miCOUser = new MiCOUser();
+            miCOUser.searchCookBookByName(recipename, new UserCallBack() {
+                @Override
+                public void onSuccess(String message) {
+                    Log.d(TAG, message);
+                    loadDate(message);
+                }
+
+                @Override
+                public void onFailure(int code, String message) {
+                    Log.d(TAG, code + "msg = " + message);
+                }
+            }, token);
+        }
+    }
+
+
     private void initDevList() {
         adapter = new CookBookItemAdapter(RecipesActivity.this, recipes_list);
         recipes_list.setOnItemClickListener(this);
-        cookBookList();
+
+        if(reqtype.equals(ConstPara.INTENT_REQTYPE_TYPE))
+            cookBookListBytype();
+        else if(reqtype.equals(ConstPara.INTENT_REQTYPE_NAME))
+            getCBListByname();
     }
 
     public void loadDate(String data) {

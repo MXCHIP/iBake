@@ -96,10 +96,13 @@ public class ConstPara {
     public static String INTENT_DEVNAME = "devicename";
     public static String INTENT_DEVID = "deviceid";
     public static String INTENT_DEVPW = "devicepw";
+    public static String INTENT_REQTYPE = "reqtype";
 
     public static String INTENT_RECIPENAME = "recipename";
     public static String INTENT_RECIPETYPE = "recipetype";
     public static String INTENT_RECIPEID = "recipeid";
+    public static String INTENT_REQTYPE_NAME = "getbyname";
+    public static String INTENT_REQTYPE_TYPE = "getbytype";
 
     public static final int ALBUM_REQUEST_CODE = 1;
 

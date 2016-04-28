@@ -59,8 +59,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
         stb = new SetTitleBar(RecipeDetailActivity.this);
         stb.setTitleName(recipename);
         stb.setLeftButton("back", "finish");
-        stb.setRightButton("edit", "edit");
-
+        stb.setRightButton("none", "");
 
         micouser = new MiCOUser();
         recipeid = Integer.parseInt((String) getIntent().getSerializableExtra(ConstPara.INTENT_RECIPEID));

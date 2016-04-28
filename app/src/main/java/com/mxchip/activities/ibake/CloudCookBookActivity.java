@@ -146,22 +146,11 @@ public class CloudCookBookActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String cookbookname = cloud_cb_search.getText().toString().trim();
-                SharePreHelper shareph = new SharePreHelper(CloudCookBookActivity.this);
-                if (ConstHelper.checkPara(cookbookname)) {
-
-                    MiCOUser miCOUser = new MiCOUser();
-                    miCOUser.searchCookBookByName(cookbookname, new UserCallBack() {
-                        @Override
-                        public void onSuccess(String message) {
-                            Log.d(TAG, message);
-                        }
-
-                        @Override
-                        public void onFailure(int code, String message) {
-                            Log.d(TAG, code + "msg = " + message);
-                        }
-                    },shareph.getData(ConstPara.SHARE_TOKEN));
-                }
+                //跳转页面
+                Intent intent = new Intent(CloudCookBookActivity.this, RecipesActivity.class);
+                intent.putExtra(ConstPara.INTENT_REQTYPE, ConstPara.INTENT_REQTYPE_NAME);
+                intent.putExtra(ConstPara.INTENT_RECIPENAME, cookbookname);
+                startActivity(intent);
             }
         });
 
@@ -330,6 +319,7 @@ public class CloudCookBookActivity extends AppCompatActivity {
 
         //跳转页面
         Intent intent = new Intent(CloudCookBookActivity.this, RecipesActivity.class);
+        intent.putExtra(ConstPara.INTENT_REQTYPE, ConstPara.INTENT_REQTYPE_TYPE);
         intent.putExtra(ConstPara.INTENT_RECIPENAME, name);
         intent.putExtra(ConstPara.INTENT_RECIPETYPE, type);
         startActivity(intent);
