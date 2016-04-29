@@ -98,6 +98,7 @@ public class BookItemAdapter extends BaseAdapter {
 
         syncImageLoader.loadImage(position, model, model.out_book_pic, imageLoadListener);
 
+        //TODO 设备是否在线
         if ("offline".equals(model.out_book_online)) {
             dev_item_name_tvid.setTextColor(ConstPara.IS_OFFLINE_COLOR);
             dev_item_isonline_tvid.setTextColor(ConstPara.IS_OFFLINE_COLOR);

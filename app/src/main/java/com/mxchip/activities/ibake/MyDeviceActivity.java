@@ -156,6 +156,11 @@ public class MyDeviceActivity extends AppCompatActivity implements AdapterView.O
                         String deviceid = temp.getString("device_id");
                         String devicepw = temp.getString("device_pw");
 //                        Log.d(TAG + "getlist", name + ' ' + online + ' ' + img);
+
+                        //TODO 设备是否在线
+                        if(!ConstHelper.checkPara(img))
+                            img = "http://img0.pchouse.com.cn/pchouse/1403/15/576135_2.jpg";
+                        online = "online";
                         adapter.addBook(name, online, img, deviceid, devicepw);
                     }
                     mydevlistlistviewid.setAdapter(adapter);

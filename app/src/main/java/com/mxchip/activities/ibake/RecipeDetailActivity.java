@@ -187,8 +187,9 @@ public class RecipeDetailActivity extends AppCompatActivity {
         recipe_dd_more_lys.removeAllViews();
 
         try {
-            for (int i = steps.length(); i > 0; i--) {
-                JSONObject temp = (JSONObject) steps.get(i-1);
+            for (int i = 0; i < steps.length(); i++) {
+//            for (int i = steps.length(); i > 0; i--) {
+                JSONObject temp = (JSONObject) steps.get(i);
 
                 String num_step = temp.getString("num_step");
                 String step_description = temp.getString("step_description");
