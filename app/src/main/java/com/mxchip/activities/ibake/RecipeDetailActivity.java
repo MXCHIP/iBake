@@ -12,8 +12,11 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.mico.micosdk.MiCODevice;
 import com.mico.micosdk.MiCOUser;
+import com.mxchip.callbacks.ControlDeviceCallBack;
 import com.mxchip.callbacks.UserCallBack;
+import com.mxchip.helper.ScheduleTaskParam;
 import com.mxchip.helpers.BookModel;
 import com.mxchip.helpers.SyncImageLoader;
 import com.mxchip.manage.ConstHelper;
@@ -40,12 +43,15 @@ public class RecipeDetailActivity extends AppCompatActivity {
     private ListView recipe_dd_material_lv;
     private LinearLayout recipe_detial_showtaobao;
     private LinearLayout recipe_detial_ilikeit;
+    private LinearLayout recipe_detial_delayCmd;
 
     private ImageView recipe_detial_img;
 
     private String itemid = ConstPara._ITEMID;
+    private MiCODevice micoDev;
+    private SharePreHelper shareph;
 
-    MiCOUser micouser;
+    private MiCOUser micouser;
     int recipeid;
     String token;
 
@@ -62,19 +68,23 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
         micouser = new MiCOUser();
         recipeid = Integer.parseInt((String) getIntent().getSerializableExtra(ConstPara.INTENT_RECIPEID));
-        SharePreHelper shareph = new SharePreHelper(RecipeDetailActivity.this);
+        shareph = new SharePreHelper(RecipeDetailActivity.this);
         token = shareph.getData(ConstPara.SHARE_TOKEN);
 
         initView();
 
         initOnClick();
         getThisBookInfo();
+
+        micoDev = new MiCODevice(RecipeDetailActivity.this);
+        shareph = new SharePreHelper(RecipeDetailActivity.this);
     }
 
     private  void initView(){
         recipe_dd_material_lv = (ListView) findViewById(R.id.recipe_dd_material_lv);
         recipe_detial_showtaobao = (LinearLayout) findViewById(R.id.recipe_detial_showtaobao);
         recipe_detial_ilikeit = (LinearLayout) findViewById(R.id.recipe_detial_ilikeit);
+        recipe_detial_delayCmd = (LinearLayout) findViewById(R.id.recipe_detial_delayCmd);
 
         recipe_detial_img = (ImageView)findViewById(R.id.recipe_detial_img);
     }
@@ -152,6 +162,43 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
             }
         });
+
+        recipe_detial_delayCmd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendDelayCommand();
+            }
+        });
+    }
+
+    private void sendDelayCommand(){
+
+        ScheduleTaskParam stp = new ScheduleTaskParam();
+        stp.device_id = "d95366fe-06c0-11e6-a739-00163e0204c0";
+        stp.order = "{\"KG_Start\":\"1\",\"WorkMode\":\"1\",\"appid\":\"d8cdf9c6-de8c-11e5-a739-00163e0204c0\",\"deviceid\":\"d95366fe-06c0-11e6-a739-00163e0204c0\",\"userid\":\"b8b917e2-deaa-11e5-a739-00163e0204c0\",\"atrrSet\":[\"KG_Start\",\"WorkMode\"]}";
+        stp.enable = true;
+
+//        stp.month = "*";
+//        stp.day_of_month = "*";
+//        stp.day_of_week = "*";
+//        stp.hour = "*";
+//        stp.minute = "*";
+
+        stp.second = 100;
+
+        micoDev.creatDelayTask(stp, new ControlDeviceCallBack() {
+            //        micoDev.createScheduleTask(stp, new ControlDeviceCallBack() {
+            @Override
+            public void onSuccess(String message) {
+                Log.d(TAG + "onSuccess", message);
+            }
+
+            @Override
+            public void onFailure(int code, String message) {
+                Log.d(TAG + "onFailure", code + " " + message);
+            }
+
+        }, token);
     }
 
     /**

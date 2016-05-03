@@ -4,6 +4,7 @@ public class Configuration {
     private static String _URLHEAD = "https://iot.mxchip.com/enduser/";
     private static String _COOKBOOK = "https://iot.mxchip.com/cookbook/";
 
+    public static String _SCHEDULETASK = "https://iot.mxchip.com/schedule/task/";
 
     public static String LOGININ = _URLHEAD + "login/";
     public static String GETVERCODE = _URLHEAD + "getVerCode/";

@@ -23,6 +23,7 @@ import com.mxchip.helper.Configuration;
 import com.mxchip.helper.MiCOConstParam;
 import com.mxchip.helper.CreateQRCode;
 import com.mxchip.helper.ListenDeviceParams;
+import com.mxchip.helper.ScheduleTaskParam;
 import com.mxchip.helper.ShareDeviceParams;
 import com.mxchip.helper.SinSocketParams;
 import com.mxchip.mqttservice2.MqttServiceListener;
@@ -474,5 +475,83 @@ public class MiCODevice {
 		}
 	}
 
+	/**
+	 * Create schedule take
+	 * @param stp
+	 * @param ctrldevcb
+	 * @param token
+	 */
+	public void createScheduleTask(ScheduleTaskParam stp, final ControlDeviceCallBack ctrldevcb, String token){
 
+		if (comfunc.checkPara(stp.device_id, stp.order, token)) {
+			try {
+				JSONObject postParam = new JSONObject();
+				postParam.put("task_type", 0);
+				postParam.put("device_id", stp.device_id);
+				postParam.put("order", stp.order);
+				postParam.put("enable", stp.enable);
+
+				postParam.put("month", stp.month);
+				postParam.put("day_of_month", stp.day_of_month);
+				postParam.put("day_of_week", stp.day_of_week);
+				postParam.put("hour", stp.hour);
+				postParam.put("minute", stp.minute);
+
+				hsp.doHttpPost(Configuration._SCHEDULETASK, postParam, new UserCallBack() {
+
+					@Override
+					public void onSuccess(String message) {
+						comfunc.successCBCtrlDev(message, ctrldevcb);
+					}
+
+					@Override
+					public void onFailure(int code, String message) {
+						comfunc.failureCBCtrlDev(code, message, ctrldevcb);
+					}
+				}, token);
+			} catch (JSONException e1) {
+				e1.printStackTrace();
+			}
+		} else {
+			comfunc.failureCBCtrlDev(MiCOConstParam.EMPTYCODE, MiCOConstParam.EMPTY, ctrldevcb);
+		}
+	}
+
+	/**
+	 * Create delay take
+	 * @param stp
+	 * @param ctrldevcb
+	 * @param token
+	 */
+	public void creatDelayTask(ScheduleTaskParam stp, final ControlDeviceCallBack ctrldevcb, String token){
+
+		if (comfunc.checkPara(stp.device_id, stp.order, token)) {
+			try {
+				JSONObject postParam = new JSONObject();
+				postParam.put("task_type", 1);
+				postParam.put("device_id", stp.device_id);
+				postParam.put("order", stp.order);
+				postParam.put("enable", stp.enable);
+
+				postParam.put("second", stp.second);
+
+				hsp.doHttpPost(Configuration._SCHEDULETASK, postParam, new UserCallBack() {
+
+					@Override
+					public void onSuccess(String message) {
+						comfunc.successCBCtrlDev(message, ctrldevcb);
+					}
+
+					@Override
+					public void onFailure(int code, String message) {
+						comfunc.failureCBCtrlDev(code, message, ctrldevcb);
+					}
+				}, token);
+			} catch (JSONException e1) {
+				e1.printStackTrace();
+			}
+		} else {
+			comfunc.failureCBCtrlDev(MiCOConstParam.EMPTYCODE, MiCOConstParam.EMPTY, ctrldevcb);
+		}
+	}
 }
