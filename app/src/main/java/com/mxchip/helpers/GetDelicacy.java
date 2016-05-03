@@ -101,7 +101,7 @@ public class GetDelicacy {
         String productid = "6486b2d1-0ee9-4647-baa3-78b9cbc778f7";
         SharePreHelper shareph = new SharePreHelper(mactivity);
         String token = shareph.getData(ConstPara.SHARE_TOKEN);
-        micoUser.getCookBookList(type, productid, new UserCallBack() {
+        micoUser.getCookBookByType(type, productid, new UserCallBack() {
             @Override
             public void onSuccess(String message) {
 

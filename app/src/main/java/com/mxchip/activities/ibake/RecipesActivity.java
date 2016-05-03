@@ -68,7 +68,7 @@ public class RecipesActivity extends AppCompatActivity implements AdapterView.On
         int type = getIntent().getIntExtra(ConstPara.INTENT_RECIPETYPE, 1);
         String productid = ConstPara._PRODUCTID;
 
-        micoUser.getCookBookList(type, productid, new UserCallBack() {
+        micoUser.getCookBookByType(type, productid, new UserCallBack() {
             @Override
             public void onSuccess(String message) {
                 Log.d(TAG + "onSuccess", message);
@@ -86,7 +86,7 @@ public class RecipesActivity extends AppCompatActivity implements AdapterView.On
         if (ConstHelper.checkPara(recipename)) {
 
             MiCOUser miCOUser = new MiCOUser();
-            miCOUser.searchCookBookByName(recipename, new UserCallBack() {
+            miCOUser.getCookBookByName(recipename, new UserCallBack() {
                 @Override
                 public void onSuccess(String message) {
                     Log.d(TAG, message);

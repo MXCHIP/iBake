@@ -305,7 +305,7 @@ public class MiCOUser {
      * @param usercb
      * @param token
      */
-    public void getCookBookList(int type, String productid, UserCallBack usercb, String token) {
+    public void getCookBookByType(int type, String productid, UserCallBack usercb, String token) {
         if (comfunc.checkPara(productid, token)) {
             String postParam = "?type=" + type + "&productid=" + productid;
             hsp.doHttpGet(Configuration.GETCOOKBOOKLIST, postParam, usercb, token);
@@ -321,6 +321,20 @@ public class MiCOUser {
      * @param token
      */
     public void addCookBookLikeNo(int cookbookid, UserCallBack usercb, String token) {
+        if (cookbookid>0 && comfunc.checkPara(token)) {
+            JSONObject postParam = new JSONObject();
+            try {
+                postParam.put("cookbook", cookbookid);
+                hsp.doHttpPost(Configuration.ADDCOOKBOOKLIKENO, postParam, usercb, token);
+            } catch (JSONException e1) {
+                e1.printStackTrace();
+            }
+        } else {
+            comfunc.illegalCallBack(usercb);
+        }
+    }
+
+    public void delCookBookLikeNo(int cookbookid, UserCallBack usercb, String token) {
         if (cookbookid>0 && comfunc.checkPara(token)) {
             JSONObject postParam = new JSONObject();
             try {
@@ -355,7 +369,7 @@ public class MiCOUser {
      * @param usercb
      * @param token
      */
-    public void searchCookBookByName(String cookbookname, UserCallBack usercb, String token) {
+    public void getCookBookByName(String cookbookname, UserCallBack usercb, String token) {
         if (comfunc.checkPara(cookbookname, token)) {
             String postParam = "?cookbook_name=" + cookbookname;
             hsp.doHttpGet(Configuration.SEARCHCOOKBOOKBYNAME, postParam, usercb, token);
