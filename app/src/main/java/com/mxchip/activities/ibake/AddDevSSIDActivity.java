@@ -168,7 +168,7 @@ public class AddDevSSIDActivity extends AppCompatActivity {
 
     private void startEasyLink() {
         showEasylinkPro();
-        micodev.startEasyLink(wifissid, password, 40000, new EasyLinkCallBack() {
+        micodev.startEasyLink(wifissid, password, 40000, 20, new EasyLinkCallBack() {
 
             @Override
             public void onSuccess(String message) {

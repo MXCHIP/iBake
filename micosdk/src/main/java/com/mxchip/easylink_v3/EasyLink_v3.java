@@ -52,7 +52,7 @@ public class EasyLink_v3 {
 	 * wifi.getConnectionInfo(); String bssid_str = info.getBSSID(); bssid_str =
 	 * bssid_str.replace(":", ""); bssid = Helper.hexStringToBytes(bssid_str); }
 	 */
-	public void transmitSettings(byte[] Ssid, byte[] Key, byte[] Userinfo) {
+	public void transmitSettings(byte[] Ssid, byte[] Key, byte[] Userinfo, final int sleeptime) {
 		try {
 			this.address = InetAddress.getByName("255.255.255.255");
 		} catch (Exception e) {
@@ -98,12 +98,12 @@ public class EasyLink_v3 {
 			@Override
 			public void run() {
 				stopSending = false;
-				send();
+				send(sleeptime);
 			}
 		}).start();
 	}
 
-	private void send() {
+	private void send(int sleeptime) {
 		int i, j, k;
 		// WifiManager.MulticastLock lock=
 		// wifi.createMulticastLock("easylink v3");
@@ -112,18 +112,18 @@ public class EasyLink_v3 {
 			try {
 				port = UDP_START_PORT;
 				k = 0;
-				UDP_SEND(START_FLAG1);
-				UDP_SEND(START_FLAG2);
-				UDP_SEND(START_FLAG3);
+				UDP_SEND(START_FLAG1, sleeptime);
+				UDP_SEND(START_FLAG2, sleeptime);
+				UDP_SEND(START_FLAG3, sleeptime);
 				for (i = 0, j = 1; i < send_data[0]; i++) {
 					len = (j * 0x100) + (send_data[i] & 0xff);
 					// Log.d("UDP_SEND", "--------" + Integer.toHexString(len)
 					// +"   " + i + "--------" + j);
-					UDP_SEND(len);
+					UDP_SEND(len,sleeptime);
 					if ((i % 4) == 3) {
 						k++;
 						len = 0x500 + k;
-						UDP_SEND(len);
+						UDP_SEND(len, sleeptime);
 					}
 					j++;
 					if (j == 5)
@@ -142,7 +142,7 @@ public class EasyLink_v3 {
 		small_mtu = onoff;
 	}
 
-	private void UDP_SEND(int length) {
+	private void UDP_SEND(int length, int sleeptime) {
 		try {
 			DatagramSocket udpSocket = new DatagramSocket();
 			udpSocket.setBroadcast(true);
@@ -156,7 +156,7 @@ public class EasyLink_v3 {
 			udpSocket.send(send_packet);
 			// Log.d("UDP_SEND", "--------" + Integer.toHexString(length) +"   "
 			// + port + "--------");
-			Thread.sleep(10);
+			Thread.sleep(sleeptime);
 			udpSocket.close();
 		} catch (Exception e) {
 			e.printStackTrace();

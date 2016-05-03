@@ -48,8 +48,7 @@ public class EasyLink_plus {
 		e3.SetSmallMTU(onoff);
 	}
 
-	public void transmitSettings(final String ssid, final String key,
-			final int ipAddress) {
+	public void transmitSettings(final String ssid, final String key, final int ipAddress, final int sleeptime) {
 		try {
 			final byte[] ssid_byte = ssid.getBytes("UTF-8");
 			final byte[] key_byte = key.getBytes("UTF-8");
@@ -74,8 +73,8 @@ public class EasyLink_plus {
 						try {
 							// minus.transmitSettings(ssid, key, ipAddress);
 							// Log.e("easylink", "START!!!!");
-							e2.transmitSettings(ssid_byte, key_byte, byteip);
-							e3.transmitSettings(ssid_byte, key_byte, byteip);
+							e2.transmitSettings(ssid_byte, key_byte, byteip, sleeptime);
+							e3.transmitSettings(ssid_byte, key_byte, byteip, sleeptime);
 							try {
 								Thread.sleep(10 * 1000);
 								e2.stopTransmitting();

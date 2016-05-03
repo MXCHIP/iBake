@@ -3,7 +3,7 @@
     package="com.mico.micosdk"
     android:versionCode="1"
     android:versionName="1.0" >
-
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="19" />

@@ -44,9 +44,7 @@ public class MiCOEasyLink {
 	 * @param runSecond
 	 * @param easylinkcb
 	 */
-	public void startEasyLink(final Context context, String ssid,
-			String password, final int runSecond,
-			final EasyLinkCallBack easylinkcb) {
+	public void startEasyLink(final Context context, String ssid, String password, final int runSecond, final int sleeptime, final EasyLinkCallBack easylinkcb) {
 		if (!eltag) {
 			if (null == workThread) {
 				workThread = new Thread(new Runnable() {
@@ -65,7 +63,7 @@ public class MiCOEasyLink {
 			}
 
 			try {
-				startEasylink(context, ssid, password, easylinkcb);
+				startEasylink(context, ssid, password, sleeptime, easylinkcb);
 				eltag = true;
 				comfunc.successCBEasyLink(MiCOConstParam.SUCCESS, easylinkcb);
 			} catch (Exception e) {
@@ -78,8 +76,7 @@ public class MiCOEasyLink {
 
 	/**
 	 * Stop EasyLink
-	 * @param context
-	 * @param micodevcb
+	 * @param easylinkcb
 	 */
 	public void stopEasyLink(EasyLinkCallBack easylinkcb) {
 		if (null != mEasylinkPlus && eltag) {
@@ -95,8 +92,7 @@ public class MiCOEasyLink {
 		}
 	}
 
-	protected void startEasylink(Context context, String ssid, String password,
-			EasyLinkCallBack easylinkcb) {
+	protected void startEasylink(Context context, String ssid, String password, int sleeptime, EasyLinkCallBack easylinkcb) {
 		// v2 and v3
 		int ip = getNormalIP(context);
 		mEasylinkPlus = EasyLink_plus.getInstence(context);
@@ -110,7 +106,7 @@ public class MiCOEasyLink {
 			comfunc.failureCBEasyLink(MiCOConstParam.EXCEPTIONCODE, e.getMessage(),easylinkcb);
 		}
 		try {
-			mEasylinkPlus.transmitSettings(ssid, password, ip);
+			mEasylinkPlus.transmitSettings(ssid, password, ip, sleeptime);
 		} catch (Exception e) {
 			e.printStackTrace();
 			comfunc.failureCBEasyLink(MiCOConstParam.EXCEPTIONCODE, e.getMessage(),easylinkcb);

@@ -39,7 +39,7 @@ public class EasyLink_v2 {
 	 * @param Key
 	 * @param Userinfo
 	 */
-	public void transmitSettings(byte[] Ssid, byte[] Key, byte[] Userinfo) {
+	public void transmitSettings(byte[] Ssid, byte[] Key, byte[] Userinfo, final int sleeptime) {
 		this.ssid = Ssid;
 		this.key = Key;
 		this.user_info = Userinfo;
@@ -48,23 +48,22 @@ public class EasyLink_v2 {
 			@Override
 			public void run() {
 				stopSending = false;
-				send();
+				send(sleeptime);
 			}
 		}).start();
 	}
 
-	private void send() {
+	private void send(int sleeptime) {
 		while (!stopSending) {
 			try {
-				sendSync();
+				sendSync(sleeptime);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 	}
 
-	private void sendSync()
-			throws InterruptedException, IOException {
+	private void sendSync(int sleeptime) throws InterruptedException, IOException {
 		InetSocketAddress sockAddr;
 		byte[] syncHBuffer = syncHString.getBytes();
 		byte[] data = new byte[2];
@@ -91,7 +90,7 @@ public class EasyLink_v2 {
 			sockAddr = new InetSocketAddress(InetAddress.getByName(head),
 					getRandomNumber());
 			sendData(new DatagramPacket(syncHBuffer, 20, sockAddr), head);
-			Thread.sleep(10);
+			Thread.sleep(sleeptime);
 		}
 		if (userlength == 0) {
 			for (int k = 0; k < data.length; k += 2) {
@@ -104,7 +103,7 @@ public class EasyLink_v2 {
 						getRandomNumber());
 				byte[] bbbb = new byte[k / 2 + 20];
 				sendData(new DatagramPacket(bbbb, k / 2 + 20, sockAddr), ip);
-				Thread.sleep(10);
+				Thread.sleep(sleeptime);
 			}
 		} else {
 			if (data.length % 2 == 0) {
@@ -130,7 +129,7 @@ public class EasyLink_v2 {
 						getRandomNumber());
 				byte[] bbbb = new byte[k / 2 + 20];
 				sendData(new DatagramPacket(bbbb, k / 2 + 20, sockAddr), ip);
-				Thread.sleep(10);
+				Thread.sleep(sleeptime);
 			}
 		}
 	}
