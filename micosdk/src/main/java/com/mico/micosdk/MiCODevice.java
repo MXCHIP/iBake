@@ -72,12 +72,12 @@ public class MiCODevice {
 	 * @param runSecond
 	 * @param easylinkcb
 	 */
-	public void startEasyLink(String ssid, String password, int runSecond, int sleeptime, EasyLinkCallBack easylinkcb) {
+	public void startEasyLink(String ssid, String password, int runSecond, int sleeptime, EasyLinkCallBack easylinkcb, String extraData) {
 		if(0 == runSecond)
 			runSecond = 60000 * 10;
 		if (comfunc.checkPara(ssid, password) && (runSecond > 0)) {
 			if(null != mContext)
-				micoeasylink.startEasyLink(mContext, ssid, password, runSecond, sleeptime, easylinkcb);
+				micoeasylink.startEasyLink(mContext, ssid, password, runSecond, sleeptime, easylinkcb, extraData);
 			else{
 				comfunc.failureCBEasyLink(MiCOConstParam.EMPTYCODE, MiCOConstParam.CONTEXTISNULL,easylinkcb);
 			}

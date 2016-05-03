@@ -48,21 +48,37 @@ public class EasyLink_plus {
 		e3.SetSmallMTU(onoff);
 	}
 
-	public void transmitSettings(final String ssid, final String key, final int ipAddress, final int sleeptime) {
+	public void transmitSettings(final String ssid, final String key, final int ipAddress, final int sleeptime, String extraData) {
 		try {
+			//TODO 不包含额外参数
+//			final byte[] ssid_byte = ssid.getBytes("UTF-8");
+//			final byte[] key_byte = key.getBytes("UTF-8");
+////			int userinfoLen = 6 + extraData.getBytes().length;
+//
+////			final byte[] userinfo = new byte[userinfoLen];
+//			final byte[] byteip = new byte[5];
+//			byteip[0] = 0x23; // #
+//			String strIP = String.format("%08x", ipAddress);
+//			System.arraycopy(Helper.hexStringToBytes(strIP), 0, byteip, 1, 4);
+////			if (!"".equals(extraData) || (null != extraData)) {
+////				userinfo[5] = 0x23; // #
+////				System.arraycopy(extraData.getBytes(), 0, userinfo, 6, extraData.getBytes().length);
+////			}
+
+			//TODO 包含额外参数
 			final byte[] ssid_byte = ssid.getBytes("UTF-8");
 			final byte[] key_byte = key.getBytes("UTF-8");
-//			int userinfoLen = 6 + extraData.getBytes().length;
+			int userinfoLen = 5 + extraData.getBytes().length;
 
-//			final byte[] userinfo = new byte[userinfoLen];
-			final byte[] byteip = new byte[5];
-			byteip[0] = 0x23; // #
+			final byte[] userinfo = new byte[userinfoLen];
+			userinfo[0] = 0x23; // #
 			String strIP = String.format("%08x", ipAddress);
-			System.arraycopy(Helper.hexStringToBytes(strIP), 0, byteip, 1, 4);
-//			if (!"".equals(extraData) || (null != extraData)) {
-//				userinfo[5] = 0x23; // #
-//				System.arraycopy(extraData.getBytes(), 0, userinfo, 6, extraData.getBytes().length);
-//			}
+			System.arraycopy(Helper.hexStringToBytes(strIP), 0, userinfo, 1, 4);
+			if (!"".equals(extraData) || (null != extraData)) {
+				System.arraycopy(extraData.getBytes(), 0, userinfo, 0, extraData.getBytes().length);
+				userinfo[extraData.getBytes().length] = 0x23; // #
+				System.arraycopy(Helper.hexStringToBytes(strIP), 0, userinfo, extraData.getBytes().length+1, 4);
+			}
 
 			singleThreadExecutor = Executors.newSingleThreadExecutor();
 			sending = true;
@@ -73,8 +89,8 @@ public class EasyLink_plus {
 						try {
 							// minus.transmitSettings(ssid, key, ipAddress);
 							// Log.e("easylink", "START!!!!");
-							e2.transmitSettings(ssid_byte, key_byte, byteip, sleeptime);
-							e3.transmitSettings(ssid_byte, key_byte, byteip, sleeptime);
+							e2.transmitSettings(ssid_byte, key_byte, userinfo, sleeptime);
+							e3.transmitSettings(ssid_byte, key_byte, userinfo, sleeptime);
 							try {
 								Thread.sleep(10 * 1000);
 								e2.stopTransmitting();

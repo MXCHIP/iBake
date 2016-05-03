@@ -44,7 +44,11 @@ public class MiCOEasyLink {
 	 * @param runSecond
 	 * @param easylinkcb
 	 */
-	public void startEasyLink(final Context context, String ssid, String password, final int runSecond, final int sleeptime, final EasyLinkCallBack easylinkcb) {
+	public void startEasyLink(final Context context, String ssid, String password,
+							  final int runSecond,
+							  final int sleeptime,
+							  final EasyLinkCallBack easylinkcb,
+							  final String extraData) {
 		if (!eltag) {
 			if (null == workThread) {
 				workThread = new Thread(new Runnable() {
@@ -63,7 +67,7 @@ public class MiCOEasyLink {
 			}
 
 			try {
-				startEasylink(context, ssid, password, sleeptime, easylinkcb);
+				startEasylink(context, ssid, password, sleeptime, easylinkcb, extraData);
 				eltag = true;
 				comfunc.successCBEasyLink(MiCOConstParam.SUCCESS, easylinkcb);
 			} catch (Exception e) {
@@ -83,7 +87,6 @@ public class MiCOEasyLink {
 			if (null != workThread) {
 				workThread = null;
 			}
-//			mEasylinkPlus = EasyLink_plus.getInstence(context);
 			mEasylinkPlus.stopTransmitting();
 			eltag = false;
 			comfunc.successCBEasyLink(MiCOConstParam.STOP_SUCCESS,easylinkcb);
@@ -92,7 +95,7 @@ public class MiCOEasyLink {
 		}
 	}
 
-	protected void startEasylink(Context context, String ssid, String password, int sleeptime, EasyLinkCallBack easylinkcb) {
+	protected void startEasylink(Context context, String ssid, String password, int sleeptime, EasyLinkCallBack easylinkcb, String extraData) {
 		// v2 and v3
 		int ip = getNormalIP(context);
 		mEasylinkPlus = EasyLink_plus.getInstence(context);
@@ -106,7 +109,7 @@ public class MiCOEasyLink {
 			comfunc.failureCBEasyLink(MiCOConstParam.EXCEPTIONCODE, e.getMessage(),easylinkcb);
 		}
 		try {
-			mEasylinkPlus.transmitSettings(ssid, password, ip, sleeptime);
+			mEasylinkPlus.transmitSettings(ssid, password, ip, sleeptime, extraData);
 		} catch (Exception e) {
 			e.printStackTrace();
 			comfunc.failureCBEasyLink(MiCOConstParam.EXCEPTIONCODE, e.getMessage(),easylinkcb);
