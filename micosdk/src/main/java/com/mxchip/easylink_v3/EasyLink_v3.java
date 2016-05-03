@@ -66,8 +66,8 @@ public class EasyLink_v3 {
 		// getBssid();
 //			udpSocket = new DatagramSocket();
 //			udpSocket.setBroadcast(true);
-		send_data[i++] = (byte) (1 + 1 + 1 + ssid.length + key.length
-				+ user_info.length + 2); // len(total) + len(ssid) +
+		send_data[i++] = (byte) (1 + 1 + 1 + ssid.length + key.length + user_info.length + 2);
+											// len(total) + len(ssid) +
 											// len(key) + ssid + key +
 											// user_info + checksum
 
@@ -117,8 +117,7 @@ public class EasyLink_v3 {
 				UDP_SEND(START_FLAG3, sleeptime);
 				for (i = 0, j = 1; i < send_data[0]; i++) {
 					len = (j * 0x100) + (send_data[i] & 0xff);
-					// Log.d("UDP_SEND", "--------" + Integer.toHexString(len)
-					// +"   " + i + "--------" + j);
+					// Log.d("UDP_SEND", "--------" + Integer.toHexString(len) +"   " + i + "--------" + j);
 					UDP_SEND(len,sleeptime);
 					if ((i % 4) == 3) {
 						k++;

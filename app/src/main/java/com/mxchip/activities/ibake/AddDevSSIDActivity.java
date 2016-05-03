@@ -182,7 +182,7 @@ public class AddDevSSIDActivity extends AppCompatActivity {
             public void onFailure(int code, String message) {
                 Log.d(TAG + " easylink", code + " " + message);
             }
-        }, "dd");
+        }, "sin");
     }
 
     private void stopEasyLink() {
