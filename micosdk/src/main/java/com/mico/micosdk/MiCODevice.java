@@ -7,6 +7,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 
+import com.mico.micoapi.AliMQTT;
 import com.mico.micoapi.MiCOEasyLink;
 import com.mico.micoapi.MiCOMQTT;
 import com.mico.micoapi.MiCOSocket;
@@ -348,26 +349,47 @@ public class MiCODevice {
 	public void startListenDevice(ListenDeviceParams listendevparams, final ControlDeviceCallBack ctrldevcb) {
 		String deviceid = listendevparams.deviceid;
 		String host = listendevparams.host;
-		String port = listendevparams.port;
 		String userName = listendevparams.userName;
 		String passWord = listendevparams.passWord;
 		String clientID = listendevparams.clientID;
+		int mqtttype = listendevparams.mqtttype;
 
-		if (comfunc.checkPara(deviceid, host, port, userName, clientID)) {
-			String topic = Configuration.getTopic(deviceid);
-			if (null != mContext) {
-				
-				micomqtt.startMqttService(mContext, host, port, userName, passWord, clientID, topic, 
-						new MqttServiceListener() {
-							@Override
-							public void onMqttReceiver(String msgType, String messages) {
-//								Log.d("---" + msgType + "---", messages);
-								comfunc.onDevStatusReceived(msgType, messages, ctrldevcb);
-							}
-						});
-				comfunc.successCBCtrlDev(MiCOConstParam.SUCCESS, ctrldevcb);
-			} else {
-				comfunc.failureCBCtrlDev(MiCOConstParam.EMPTYCODE, MiCOConstParam.CONTEXTISNULL, ctrldevcb);
+		if (comfunc.checkPara(deviceid, host, userName, passWord, clientID)) {
+			//使用Fogcloud2.0的MQTT
+			if (0 == mqtttype) {
+				String port = listendevparams.port;
+				if (comfunc.checkPara(port)) {
+					String topic = Configuration.getTopic(deviceid);
+					if (null != mContext) {
+						micomqtt.startMqttService(mContext, host, port, userName, passWord, clientID, topic,
+								new MqttServiceListener() {
+									@Override
+									public void onMqttReceiver(String msgType, String messages) {
+										comfunc.onDevStatusReceived(msgType, messages, ctrldevcb);
+									}
+								});
+
+						comfunc.successCBCtrlDev(MiCOConstParam.SUCCESS, ctrldevcb);
+					} else {
+						comfunc.failureCBCtrlDev(MiCOConstParam.EMPTYCODE, MiCOConstParam.CONTEXTISNULL, ctrldevcb);
+					}
+				} else {
+					comfunc.failureCBCtrlDev(MiCOConstParam.EMPTYCODE, MiCOConstParam.EMPTY, ctrldevcb);
+				}
+			}
+			//使用阿里云的MQTT
+			else if (1 == mqtttype) {
+				AliMQTT aliMQTT = new AliMQTT();
+				String[] topicFilters = listendevparams.topicFilters;
+
+				if (comfunc.checkPara(topicFilters)) {
+					aliMQTT.startAliMqtt(host, userName, passWord, clientID, topicFilters, new MqttServiceListener() {
+						@Override
+						public void onMqttReceiver(String msgType, String messages) {
+							comfunc.onDevStatusReceived(msgType, messages, ctrldevcb);
+						}
+					});
+				}
 			}
 		} else {
 			comfunc.failureCBCtrlDev(MiCOConstParam.EMPTYCODE, MiCOConstParam.EMPTY, ctrldevcb);

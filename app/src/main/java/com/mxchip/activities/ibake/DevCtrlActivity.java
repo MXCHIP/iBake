@@ -514,6 +514,15 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
         ldp.deviceid = deviceid;
         ldp.clientID = enduserid;
 
+//        ldp.mqtttype = 1;
+//        ldp.host = "tcp://mqtt.ons.aliyun.com:1883";
+//        ldp.userName = "wHQNXGLIEo9fqHYy";
+//        ldp.passWord = "VcVi86gK3JVefO8Yo3ATWYmiugoBFh";
+//        ldp.clientID = "CID_MXCHIP_TEST@@@M0025";
+//        String topic = "MXCHIP_TEST";
+//        String p2ptopic = topic + "/p2p/";
+//        ldp.topicFilters = new String[]{topic, p2ptopic};
+
         /**
          * TODO 使用fog1.0测试
          */
