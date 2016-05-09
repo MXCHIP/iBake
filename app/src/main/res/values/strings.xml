@@ -106,7 +106,7 @@
     <string name="recipe_ed_descripttitle">Recipe Description</string>
     <string name="recipe_ed_dessteptitle">Describe Steps</string>
 
-    <string name="recipe_ed_recip_nametxt_hint">Please enter a recipe name</string>
+    <string name="recipe_ed_recip_nametxt_hint">Please enter a recipe name.</string>
     <string name="recipe_ed_recip_destxt_hint">What do you want to share with everyone?</string>
     <string name="add_ingredient">Add + </string>
 
