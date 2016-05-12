@@ -77,7 +77,7 @@ public class RecipeEditActivity extends AppCompatActivity {
                                         Log.d(TAG, "to ----- Camara");
                                         Intent intent = new Intent(Intent.ACTION_PICK, null);
                                         intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "temp.jpg")));
+                                        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(ConstPara._FILE_ROOT_PATH, "temp.jpg")));
                                         startActivityForResult(intent, ConstPara.CAMERA_REQUEST_CODE);
                                     }
                                 })
@@ -136,7 +136,7 @@ public class RecipeEditActivity extends AppCompatActivity {
                 startCrop(data.getData());
                 break;
             case ConstPara.CAMERA_REQUEST_CODE:
-                File picture = new File(Environment.getExternalStorageDirectory() + "/temp.jpg");
+                File picture = new File(ConstPara._FILE_ROOT_PATH + "/temp.jpg");
                 startCrop(Uri.fromFile(picture));
                 break;
             case ConstPara.CROP_REQUEST_CODE:

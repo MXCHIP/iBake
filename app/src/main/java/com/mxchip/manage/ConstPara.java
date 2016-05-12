@@ -7,6 +7,8 @@ import android.graphics.Color;
  */
 public class ConstPara {
 
+    public static String _FILE_ROOT_PATH = "";
+
     //    ERROR code
     public static String _SUCCESSCODE = "0";
 

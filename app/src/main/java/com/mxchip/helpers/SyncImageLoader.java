@@ -5,6 +5,8 @@ import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 
+import com.mxchip.manage.ConstPara;
+
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -141,7 +143,7 @@ public class SyncImageLoader {
 
     public static Drawable loadImageFromUrl(String url) throws IOException {
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            File f = new File(Environment.getExternalStorageDirectory() + "/iBakImgs/" + MD5.getMD5(url));
+            File f = new File(ConstPara._FILE_ROOT_PATH + "/iBakImgs/" + MD5.getMD5(url));
             if (f.exists()) {
                 FileInputStream fis = new FileInputStream(f);
                 Drawable d = Drawable.createFromStream(fis, "src");
