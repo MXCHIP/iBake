@@ -78,6 +78,7 @@ public class QrCodeActivity extends AppCompatActivity {
             @Override
             public void onFailure(int code, String message) {
                 Log.d(TAG, message);
+                ConstHelper.setToast(QrCodeActivity.this, ConstHelper.getFogMessage(message));
             }
         }, token);
     }

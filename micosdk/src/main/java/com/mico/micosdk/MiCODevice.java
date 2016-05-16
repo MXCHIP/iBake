@@ -142,9 +142,17 @@ public class MiCODevice {
 							@Override
 							public void onSuccess(String message) {
 								try {
-									String sharcode = new JSONObject(message).getString("data");
-									sharcode = new JSONObject(sharcode).getString("vercode");
-									comfunc.successCBShareQrCode(sharcode, managedevcb);
+									String meta = new JSONObject(message).getString("meta");
+									String messagecode = new JSONObject(meta).getString("code");
+
+									if(messagecode.equals("0")){
+										String sharcode = new JSONObject(message).getString("data");
+										sharcode = new JSONObject(sharcode).getString("vercode");
+										comfunc.successCBShareQrCode(sharcode, managedevcb);
+									}else{
+										comfunc.failureCBShareQrCode(MiCOConstParam.EXCEPTIONCODE, message.toString(), managedevcb);
+									}
+
 								} catch (JSONException e) {
 									e.printStackTrace();
 								}
@@ -236,11 +244,16 @@ public class MiCODevice {
 //							Log.d("---POST---", message);
 							if (null != message && !message.equals("")) {
 								try {
-									JSONObject msgobj = new JSONObject(message);
-									String vercode = msgobj.getString("vercode");
-									String deviceid = msgobj.getString("deviceid");
-									String devicepw = msgobj.getString("devicepw");
-									toBindingFogCloud(deviceid, devicepw,vercode, managedevcb, token);
+									if(!(message.indexOf("error") > -1)){
+										JSONObject msgobj = new JSONObject(message);
+
+										String vercode = msgobj.getString("vercode");
+										String deviceid = msgobj.getString("deviceid");
+										String devicepw = msgobj.getString("devicepw");
+										toBindingFogCloud(deviceid, devicepw,vercode, managedevcb, token);
+									}else{
+										comfunc.failureCBBindDev(MiCOConstParam.EXCEPTIONCODE, message, managedevcb);
+									}
 								} catch (JSONException e) {
 									e.printStackTrace();
 								}
