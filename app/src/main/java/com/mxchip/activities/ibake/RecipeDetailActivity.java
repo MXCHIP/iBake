@@ -199,7 +199,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
 //            }
 //        }, token);
 
-        micoDev.getScheduleTask("d95366fe-06c0-11e6-a739-00163e0204c0", 1, new ControlDeviceCallBack() {
+        micoDev.getTaskList("d95366fe-06c0-11e6-a739-00163e0204c0", 1, new ControlDeviceCallBack() {
             @Override
             public void onSuccess(String message) {
                 Log.d(TAG + "onSuccess", message);

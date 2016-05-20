@@ -564,7 +564,7 @@ public class MiCODevice {
 	 * @param ctrldevcb
 	 * @param token
 	 */
-	public void getScheduleTask(String deviceid, int taskType, final ControlDeviceCallBack ctrldevcb, String token){
+	public void getTaskList(String deviceid, int taskType, final ControlDeviceCallBack ctrldevcb, String token){
 
 		if (comfunc.checkPara(deviceid, token) && (0 == taskType || 1 == taskType)) {
 
