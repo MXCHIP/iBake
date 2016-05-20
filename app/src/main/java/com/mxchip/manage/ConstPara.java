@@ -13,8 +13,11 @@ public class ConstPara {
     public static String _SUCCESSCODE = "0";
 
     //APP在云端注册后得到的APPID的值
-    public static String _APPID = "db456b4a-17fc-11e6-a739-00163e0204c0";
-//    public static String _APPID = "d8cdf9c6-de8c-11e5-a739-00163e0204c0";
+//    探针
+//    public static String _APPID = "db456b4a-17fc-11e6-a739-00163e0204c0";
+
+//    ACA烤箱
+    public static String _APPID = "d8cdf9c6-de8c-11e5-a739-00163e0204c0";
     public static String _PRODUCTID = "6486b2d1-0ee9-4647-baa3-78b9cbc778f7";//"6486b2d1-0ee9-4647-baa3-78b9cbc778f7"
 	public static String _DEVMAC = "d0bae40c2fee";
     //device ID

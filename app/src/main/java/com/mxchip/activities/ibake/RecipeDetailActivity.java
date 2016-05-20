@@ -37,7 +37,7 @@ import java.util.Map;
  * Created by Rocke on 2016/03/29.
  */
 public class RecipeDetailActivity extends AppCompatActivity {
-    private static final String TAG = "---RecipeDetailActivity---";
+    private static final String TAG = "---RecDeAc---";
     private SetTitleBar stb;
 
     private ListView recipe_dd_material_lv;
@@ -175,19 +175,31 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
         ScheduleTaskParam stp = new ScheduleTaskParam();
         stp.device_id = "d95366fe-06c0-11e6-a739-00163e0204c0";
-        stp.order = "{\"KG_Start\":\"1\",\"WorkMode\":\"1\",\"appid\":\"d8cdf9c6-de8c-11e5-a739-00163e0204c0\",\"deviceid\":\"d95366fe-06c0-11e6-a739-00163e0204c0\",\"userid\":\"b8b917e2-deaa-11e5-a739-00163e0204c0\",\"atrrSet\":[\"KG_Start\",\"WorkMode\"]}";
+        stp.commands = "{\"KG_Bottom\":\"1\",\"KG_Start\":\"1\",\"KG_Top\":\"1\",\"Temp_Bottom\":\"240\",\"Temp_Top\":\"240\",\"WorkMode\":\"1\",\"WorkTime\":\"58\",\"appid\":\"d8cdf9c6-de8c-11e5-a739-00163e0204c0\",\"deviceid\":\"d95366fe-06c0-11e6-a739-00163e0204c0\",\"userid\":\"b8b917e2-deaa-11e5-a739-00163e0204c0\",\"atrrSet\":[\"KG_Bottom\",\"KG_Start\",\"KG_Top\",\"Temp_Bottom\",\"Temp_Top\",\"WorkMode\",\"WorkTime\"]}";
         stp.enable = true;
 
-//        stp.month = "*";
+        stp.month = "*";
 //        stp.day_of_month = "*";
-//        stp.day_of_week = "*";
-//        stp.hour = "*";
-//        stp.minute = "*";
+        stp.day_of_week = "*";
+        stp.hour = "*";
+        stp.minute = "*";
 
-        stp.second = 100;
+//        stp.second = 10;
 
-        micoDev.creatDelayTask(stp, new ControlDeviceCallBack() {
-            //        micoDev.createScheduleTask(stp, new ControlDeviceCallBack() {
+//        micoDev.creatDelayTask(stp, new ControlDeviceCallBack() {
+//        micoDev.createScheduleTask(stp, new ControlDeviceCallBack() {
+//            @Override
+//            public void onSuccess(String message) {
+//                Log.d(TAG + "onSuccess", message);
+//            }
+//
+//            @Override
+//            public void onFailure(int code, String message) {
+//                Log.d(TAG + "onFailure", code + " " + message);
+//            }
+//        }, token);
+
+        micoDev.getScheduleTask("d95366fe-06c0-11e6-a739-00163e0204c0", 1, new ControlDeviceCallBack() {
             @Override
             public void onSuccess(String message) {
                 Log.d(TAG + "onSuccess", message);
@@ -197,7 +209,6 @@ public class RecipeDetailActivity extends AppCompatActivity {
             public void onFailure(int code, String message) {
                 Log.d(TAG + "onFailure", code + " " + message);
             }
-
         }, token);
     }
 

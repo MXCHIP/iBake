@@ -6,6 +6,11 @@ import org.json.JSONObject;
  * Created by Rocke on 2016/04/08.
  */
 public class CommandBean {
+
+    // 获取当前状态
+    public String GET_STATUS = "";
+
+
     public String deviceid = "";
     public String appid = "";
     public String enduserid = "";
@@ -27,6 +32,7 @@ public class CommandBean {
     public JSONObject extrajson = null;
 
     public CommandBean() {
+        this.GET_STATUS = "";
         this.deviceid = "";
         this.appid = "";
         this.enduserid = "";

@@ -514,6 +514,7 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
         ldp.deviceid = deviceid;
         ldp.clientID = enduserid;
 
+//        ldp.deviceid = deviceid;
 //        ldp.mqtttype = 1;
 //        ldp.host = "tcp://mqtt.ons.aliyun.com:1883";
 //        ldp.userName = "wHQNXGLIEo9fqHYy";
@@ -535,6 +536,9 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
                 shareph.addData(ConstPara.SHARE_LASTDEVNAME, devicename);
                 shareph.addData(ConstPara.SHARE_LASTDEVICEID, deviceid);
                 shareph.addData(ConstPara.SHARE_LASTDEVICEPW, devicepw);
+
+                cb.GET_STATUS = "0";
+                sendCommand(CommandHelper.combCommand(cb));
             }
 
             @Override
@@ -643,12 +647,13 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
 //                jsonVal =  ConstHelper.getJsonValue(jsonTmp.getString(jsonKey));
                 jsonVal =  jsonTmp.getString(jsonKey);
                 switch (jsonKey){
-                    case "KG_Start":
-                        if("0".equals(jsonVal))
-                            showdevCtrlButton("start");
-                        else if("1".equals(jsonVal))
-                            showdevCtrlButton("stop");
-                        break;
+//                    case "KG_Start":
+//                        if("0".equals(jsonVal)){
+//                            showdevCtrlButton("start");
+//
+//                        }else if("1".equals(jsonVal))
+//                            showdevCtrlButton("stop");
+//                        break;
                     case "KG_Light":
                         if("1".equals(jsonVal))
                             showKGLight("on", dev_ctrl_light);
@@ -692,6 +697,30 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
     private void updateCircleTitle(String status){
 
         circletitle_txt.setText(wsm.getStatusName(status));
+
+        switch (status){
+            case WorkStatusMap.DJ_CODE:
+                showdevCtrlButton("start");
+                break;
+            case WorkStatusMap.YY_CODE:
+                showdevCtrlButton("stop");
+                break;
+            case WorkStatusMap.HK_CODE:
+                showdevCtrlButton("stop");
+                break;
+            case WorkStatusMap.ZT_CODE:
+                showdevCtrlButton("resume");
+                break;
+            case WorkStatusMap.YR_CODE:
+                showdevCtrlButton("stop");
+                break;
+            case WorkStatusMap.WC_CODE:
+                showdevCtrlButton("start");
+                break;
+            case WorkStatusMap.YRWC_CODE:
+                showdevCtrlButton("start");
+                break;
+        }
 //        if(wsm.DJ_CODE.equals(status)){
 //            showdevCtrlButton("start");
 //        }else{

@@ -14,6 +14,7 @@ import com.mico.micosdk.MiCODevice;
 import com.mxchip.callbacks.EasyLinkCallBack;
 import com.mxchip.callbacks.ManageDeviceCallBack;
 import com.mxchip.callbacks.SearchDeviceCallBack;
+import com.mxchip.helper.MiCOConstParam;
 import com.mxchip.manage.ActivitiesManagerApplication;
 import com.mxchip.manage.ConstHelper;
 import com.mxchip.manage.ConstPara;
@@ -224,7 +225,9 @@ public class AddDevSSIDActivity extends AppCompatActivity {
 
         SharePreHelper shareph = new SharePreHelper(context);
 
-        micodev.bindDevice(ip, new ManageDeviceCallBack() {
+        String port = MiCOConstParam.LOCALDEVICEPORT;
+
+        micodev.bindDevice(ip, port, new ManageDeviceCallBack() {
             @Override
             public void onSuccess(String message) {
                 Log.d(TAG + " bindDevice", message);

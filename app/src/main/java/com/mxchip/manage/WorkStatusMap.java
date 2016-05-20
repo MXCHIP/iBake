@@ -12,19 +12,19 @@ public class WorkStatusMap {
     /**
      * WorkStatus
      */
-    public String DJ_CODE = "0";
+    public final static String DJ_CODE = "0";
     String DJ_NAME = "waiting";
-    String YY_CODE = "1";
+    public final static String YY_CODE = "1";
     String YY_NAME = "waiting";
-    String HK_CODE = "2";
+    public final static String HK_CODE = "2";
     String HK_NAME = "waiting";
-    String ZT_CODE = "3";
+    public final static String ZT_CODE = "3";
     String ZT_NAME = "waiting";
-    String YR_CODE = "4";
+    public final static String YR_CODE = "4";
     String YR_NAME = "waiting";
-    String WC_CODE = "5";
+    public final static String WC_CODE = "5";
     String WC_NAME = "waiting";
-    String YRWC_CODE = "6";
+    public final static String YRWC_CODE = "6";
     String YRWC_NAME = "waiting";
 
     public WorkStatusMap() {
@@ -37,7 +37,7 @@ public class WorkStatusMap {
         map.put(YRWC_CODE, YRWC_NAME);
     }
 
-    public String getStatusName(String key){
+    public String getStatusName(String key) {
 
         return map.get(key);
     }

@@ -224,20 +224,20 @@ public class MiCODevice {
 	/**
 	 * Binding my device from device.
 	 */
-	public void bindDevice(String ip, final ManageDeviceCallBack managedevcb, String token){
-		
-		if (comfunc.checkPara(ip, token)){
-			getBindVerCodeFromDevice(ip, managedevcb, token);
+	public void bindDevice(String ip, String port, final ManageDeviceCallBack managedevcb, String token){
+
+		if (comfunc.checkPara(ip, port, token)){
+			getBindVerCodeFromDevice(ip, port,managedevcb, token);
 		}else{
 			comfunc.failureCBBindDev(MiCOConstParam.EMPTYCODE, MiCOConstParam.EMPTY, managedevcb);
 		}
 	}
 	
-	private void getBindVerCodeFromDevice(String ip, final ManageDeviceCallBack managedevcb, final String token) {
+	private void getBindVerCodeFromDevice(String ip, String port, final ManageDeviceCallBack managedevcb, final String token) {
 		try {
 			JSONObject postParam = new JSONObject();
 			postParam.put("getvercode", "");
-			hsp.doHttpPost("http://" + ip + ":" + MiCOConstParam.LOCALDEVICEPORT,postParam, new UserCallBack() {
+			hsp.doHttpPost("http://" + ip + ":" + port ,postParam, new UserCallBack() {
 
 						@Override
 						public void onSuccess(String message) {
@@ -518,14 +518,19 @@ public class MiCODevice {
 	 */
 	public void createScheduleTask(ScheduleTaskParam stp, final ControlDeviceCallBack ctrldevcb, String token){
 
-		if (comfunc.checkPara(stp.device_id, stp.order, token)) {
+		if (comfunc.checkPara(stp.device_id, stp.commands, stp.hour, stp.minute, token)) {
 			try {
 				JSONObject postParam = new JSONObject();
 				postParam.put("task_type", 0);
 				postParam.put("device_id", stp.device_id);
-				postParam.put("order", stp.order);
-				postParam.put("enable", stp.enable);
+				postParam.put("commands", stp.commands);
 
+				stp.enable = stp.enable ? stp.enable : true;
+				stp.month = comfunc.checkPara(stp.month) ? stp.month : "*";
+				stp.day_of_month = comfunc.checkPara(stp.day_of_month) ? stp.day_of_month : "*";
+				stp.day_of_week = comfunc.checkPara(stp.day_of_week) ? stp.day_of_week : "*";
+
+				postParam.put("enable", stp.enable);
 				postParam.put("month", stp.month);
 				postParam.put("day_of_month", stp.day_of_month);
 				postParam.put("day_of_week", stp.day_of_week);
@@ -553,6 +558,36 @@ public class MiCODevice {
 	}
 
 	/**
+	 * 获取任务列表
+	 * @param deviceid
+	 * @param taskType
+	 * @param ctrldevcb
+	 * @param token
+	 */
+	public void getScheduleTask(String deviceid, int taskType, final ControlDeviceCallBack ctrldevcb, String token){
+
+		if (comfunc.checkPara(deviceid, token) && (0 == taskType || 1 == taskType)) {
+
+			String postParam = "?request_type=1&task_type=" + taskType + "&device_id="+deviceid + "&" + Math.random();
+
+			hsp.doHttpGet(Configuration._SCHEDULETASK, postParam, new UserCallBack() {
+
+				@Override
+				public void onSuccess(String message) {
+					comfunc.successCBCtrlDev(message, ctrldevcb);
+				}
+
+				@Override
+				public void onFailure(int code, String message) {
+					comfunc.failureCBCtrlDev(code, message, ctrldevcb);
+				}
+			}, token);
+		} else {
+			comfunc.failureCBCtrlDev(MiCOConstParam.EMPTYCODE, MiCOConstParam.EMPTY, ctrldevcb);
+		}
+	}
+
+	/**
 	 * Create delay take
 	 * @param stp
 	 * @param ctrldevcb
@@ -560,12 +595,12 @@ public class MiCODevice {
 	 */
 	public void creatDelayTask(ScheduleTaskParam stp, final ControlDeviceCallBack ctrldevcb, String token){
 
-		if (comfunc.checkPara(stp.device_id, stp.order, token)) {
+		if (comfunc.checkPara(stp.device_id, stp.commands, token)) {
 			try {
 				JSONObject postParam = new JSONObject();
 				postParam.put("task_type", 1);
 				postParam.put("device_id", stp.device_id);
-				postParam.put("order", stp.order);
+				postParam.put("commands", stp.commands);
 				postParam.put("enable", stp.enable);
 
 				postParam.put("second", stp.second);

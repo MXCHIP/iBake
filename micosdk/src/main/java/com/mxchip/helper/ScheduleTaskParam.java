@@ -9,7 +9,7 @@ public class ScheduleTaskParam {
 //    public int task_type; //0定时任务 1延时任务
     public String task_name; //一个uuid，创建task时会生成，只在取指定task时，传入，获取用户全部task时，不需要传入
     public String device_id; //设备ID
-    public String order; //指令
+    public String commands; //指令
     public boolean enable; // 当前task，True 启用 False 暂停
 
     //定时任务
@@ -39,7 +39,7 @@ public class ScheduleTaskParam {
 //        this.task_type = 0;
         this.task_name = "";
         this.device_id = "";
-        this.order = "";
+        this.commands = "";
         this.enable = true;
 
         this.month = "";
