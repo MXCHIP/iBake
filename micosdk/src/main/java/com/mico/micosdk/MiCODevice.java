@@ -593,7 +593,7 @@ public class MiCODevice {
 	 * @param ctrldevcb
 	 * @param token
 	 */
-	public void creatDelayTask(ScheduleTaskParam stp, final ControlDeviceCallBack ctrldevcb, String token){
+	public void createDelayTask(ScheduleTaskParam stp, final ControlDeviceCallBack ctrldevcb, String token){
 
 		if (comfunc.checkPara(stp.device_id, stp.commands, token)) {
 			try {
@@ -606,6 +606,124 @@ public class MiCODevice {
 				postParam.put("second", stp.second);
 
 				hsp.doHttpPost(Configuration._SCHEDULETASK, postParam, new UserCallBack() {
+
+					@Override
+					public void onSuccess(String message) {
+						comfunc.successCBCtrlDev(message, ctrldevcb);
+					}
+
+					@Override
+					public void onFailure(int code, String message) {
+						comfunc.failureCBCtrlDev(code, message, ctrldevcb);
+					}
+				}, token);
+			} catch (JSONException e1) {
+				e1.printStackTrace();
+			}
+		} else {
+			comfunc.failureCBCtrlDev(MiCOConstParam.EMPTYCODE, MiCOConstParam.EMPTY, ctrldevcb);
+		}
+	}
+
+	/**
+	 * delete one task
+	 * @param deviceid
+	 * @param taskid
+	 * @param ctrldevcb
+	 * @param token
+	 */
+	public void deleteTask(String deviceid, String taskid, final ControlDeviceCallBack ctrldevcb, String token){
+
+		if (comfunc.checkPara(deviceid, taskid, token)) {
+
+			String postParam = "?device_id=" + deviceid + "&task_name="+taskid;
+
+			hsp.doHttpDelete(Configuration._SCHEDULETASK, postParam, new UserCallBack() {
+
+				@Override
+				public void onSuccess(String message) {
+					comfunc.successCBCtrlDev(message, ctrldevcb);
+				}
+
+				@Override
+				public void onFailure(int code, String message) {
+					comfunc.failureCBCtrlDev(code, message, ctrldevcb);
+				}
+			}, token);
+
+		} else {
+			comfunc.failureCBCtrlDev(MiCOConstParam.EMPTYCODE, MiCOConstParam.EMPTY, ctrldevcb);
+		}
+	}
+
+	/**
+	 * 更新定时任务
+	 * @param stp
+	 * @param ctrldevcb
+	 * @param token
+	 */
+	public void updateScheduleTask(ScheduleTaskParam stp, final ControlDeviceCallBack ctrldevcb, String token){
+
+		if (comfunc.checkPara(stp.device_id, stp.task_name, stp.commands, stp.hour, stp.minute, token)) {
+			try {
+				JSONObject postParam = new JSONObject();
+				postParam.put("task_type", 0);
+				postParam.put("task_name", stp.task_name);
+				postParam.put("device_id", stp.device_id);
+				postParam.put("commands", stp.commands);
+
+				stp.enable = stp.enable ? stp.enable : true;
+				stp.month = comfunc.checkPara(stp.month) ? stp.month : "*";
+				stp.day_of_month = comfunc.checkPara(stp.day_of_month) ? stp.day_of_month : "*";
+				stp.day_of_week = comfunc.checkPara(stp.day_of_week) ? stp.day_of_week : "*";
+
+				postParam.put("enable", stp.enable);
+				postParam.put("month", stp.month);
+				postParam.put("day_of_month", stp.day_of_month);
+				postParam.put("day_of_week", stp.day_of_week);
+				postParam.put("hour", stp.hour);
+				postParam.put("minute", stp.minute);
+
+				hsp.doHttpPut(Configuration._SCHEDULETASK, postParam, new UserCallBack() {
+
+					@Override
+					public void onSuccess(String message) {
+						comfunc.successCBCtrlDev(message, ctrldevcb);
+					}
+
+					@Override
+					public void onFailure(int code, String message) {
+						comfunc.failureCBCtrlDev(code, message, ctrldevcb);
+					}
+				}, token);
+			} catch (JSONException e1) {
+				e1.printStackTrace();
+			}
+		} else {
+			comfunc.failureCBCtrlDev(MiCOConstParam.EMPTYCODE, MiCOConstParam.EMPTY, ctrldevcb);
+		}
+	}
+
+	/**
+	 * 更新延时任务
+	 * @param stp
+	 * @param ctrldevcb
+	 * @param token
+	 */
+	public void updateDelayTask(ScheduleTaskParam stp, final ControlDeviceCallBack ctrldevcb, String token){
+
+		if (comfunc.checkPara(stp.device_id, stp.commands, token)) {
+			try {
+				JSONObject postParam = new JSONObject();
+				postParam.put("task_type", 1);
+				postParam.put("task_name", stp.task_name);
+				postParam.put("device_id", stp.device_id);
+				postParam.put("commands", stp.commands);
+				postParam.put("enable", stp.enable);
+
+				postParam.put("second", stp.second);
+
+				hsp.doHttpPut(Configuration._SCHEDULETASK, postParam, new UserCallBack() {
 
 					@Override
 					public void onSuccess(String message) {

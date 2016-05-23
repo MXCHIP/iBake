@@ -128,9 +128,35 @@
                                 android:textSize="@dimen/common_text_size" />
                         </LinearLayout>
                     </LinearLayout>
+                    <Button
+                        android:id="@+id/scheduletaskid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="定时任务"/>
+                    <Button
+                        android:id="@+id/delaytaskid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="延时任务"/>
+                    <Button
+                        android:id="@+id/tasklistid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="任务列表"/>
+                    <Button
+                        android:id="@+id/removetaskid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="移除任务"/>
+                    <Button
+                        android:id="@+id/stoptaskid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="暂停任务"/>
 
                 </LinearLayout>
             </RelativeLayout>
+
         </LinearLayout>
     </ScrollView>
 
