@@ -12,8 +12,9 @@
             <option value="$PROJECT_DIR$/alibaichuan" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/library" />
-            <option value="$PROJECT_DIR$/micosdk" />
             <option value="$PROJECT_DIR$/shapeloading" />
+            <option value="$PROJECT_DIR$/../FogLibrary" />
+            <option value="$PROJECT_DIR$/../FogLibrary/micosdk" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -1,1 +1,4 @@
-include ':app', ':micosdk', ':library', ':shapeloading', ':alibaichuan'
+include ':app',  ':library', ':shapeloading', ':alibaichuan'
+include ':FogLibrary'
+project (':FogLibrary').projectDir = new File('../FogLibrary/')
+include ':FogLibrary:micosdk'
