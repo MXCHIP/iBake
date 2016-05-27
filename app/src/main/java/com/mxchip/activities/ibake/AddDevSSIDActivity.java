@@ -85,8 +85,6 @@ public class AddDevSSIDActivity extends AppCompatActivity {
 
     //    初始化所有的参数
     private void initAppPara() {
-        micodev = null;
-        micodev = new MiCODevice(context);
         easylinkTag = true;
         retrypgtag = false;
     }
@@ -135,11 +133,12 @@ public class AddDevSSIDActivity extends AppCompatActivity {
             @Override
             public void onFailure(int code, String message) {
                 Log.d(TAG + " mDNS", message);
+                toRetryPage();
             }
 
             @Override
             public void onDevicesFind(JSONArray deviceStatus) {
-                Log.d(TAG + " onDevicesFind", deviceStatus.toString());
+                Log.d(TAG + " onDevicesFind", deviceStatus.length() + " -- " +deviceStatus.toString());
                 if (!deviceStatus.equals("")) {
                     getBindDevByIP(deviceStatus);
                 }
@@ -155,13 +154,13 @@ public class AddDevSSIDActivity extends AppCompatActivity {
                 try {
                     temp = (JSONObject) tempArr.get(i);
 //                    if (temp.getString("isHaveSuperUser").equals("0")) {
-                    if (temp.getString("isHaveSuperUser").equals("false")) {
+                    if (temp.getString("IsHaveSuperUser").equals("false")) {
                         Log.d(TAG + " get bind IP", temp.getString("deviceIP"));
 
                         toBindDevice(temp.getString("deviceIP"));
                     }
                 } catch (JSONException e) {
-                    e.printStackTrace();
+//                    e.printStackTrace();
                 }
             }
         }
@@ -169,7 +168,7 @@ public class AddDevSSIDActivity extends AppCompatActivity {
 
     private void startEasyLink() {
         showEasylinkPro();
-        micodev.startEasyLink(wifissid, password, 40000, 100, new EasyLinkCallBack() {
+        micodev.startEasyLink(wifissid, password, 60000, 20, new EasyLinkCallBack() {
 
             @Override
             public void onSuccess(String message) {
@@ -182,6 +181,7 @@ public class AddDevSSIDActivity extends AppCompatActivity {
             @Override
             public void onFailure(int code, String message) {
                 Log.d(TAG + " easylink", code + " " + message);
+                toRetryPage();
             }
         }, "sin");
     }
@@ -249,7 +249,7 @@ public class AddDevSSIDActivity extends AppCompatActivity {
             @Override
             public void onFailure(int code, String message) {
                 Log.d(TAG + " bindDevice", message);
-//                toRetryPage();
+                toRetryPage();
             }
         }, shareph.getData(ConstPara.SHARE_TOKEN));
     }
