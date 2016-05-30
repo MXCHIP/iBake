@@ -76,7 +76,7 @@ public class SetPasswordActivity extends AppCompatActivity {
                 final String password1 = password.getText().toString().trim();
                 String password2 = passwordcf.getText().toString().trim();
 
-                micoUser.register(password1, password2, new MiCOCallBack() {
+                micoUser.setPassword(password1,new MiCOCallBack() {
 
                     @Override
                     public void onSuccess(String message) {
