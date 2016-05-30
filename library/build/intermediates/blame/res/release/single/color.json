@@ -1,9 +1,5 @@
 [
     {
-        "merged": "D:\\TempScene\\AndroidStudio\\Fog2.0\\library\\build\\intermediates\\res\\merged\\release\\color\\abc_background_cache_hint_selector_material_dark.xml",
-        "source": "D:\\TempScene\\AndroidStudio\\Fog2.0\\library\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\color\\abc_background_cache_hint_selector_material_dark.xml"
-    },
-    {
         "merged": "D:\\TempScene\\AndroidStudio\\Fog2.0\\library\\build\\intermediates\\res\\merged\\release\\color\\abc_secondary_text_material_dark.xml",
         "source": "D:\\TempScene\\AndroidStudio\\Fog2.0\\library\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\color\\abc_secondary_text_material_dark.xml"
     },
@@ -38,9 +34,5 @@
     {
         "merged": "D:\\TempScene\\AndroidStudio\\Fog2.0\\library\\build\\intermediates\\res\\merged\\release\\color\\abc_primary_text_material_light.xml",
         "source": "D:\\TempScene\\AndroidStudio\\Fog2.0\\library\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\color\\abc_primary_text_material_light.xml"
-    },
-    {
-        "merged": "D:\\TempScene\\AndroidStudio\\Fog2.0\\library\\build\\intermediates\\res\\merged\\release\\color\\abc_background_cache_hint_selector_material_light.xml",
-        "source": "D:\\TempScene\\AndroidStudio\\Fog2.0\\library\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\color\\abc_background_cache_hint_selector_material_light.xml"
     }
 ]

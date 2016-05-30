@@ -17,10 +17,9 @@ import android.widget.ListView;
 
 import com.dtr.zxing.bean.ComminuteCode;
 import com.mico.micosdk.MiCODevice;
-import com.mico.micosdk.MiCOUser;
 import com.mingle.widget.ShapeLoadingDialog;
 import com.mxchip.callbacks.ManageDeviceCallBack;
-import com.mxchip.callbacks.UserCallBack;
+import com.mxchip.callbacks.MiCOCallBack;
 import com.mxchip.helper.ShareDeviceParams;
 import com.mxchip.helpers.BookItemAdapter;
 import com.mxchip.manage.ConstHelper;
@@ -46,7 +45,7 @@ public class MyDeviceActivity extends AppCompatActivity implements AdapterView.O
     private SetTitleBar stb;
 
     private BookItemAdapter adapter;
-    private MiCOUser micoUser = new MiCOUser();
+//    private MiCOUser micoUser = new MiCOUser();
     private MiCODevice micoDev;
     private ShapeLoadingDialog shapeLoadingDialog;
 
@@ -142,7 +141,7 @@ public class MyDeviceActivity extends AppCompatActivity implements AdapterView.O
     public void loadDate() {
         SharePreHelper shareph = new SharePreHelper(MyDeviceActivity.this);
         String token = shareph.getData(ConstPara.SHARE_TOKEN);
-        micoUser.getDeviceList(new UserCallBack() {
+        micoDev.getDeviceList(new MiCOCallBack() {
             @Override
             public void onSuccess(String message) {
                 Log.d(TAG + "getDeviceList", message);

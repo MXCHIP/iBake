@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.mico.micosdk.MiCOUser;
-import com.mxchip.callbacks.UserCallBack;
+import com.mico.micosdk.MiCOCookBook;
+import com.mxchip.callbacks.MiCOCallBack;
 import com.mxchip.helpers.CookBookItemAdapter;
 import com.mxchip.manage.ConstHelper;
 import com.mxchip.manage.ConstPara;
@@ -30,7 +30,7 @@ public class RecipesActivity extends AppCompatActivity implements AdapterView.On
     private SetTitleBar stb;
     private String reqtype;
     private String recipename;
-    private MiCOUser micoUser;
+    private MiCOCookBook micocookbook;
     private String token;
 
     @Override
@@ -48,7 +48,7 @@ public class RecipesActivity extends AppCompatActivity implements AdapterView.On
         stb.setLeftButton("back", "finish");
         stb.setRightButton("none", "");
 
-        micoUser = new MiCOUser();
+        micocookbook = new MiCOCookBook();
         SharePreHelper shareph = new SharePreHelper(RecipesActivity.this);
         token = shareph.getData(ConstPara.SHARE_TOKEN);
 
@@ -68,7 +68,7 @@ public class RecipesActivity extends AppCompatActivity implements AdapterView.On
         int type = getIntent().getIntExtra(ConstPara.INTENT_RECIPETYPE, 1);
         String productid = ConstPara._PRODUCTID;
 
-        micoUser.getCookBookByType(type, productid, new UserCallBack() {
+        micocookbook.getCookBookByType(type, productid, new MiCOCallBack() {
             @Override
             public void onSuccess(String message) {
                 Log.d(TAG + "onSuccess", message);
@@ -85,8 +85,7 @@ public class RecipesActivity extends AppCompatActivity implements AdapterView.On
     private void getCBListByname(){
         if (ConstHelper.checkPara(recipename)) {
 
-            MiCOUser miCOUser = new MiCOUser();
-            miCOUser.getCookBookByName(recipename, new UserCallBack() {
+            micocookbook.getCookBookByName(recipename, new MiCOCallBack() {
                 @Override
                 public void onSuccess(String message) {
                     Log.d(TAG, message);

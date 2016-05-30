@@ -10,10 +10,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.mico.micosdk.MiCOUser;
+import com.mico.micosdk.MiCOCookBook;
 import com.mxchip.activities.ibake.R;
 import com.mxchip.activities.ibake.RecipeDetailActivity;
-import com.mxchip.callbacks.UserCallBack;
+import com.mxchip.callbacks.MiCOCallBack;
 import com.mxchip.manage.ConstHelper;
 import com.mxchip.manage.ConstPara;
 import com.mxchip.manage.SharePreHelper;
@@ -96,12 +96,12 @@ public class GetDelicacy {
     public void getSweetTime() {
         sweet_time_lycontain.removeAllViews();
 
-        MiCOUser micoUser = new MiCOUser();
+        MiCOCookBook micocookbook = new MiCOCookBook();
         int type = 2;
         String productid = "6486b2d1-0ee9-4647-baa3-78b9cbc778f7";
         SharePreHelper shareph = new SharePreHelper(mactivity);
         String token = shareph.getData(ConstPara.SHARE_TOKEN);
-        micoUser.getCookBookByType(type, productid, new UserCallBack() {
+        micocookbook.getCookBookByType(type, productid, new MiCOCallBack() {
             @Override
             public void onSuccess(String message) {
 

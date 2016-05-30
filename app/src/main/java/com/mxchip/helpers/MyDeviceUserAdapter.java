@@ -9,8 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mico.micosdk.MiCODevice;
 import com.mico.micosdk.MiCOUser;
-import com.mxchip.callbacks.UserCallBack;
+import com.mxchip.callbacks.MiCOCallBack;
 import com.mxchip.manage.ActionSheetDialog;
 import com.mxchip.manage.ConstHelper;
 import com.mxchip.manage.ConstPara;
@@ -120,10 +121,10 @@ class userButtonListener implements View.OnClickListener {
     }
 
     private void removeBindRole(final Context context){
-        MiCOUser micoUser = new MiCOUser();
+        MiCODevice micoDev = new MiCODevice(context);
         String token = new SharePreHelper(mcontext).getData(ConstPara.SHARE_TOKEN);
 
-        micoUser.removeBindRole(mdeviceid, menduserid, new UserCallBack() {
+        micoDev.removeBindRole(mdeviceid, menduserid, new MiCOCallBack() {
             @Override
             public void onSuccess(String message) {
 //                mba.notifyDataSetInvalidated();

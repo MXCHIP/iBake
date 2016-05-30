@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.mico.micosdk.MiCOUser;
-import com.mxchip.callbacks.UserCallBack;
+import com.mxchip.callbacks.MiCOCallBack;
 import com.mxchip.manage.ActivitiesManagerApplication;
 import com.mxchip.manage.ConstHelper;
 import com.mxchip.manage.ConstPara;
@@ -76,7 +76,7 @@ public class SetPasswordActivity extends AppCompatActivity {
                 final String password1 = password.getText().toString().trim();
                 String password2 = passwordcf.getText().toString().trim();
 
-                micoUser.register(password1, password2, new UserCallBack() {
+                micoUser.register(password1, password2, new MiCOCallBack() {
 
                     @Override
                     public void onSuccess(String message) {

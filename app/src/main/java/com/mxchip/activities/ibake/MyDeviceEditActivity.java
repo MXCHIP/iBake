@@ -2,17 +2,10 @@ package com.mxchip.activities.ibake;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,9 +13,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.mico.micosdk.MiCODevice;
-import com.mico.micosdk.MiCOUser;
 import com.mxchip.callbacks.ManageDeviceCallBack;
-import com.mxchip.callbacks.UserCallBack;
+import com.mxchip.callbacks.MiCOCallBack;
 import com.mxchip.helpers.MyDeviceUserAdapter;
 import com.mxchip.manage.ActionSheetDialog;
 import com.mxchip.manage.ConstHelper;
@@ -46,7 +38,7 @@ public class MyDeviceEditActivity extends AppCompatActivity {
 
     private String TAG = "---MyDeviceEditActivity---";
     private SetTitleBar stb;
-    private MiCOUser micoUser = new MiCOUser();
+    private MiCODevice micoDev;
 
     private Context context;
 
@@ -72,7 +64,8 @@ public class MyDeviceEditActivity extends AppCompatActivity {
         setContentView(R.layout.my_dev_edit);
 
         context = MyDeviceEditActivity.this;
-
+        micoDev = new MiCODevice(context);
+        
         stb = new SetTitleBar(MyDeviceEditActivity.this);
         stb.setTitleName(ConstPara.TITLENAME_MYDEVICE);
         stb.setLeftButton("back", "finish");
@@ -163,7 +156,7 @@ public class MyDeviceEditActivity extends AppCompatActivity {
 
     private void getDeviceInfo() {
 
-        micoUser.getDeviceInfo(deviceid, new UserCallBack() {
+        micoDev.getDeviceInfo(deviceid, new MiCOCallBack() {
             @Override
             public void onSuccess(String message) {
                 Log.d(TAG + "getDeviceInfo", ConstHelper.getFogData(message));
@@ -233,7 +226,7 @@ public class MyDeviceEditActivity extends AppCompatActivity {
 
     private void getMemberList() {
 
-        micoUser.getMemberList(deviceid, new UserCallBack() {
+        micoDev.getMemberList(deviceid, new MiCOCallBack() {
             @Override
             public void onSuccess(String message) {
                 Log.d(TAG + "getMemberList", message);

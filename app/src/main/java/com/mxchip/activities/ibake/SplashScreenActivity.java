@@ -10,8 +10,10 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.mico.micosdk.MiCODevice;
 import com.mico.micosdk.MiCOUser;
-import com.mxchip.callbacks.UserCallBack;
+import com.mxchip.callbacks.MiCOCallBack;
+import com.mxchip.helper.MiCO;
 import com.mxchip.manage.ConstHelper;
 import com.mxchip.manage.ConstPara;
 import com.mxchip.manage.SharePreHelper;
@@ -31,6 +33,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     private String newToken;
     private String lastdeviceid;
     private MiCOUser micoUser = new MiCOUser();
+    private MiCODevice micoDev;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -40,6 +43,10 @@ public class SplashScreenActivity extends AppCompatActivity {
             window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
         setContentView(R.layout.splashscreen);
+
+        MiCO.init("https://iot.mxchip.com");
+
+        micoDev = new MiCODevice(SplashScreenActivity.this);
 
         new Handler().postDelayed(new Runnable() {
             public void run() {
@@ -75,7 +82,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     private void refreshToken(String token) {
-        micoUser.refreshToken(token, new UserCallBack() {
+        micoUser.refreshToken(token, new MiCOCallBack() {
             @Override
             public void onSuccess(String message) {
                 Log.v(TAG + "refreshToken", message);
@@ -92,7 +99,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                     lastdeviceid = shareph.getData(ConstPara.SHARE_LASTDEVICEID);
 
                     if (ConstHelper.checkPara(lastdeviceid)) {
-                        micoUser.getDeviceInfo(lastdeviceid, new UserCallBack() {
+                        micoDev.getDeviceInfo(lastdeviceid, new MiCOCallBack() {
                             @Override
                             public void onSuccess(String message) {
                                 Log.d(TAG + "getDeviceInfo", ConstHelper.getFogData(message));

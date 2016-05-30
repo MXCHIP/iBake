@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.mico.micosdk.MiCOUser;
-import com.mxchip.callbacks.UserCallBack;
+import com.mxchip.callbacks.MiCOCallBack;
 import com.mxchip.manage.ActivitiesManagerApplication;
 import com.mxchip.manage.ConstHelper;
 import com.mxchip.manage.ConstPara;
@@ -55,7 +55,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 final String userName = rsp_username.getText().toString().trim();
                 Log.d(TAG, userName);
 
-                micoUser.getVerifyCode(userName, _APPID, new UserCallBack() {
+                micoUser.getVerifyCode(userName, _APPID, new MiCOCallBack() {
 
                     @Override
                     public void onSuccess(String message) {

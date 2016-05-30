@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 
 import com.mico.micosdk.MiCOUser;
 import com.mingle.widget.ShapeLoadingDialog;
-import com.mxchip.callbacks.UserCallBack;
+import com.mxchip.callbacks.MiCOCallBack;
 import com.mxchip.manage.ActivitiesManagerApplication;
 import com.mxchip.manage.ConstHelper;
 import com.mxchip.manage.ConstPara;
@@ -76,7 +76,7 @@ public class Fragment_LoginActivity extends Fragment implements OnClickListener 
                 final String password = passwordid.getText().toString();
 
                 micoUser.login(userName, password, _APPID,
-                        new UserCallBack() {
+                        new MiCOCallBack() {
                             @Override
                             public void onSuccess(String message) {
                                 Log.d(TAG, message.toString());

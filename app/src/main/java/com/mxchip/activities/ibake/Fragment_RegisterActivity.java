@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.mico.micosdk.MiCOUser;
-import com.mxchip.callbacks.UserCallBack;
+import com.mxchip.callbacks.MiCOCallBack;
 import com.mxchip.manage.ActivitiesManagerApplication;
 import com.mxchip.manage.ConstHelper;
 import com.mxchip.manage.ConstPara;
@@ -61,7 +61,7 @@ public class Fragment_RegisterActivity extends Fragment implements View.OnClickL
             public void onClick(View v) {
                 userName = username.getText().toString().trim();
                 Log.d(TAG, userName + _APPID);
-                micoUser.getVerifyCode(userName, _APPID, new UserCallBack() {
+                micoUser.getVerifyCode(userName, _APPID, new MiCOCallBack() {
 
                     @Override
                     public void onSuccess(String message) {
@@ -83,7 +83,7 @@ public class Fragment_RegisterActivity extends Fragment implements View.OnClickL
             public void onClick(final View v) {
                 final String vercoden = vercode.getText().toString().trim();
                 micoUser.checkVerifyCode(userName, vercoden, _APPID,
-                        new UserCallBack() {
+                        new MiCOCallBack() {
 
                             @Override
                             public void onSuccess(String message) {

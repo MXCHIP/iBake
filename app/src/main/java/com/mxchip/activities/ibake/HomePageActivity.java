@@ -4,16 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.mico.micosdk.MiCOUser;
-import com.mxchip.callbacks.UserCallBack;
 import com.mxchip.helpers.GetDelicacy;
 import com.mxchip.manage.ConstHelper;
 import com.mxchip.manage.ConstPara;

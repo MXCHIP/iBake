@@ -12,10 +12,10 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.mico.micosdk.MiCOCookBook;
 import com.mico.micosdk.MiCODevice;
-import com.mico.micosdk.MiCOUser;
 import com.mxchip.callbacks.ControlDeviceCallBack;
-import com.mxchip.callbacks.UserCallBack;
+import com.mxchip.callbacks.MiCOCallBack;
 import com.mxchip.helper.ScheduleTaskParam;
 import com.mxchip.helpers.BookModel;
 import com.mxchip.helpers.SyncImageLoader;
@@ -51,7 +51,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
     private MiCODevice micoDev;
     private SharePreHelper shareph;
 
-    private MiCOUser micouser;
+    private MiCOCookBook micocookbook;
     int recipeid;
     String token;
 
@@ -66,7 +66,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
         stb.setLeftButton("back", "finish");
         stb.setRightButton("edit", "edit");
 
-        micouser = new MiCOUser();
+        micocookbook = new MiCOCookBook();
         recipeid = Integer.parseInt((String) getIntent().getSerializableExtra(ConstPara.INTENT_RECIPEID));
         shareph = new SharePreHelper(RecipeDetailActivity.this);
         token = shareph.getData(ConstPara.SHARE_TOKEN);
@@ -121,7 +121,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
                     recipe_detial_img.setImageResource(R.drawable.recipe_icon_favourate_3);
                     recipe_detial_img.setTag(R.drawable.recipe_icon_favourate_3);
 
-//                    micouser.delCookBookLikeNo(recipeid, new UserCallBack() {
+//                    micocookbook.delCookBookLikeNo(recipeid, new MiCOCallBack() {
 //                        @Override
 //                        public void onSuccess(String message) {
 //                            Log.d(TAG, message);
@@ -140,7 +140,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
 //                    }, token);
                 } else {
                     //recipe_icon_favourate_3
-                    micouser.addCookBookLikeNo(recipeid, new UserCallBack() {
+                    micocookbook.addCookBookLikeNo(recipeid, new MiCOCallBack() {
                         @Override
                         public void onSuccess(String message) {
                             Log.d(TAG, message);
@@ -314,7 +314,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
     TextView recipe_dd_likeno_txt;
     int like_count;
     private void getThisBookInfo() {
-        micouser.getCookBookInfo(recipeid, new UserCallBack() {
+        micocookbook.getCookBookInfo(recipeid, new MiCOCallBack() {
             @Override
             public void onSuccess(String message) {
                 Log.d(TAG, message);
