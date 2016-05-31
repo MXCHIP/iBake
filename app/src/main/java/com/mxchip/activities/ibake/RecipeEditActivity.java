@@ -296,7 +296,7 @@ public class RecipeEditActivity extends AppCompatActivity {
                 ScheduleTaskParam stp = new ScheduleTaskParam();
                 stp.device_id = "d95366fe-06c0-11e6-a739-00163e0204c0";
                 stp.commands = "{\"KG_Bottom\":\"1\",\"KG_Start\":\"1\",\"KG_Top\":\"1\",\"Temp_Bottom\":\"330\",\"Temp_Top\":\"330\",\"WorkMode\":\"1\",\"WorkTime\":\"58\",\"appid\":\"d8cdf9c6-de8c-11e5-a739-00163e0204c0\",\"deviceid\":\"d95366fe-06c0-11e6-a739-00163e0204c0\",\"userid\":\"b8b917e2-deaa-11e5-a739-00163e0204c0\",\"atrrSet\":[\"KG_Bottom\",\"KG_Start\",\"KG_Top\",\"Temp_Bottom\",\"Temp_Top\",\"WorkMode\",\"WorkTime\"]}";
-                stp.task_name = "ff9c5c3a-2097-11e6-a739-00163e0204c0";
+                stp.task_id = "ff9c5c3a-2097-11e6-a739-00163e0204c0";
                 stp.enable = false;
 
                 stp.month = "*";
