@@ -28,5 +28,6 @@ dependencies {
     compile project(':library')
     compile project(':shapeloading')
     compile files('libs/guideshowlib.jar')
+    compile files('libs/zxing.jar')
     compile project(':alibaichuan')
 }

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.mico.micosdk.MiCODevice;
 import com.mxchip.callbacks.ManageDeviceCallBack;
+import com.mxchip.helpers.CreateQRCode;
 import com.mxchip.manage.ConstHelper;
 import com.mxchip.manage.ConstPara;
 import com.mxchip.manage.SetTitleBar;
@@ -71,8 +72,9 @@ public class QrCodeActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(String message) {
+                CreateQRCode cer = new CreateQRCode();
                 String qrcodemsg = "{\"deviceid\":\"" + deviceid + "\",\"devicepw\":\"" + devicepw + "\",\"vercode\":\"" + message + "\"}";
-                qrcodeimg.setImageBitmap(micoDev.creatQrCode(qrcodemsg, 250, 250));
+                qrcodeimg.setImageBitmap(cer.createQRImage(qrcodemsg, 250, 250));
             }
 
             @Override

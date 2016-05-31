@@ -45,12 +45,14 @@ public class CommandHelper {
 //                            break;
                         default:
                             try {
-                                temp = fl.get(cb).toString();
-                                if (ConstHelper.checkPara(temp)) {
-                                    list.add(fl.getName());
-                                    //TODO 这里是带了value的如:"KG_Start":{"value":"1"}
+                                if(null != fl.get(cb)){
+                                    temp = fl.get(cb).toString();
+                                    if (ConstHelper.checkPara(temp)) {
+                                        list.add(fl.getName());
+                                        //TODO 这里是带了value的如:"KG_Start":{"value":"1"}
 //                                    cmdbody.put(fl.getName(), setChild(temp));
-                                    cmdbody.put(fl.getName(), temp);
+                                        cmdbody.put(fl.getName(), temp);
+                                    }
                                 }
                             } catch (IllegalAccessException e) {
                                 e.printStackTrace();
