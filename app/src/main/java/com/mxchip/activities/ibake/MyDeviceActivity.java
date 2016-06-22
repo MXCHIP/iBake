@@ -248,6 +248,7 @@ public class MyDeviceActivity extends AppCompatActivity implements AdapterView.O
             sdevp.role = role;
             sdevp.bindingtype = bindingtype;
             sdevp.iscallback = false;
+//            sdevp.granttimes = 10;
 
         } catch (JSONException e) {
             e.printStackTrace();
