@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -13,9 +14,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.mico.micosdk.MiCOCookBook;
+import com.mico.micosdk.MiCODevice;
+import com.mxchip.callbacks.MiCOCallBack;
 import com.mxchip.manage.ConstHelper;
 import com.mxchip.manage.ConstPara;
 import com.mxchip.manage.SetTitleBar;
+import com.mxchip.manage.SharePreHelper;
 
 /**
  * Created by Rocke on 2016/03/10.
@@ -64,6 +69,9 @@ public class CloudCookBookActivity extends AppCompatActivity {
     private LinearLayout cloud_cb_muffinly;
     private ImageView cloud_cb_muffinimg;
     private TextView cloud_cb_muffintxt;
+
+    //getcbtypeinfolist
+    private LinearLayout getcbtypeinfolist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +130,9 @@ public class CloudCookBookActivity extends AppCompatActivity {
         cloud_cb_muffinly = (LinearLayout) findViewById(R.id.cloud_cb_muffinly);
         cloud_cb_muffinimg = (ImageView) findViewById(R.id.cloud_cb_muffinimg);
         cloud_cb_muffintxt = (TextView) findViewById(R.id.cloud_cb_muffintxt);
+
+        //getcbtypeinfolist
+        getcbtypeinfolist = (LinearLayout) findViewById(R.id.getcbtypeinfolist);
     }
 
     //    初始化click事件
@@ -241,6 +252,28 @@ public class CloudCookBookActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 switchRecipe(ConstPara.TITLENAME_MUFFIN, cloud_cb_muffinly, cloud_cb_muffinimg, cloud_cb_muffintxt);
+            }
+        });
+
+        //getcbtypeinfolist
+        getcbtypeinfolist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MiCOCookBook mcb = new MiCOCookBook();
+
+                SharePreHelper shareph = new SharePreHelper(CloudCookBookActivity.this);
+                String token = shareph.getData(ConstPara.SHARE_TOKEN);
+                mcb.getcbtypeinfolist(new MiCOCallBack() {
+                    @Override
+                    public void onSuccess(String message) {
+                        Log.d(TAG, message);
+                    }
+
+                    @Override
+                    public void onFailure(int code, String message) {
+                        Log.d(TAG, code +"  "+ message);
+                    }
+                }, token);
             }
         });
     }

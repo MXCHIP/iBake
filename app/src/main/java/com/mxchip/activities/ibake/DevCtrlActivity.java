@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.mico.micosdk.MiCODevice;
 import com.mxchip.callbacks.ControlDeviceCallBack;
+import com.mxchip.helper.ListenDevParFog;
 import com.mxchip.helper.ListenDeviceParams;
 import com.mxchip.helpers.CircleProgressBar;
 import com.mxchip.helpers.GetDelicacy;
@@ -506,7 +507,7 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
     //获取设备的状态信息
     private void getDeviceInfo() {
 
-        ListenDeviceParams ldp = new ListenDeviceParams();
+        ListenDevParFog ldp = new ListenDevParFog();
         ldp.host = ConstPara.MQTT_HOST;
         ldp.port = ConstPara.MQTT_PORT;
         ldp.userName = enduserid;
@@ -547,8 +548,8 @@ public class DevCtrlActivity extends AppCompatActivity implements NavigationView
             }
 
             @Override
-            public void onDeviceStatusReceived(String msgType, String messages) {
-                Log.d(TAG + "onDeviceStatusReceived", msgType + " " + messages);
+            public void onDeviceStatusReceived(int code, String messages) {
+                Log.d(TAG + "onDeviceStatusReceived", code + " " + messages);
                 dealWithStatus(messages);
             }
         });

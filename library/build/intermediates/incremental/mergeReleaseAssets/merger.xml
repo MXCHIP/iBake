@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="D:\TempScene\AndroidStudio\Fog2.0\library\src\main\assets"/><source path="D:\TempScene\AndroidStudio\Fog2.0\library\build\generated\assets\shaders\release"/></dataSet><dataSet config="release"><source path="D:\TempScene\AndroidStudio\Fog2.0\library\src\release\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="D:\MXCHIP\CurWork\developer\AndroidStudio\Fog2.0\library\src\main\assets"/><source path="D:\MXCHIP\CurWork\developer\AndroidStudio\Fog2.0\library\build\generated\assets\shaders\release"/></dataSet><dataSet config="release"><source path="D:\MXCHIP\CurWork\developer\AndroidStudio\Fog2.0\library\src\release\assets"/></dataSet></merger>

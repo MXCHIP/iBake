@@ -12,6 +12,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/getcbtypeinfolist"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/cloud_cb_other_height"
             android:layout_weight="1"

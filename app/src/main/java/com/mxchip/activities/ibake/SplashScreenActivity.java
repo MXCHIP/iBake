@@ -44,7 +44,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         }
         setContentView(R.layout.splashscreen);
 
-        MiCO.init("https://iot.mxchip.com");
+//        MiCO.init("https://iot.mxchip.com");
 
         micoDev = new MiCODevice(SplashScreenActivity.this);
 

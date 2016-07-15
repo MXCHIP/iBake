@@ -1,5 +1,7 @@
 package com.mxchip.activities.ibake;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +14,10 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.alibaba.sdk.android.AlibabaSDK;
+import com.alibaba.sdk.android.trade.TradeConstants;
+import com.alibaba.sdk.android.trade.TradeService;
+import com.alibaba.sdk.android.trade.page.ItemDetailPage;
 import com.mico.micosdk.MiCOCookBook;
 import com.mico.micosdk.MiCODevice;
 import com.mxchip.callbacks.ControlDeviceCallBack;
@@ -23,6 +29,7 @@ import com.mxchip.manage.ConstHelper;
 import com.mxchip.manage.ConstPara;
 import com.mxchip.manage.SetTitleBar;
 import com.mxchip.manage.SharePreHelper;
+import com.taobao.tae.sdk.model.TaokeParams;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -97,6 +104,42 @@ public class RecipeDetailActivity extends AppCompatActivity {
         recipe_dd_material_lv.setAdapter(adapter);
     }
 
+    //通过itemid打开淘宝的宝贝详情界面
+    private static void showItemDetailPage(Activity context, String isvcode, String itemid) {
+        TradeService tradeService = AlibabaSDK.getService(TradeService.class);
+        Map<String, String> exParams = new HashMap<String, String>();
+
+        if(!ConstHelper.checkPara(isvcode))
+            isvcode = ConstPara._ISVCODE;
+
+        exParams.put(TradeConstants.ISV_CODE, isvcode);
+        exParams.put(TradeConstants.ITEM_DETAIL_VIEW_TYPE, TradeConstants.TAOBAO_NATIVE_VIEW);
+        ItemDetailPage itemDetailPage = new ItemDetailPage(itemid, exParams);
+        TaokeParams taokeParams = new TaokeParams();
+        taokeParams.pid = ConstPara._MMPID;
+        tradeService.show(itemDetailPage, taokeParams, context, null, new com.alibaba.sdk.android.trade.callback.TradeProcessCallback() {
+            @Override
+            public void onPaySuccess(com.alibaba.sdk.android.trade.model.TradeResult tradeResult) {
+                Log.d(TAG, tradeResult.toString());
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                Log.d(TAG, s);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Log.d(TAG, requestCode+"");
+        Log.d(TAG, resultCode+"");
+
+        Log.d(TAG, "---onActivityResult---");
+    }
+
     private void initOnClick() {
         ConstHelper.initAlibabaSDK(RecipeDetailActivity.this);
 
@@ -104,7 +147,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
         recipe_detial_showtaobao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ConstHelper.showItemDetailPage(RecipeDetailActivity.this, null, itemid);
+                showItemDetailPage(RecipeDetailActivity.this, null, itemid);
             }
         });
 
@@ -140,6 +183,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
 //                    }, token);
                 } else {
                     //recipe_icon_favourate_3
+//                    micocookbook.addCookBookFavoriteNo(recipeid, new MiCOCallBack() {
                     micocookbook.addCookBookLikeNo(recipeid, new MiCOCallBack() {
                         @Override
                         public void onSuccess(String message) {

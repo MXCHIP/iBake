@@ -155,9 +155,9 @@ public class AddDevSSIDActivity extends AppCompatActivity {
                     temp = (JSONObject) tempArr.get(i);
 //                    if (temp.getString("isHaveSuperUser").equals("0")) {
                     if (temp.getString("IsHaveSuperUser").equals("false")) {
-                        Log.d(TAG + " get bind IP", temp.getString("deviceIP"));
+                        Log.d(TAG + " get bind IP", temp.getString("IP"));
 
-                        toBindDevice(temp.getString("deviceIP"));
+                        toBindDevice(temp.getString("IP"));
                     }
                 } catch (JSONException e) {
 //                    e.printStackTrace();

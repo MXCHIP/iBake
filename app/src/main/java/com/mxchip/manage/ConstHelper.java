@@ -304,13 +304,15 @@ public class ConstHelper {
         tradeService.show(itemDetailPage, taokeParams, context, null, new com.alibaba.sdk.android.trade.callback.TradeProcessCallback() {
             @Override
             public void onPaySuccess(com.alibaba.sdk.android.trade.model.TradeResult tradeResult) {
-
+                Log.d(TAG, tradeResult.toString());
             }
 
             @Override
             public void onFailure(int i, String s) {
-
+                Log.d(TAG, s);
             }
         });
     }
+
+
 }
