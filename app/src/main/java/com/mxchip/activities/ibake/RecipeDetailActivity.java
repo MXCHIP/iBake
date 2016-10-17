@@ -357,7 +357,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
     TextView recipe_dd_likeno_txt;
     int like_count;
-    private void getThisBookInfo() {
+    private void coogetThisBookInfo() {
         micocookbook.getCookBookInfo(recipeid, new MiCOCallBack() {
             @Override
             public void onSuccess(String message) {
